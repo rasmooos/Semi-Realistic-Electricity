@@ -1,0 +1,9 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": [
+    "semirealisticelectricity:magnetite_ore_placed",
+    "semirealisticelectricity:magnetite_ore_large_placed"
+  ],
+  "step": "underground_ores"
+}

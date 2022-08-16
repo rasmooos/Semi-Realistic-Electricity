@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "semirealisticelectricity:tin_ore",
+    "semirealisticelectricity:deepslate_tin_ore",
+    "semirealisticelectricity:magnetite_ore",
+    "semirealisticelectricity:deepslate_magnetite_ore"
+  ]
+}

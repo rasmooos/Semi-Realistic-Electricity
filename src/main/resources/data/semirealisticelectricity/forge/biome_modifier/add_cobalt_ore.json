@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": [
+    "semirealisticelectricity:cobalt_ore_placed",
+    "semirealisticelectricity:cobalt_ore_large_placed",
+    "semirealisticelectricity:cobalt_ore_buried_placed"
+  ],
+  "step": "underground_ores"
+}
