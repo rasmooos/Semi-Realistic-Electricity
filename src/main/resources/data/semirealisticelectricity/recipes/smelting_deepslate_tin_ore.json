@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "ingredient": {
+    "item": "semirealisticelectricity:deepslate_tin_ore"
+  },
+  "result": "semirealisticelectricity:tin_ingot"
+}

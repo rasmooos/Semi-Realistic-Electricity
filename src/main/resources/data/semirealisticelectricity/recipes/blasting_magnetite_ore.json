@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "cookingtime": 100,
+  "experience": 0.7,
+  "ingredient": {
+    "item": "semirealisticelectricity:magnetite_ore"
+  },
+  "result": "semirealisticelectricity:magnetite_ingot"
+}
