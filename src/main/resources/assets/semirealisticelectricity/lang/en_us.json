@@ -1,0 +1,24 @@
+{
+  "itemGroup.semirealisticelectricity": "Semi Realistic Electricity",
+
+
+  "item.semirealisticelectricity.raw_tin": "Raw Tin",
+  "item.semirealisticelectricity.raw_magnetite": "Raw Magnetite",
+  "item.semirealisticelectricity.raw_lepidolite": "Raw Lepidolite",
+  "item.semirealisticelectricity.raw_cobalt": "Raw Cobalt",
+
+  "item.semirealisticelectricity.tin_ingot": "Tin Ingot",
+  "item.semirealisticelectricity.magnetite_ingot": "Magnetite Ingot",
+  "item.semirealisticelectricity.cobalt_ingot": "Cobalt Ingot",
+  "item.semirealisticelectricity.lithium_dust": "Lithium Dust",
+
+
+  "block.semirealisticelectricity.tin_ore": "Tin Ore",
+  "block.semirealisticelectricity.deepslate_tin_ore": "Deepslate Tin Ore",
+  "block.semirealisticelectricity.cobalt_ore": "Cobalt Ore",
+  "block.semirealisticelectricity.deepslate_cobalt_ore": "Deepslate Cobalt Ore",
+  "block.semirealisticelectricity.magnetite_ore": "Magnetite Ore",
+  "block.semirealisticelectricity.deepslate_magnetite_ore": "Deepslate Magnetite Ore",
+  "block.semirealisticelectricity.lepidolite_ore": "Lepidolite Ore",
+  "block.semirealisticelectricity.deepslate_lepidolite_ore": "Deepslate Lepidolite Ore"
+}
