@@ -1,6 +1,0 @@
-{
-  "parent" : "block/cube_all",
-  "textures" :{
-    "all" : "semirealisticelectricity:block/cobalt_ore"
-  }
-}

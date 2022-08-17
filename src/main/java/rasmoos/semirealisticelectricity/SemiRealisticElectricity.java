@@ -15,7 +15,7 @@ import rasmoos.semirealisticelectricity.setup.Registration;
 @Mod(SemiRealisticElectricity.MOD_ID)
 public class SemiRealisticElectricity {
     public static final String MOD_ID = "semirealisticelectricity";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public SemiRealisticElectricity() {
 

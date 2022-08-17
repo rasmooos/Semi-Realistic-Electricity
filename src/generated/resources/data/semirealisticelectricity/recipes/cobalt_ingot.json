@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "E": {
+      "item": "semirealisticelectricity:raw_cobalt"
+    }
+  },
+  "pattern": [
+    "EEE"
+  ],
+  "result": {
+    "item": "semirealisticelectricity:cobalt_ingot"
+  }
+}
