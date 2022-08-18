@@ -20,5 +20,12 @@
   "block.semirealisticelectricity.magnetite_ore": "Magnetite Ore",
   "block.semirealisticelectricity.deepslate_magnetite_ore": "Deepslate Magnetite Ore",
   "block.semirealisticelectricity.lepidolite_ore": "Lepidolite Ore",
-  "block.semirealisticelectricity.deepslate_lepidolite_ore": "Deepslate Lepidolite Ore"
+  "block.semirealisticelectricity.deepslate_lepidolite_ore": "Deepslate Lepidolite Ore",
+
+  "block.semirealisticelectricity.rubber_planks": "Rubber Planks",
+  "block.semirealisticelectricity.rubber_log": "Rubber Log",
+  "block.semirealisticelectricity.stripped_rubber_log": "Stripped Rubber Log",
+  "block.semirealisticelectricity.rubber_leaves": "Rubber Leaves",
+  "block.semirealisticelectricity.rubber_sapling": "Rubber Sapling"
+
 }

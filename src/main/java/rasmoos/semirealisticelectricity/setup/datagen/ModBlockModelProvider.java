@@ -17,14 +17,17 @@ public class ModBlockModelProvider extends BlockModelProvider {
 
     @Override
     protected void registerModels() {
-        simpleBlock(Registration.COBALT_ORE.get());
-        simpleBlock(Registration.DEEPSLATE_COBALT_ORE.get());
-        simpleBlock(Registration.TIN_ORE.get());
-        simpleBlock(Registration.DEEPSLATE_TIN_ORE.get());
-        simpleBlock(Registration.MAGNETITE_ORE.get());
-        simpleBlock(Registration.DEEPSLATE_MAGNETITE_ORE.get());
-        simpleBlock(Registration.LEPIDOLITE_ORE.get());
-        simpleBlock(Registration.DEEPSLATE_LEPIDOLITE_ORE.get());
+//        simpleBlock(Registration.COBALT_ORE.get());
+//        simpleBlock(Registration.DEEPSLATE_COBALT_ORE.get());
+//        simpleBlock(Registration.TIN_ORE.get());
+//        simpleBlock(Registration.DEEPSLATE_TIN_ORE.get());
+//        simpleBlock(Registration.MAGNETITE_ORE.get());
+//        simpleBlock(Registration.DEEPSLATE_MAGNETITE_ORE.get());
+//        simpleBlock(Registration.LEPIDOLITE_ORE.get());
+//        simpleBlock(Registration.DEEPSLATE_LEPIDOLITE_ORE.get());
+//        simpleBlock(Registration.RUBBER_PLANKS.get());
+
+
     }
 
     private BlockModelBuilder simpleBlock(Block block) {

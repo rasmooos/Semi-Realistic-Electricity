@@ -15,10 +15,14 @@ public class DataGenerators {
         DataGenerator generator = event.getGenerator();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
+        ModBlockTagProvider blockTagProvider = new ModBlockTagProvider(generator, existingFileHelper);
+
+        generator.addProvider(true, blockTagProvider);
+        generator.addProvider(true, new ModItemsTagProvider(generator, blockTagProvider, existingFileHelper));
         generator.addProvider(true, new ModRecipeProvider(generator));
         generator.addProvider(true, new ModLootTableProvider(generator));
         generator.addProvider(true, new ModBlockStateProvider(generator, existingFileHelper));
-        generator.addProvider(true, new ModBlockModelProvider(generator, existingFileHelper));
+//        generator.addProvider(true, new ModBlockModelProvider(generator, existingFileHelper));
         generator.addProvider(true, new ModItemModelProvider(generator, existingFileHelper));
     }
 

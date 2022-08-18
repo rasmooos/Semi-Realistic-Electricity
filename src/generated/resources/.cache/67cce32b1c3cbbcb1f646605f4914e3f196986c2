@@ -1,4 +1,4 @@
-// 1.19.2	2022-08-17T11:31:44.4152458	LootTables
+// 1.19.2	2022-08-18T12:27:06.8693733	LootTables
 92f93a4cb5c517b919a3dfb950768f38c32bc6e5 data/semirealisticelectricity/loot_tables/blocks/cobalt_ore.json
 6b6f21c6f381a8ab7c3aed6918c49406c288fade data/semirealisticelectricity/loot_tables/blocks/deepslate_cobalt_ore.json
 6bc97a906c0ba91c01170f06c65bc54cce464918 data/semirealisticelectricity/loot_tables/blocks/deepslate_lepidolite_ore.json
@@ -6,4 +6,9 @@
 eec71b6f16f24fc52af190c90ae9046310b5a07c data/semirealisticelectricity/loot_tables/blocks/deepslate_tin_ore.json
 c5b47d2407844b3fb01dff3de7f9ab3d3a79f187 data/semirealisticelectricity/loot_tables/blocks/lepidolite_ore.json
 e4e310609ee24b95702aba476011f8e320bd1ab1 data/semirealisticelectricity/loot_tables/blocks/magnetite_ore.json
+02b5197093407c7baf368bc7fe3b98d739bb488b data/semirealisticelectricity/loot_tables/blocks/rubber_leaves.json
+993562988616293d7ff3f5d3b9acb04e7221a2bb data/semirealisticelectricity/loot_tables/blocks/rubber_log.json
+0ee49c275871e76fa6139e9424f0473ad86ef36c data/semirealisticelectricity/loot_tables/blocks/rubber_planks.json
+5b9ec65675d8de066f9f6d311eb19f2c08d811ec data/semirealisticelectricity/loot_tables/blocks/rubber_sapling.json
+cdd2aa55ea4fc345284ab2953bffaf1e46632195 data/semirealisticelectricity/loot_tables/blocks/stripped_rubber_log.json
 39b37a85e5a637e7c3cfa16d0bcc5a6ef97b07b9 data/semirealisticelectricity/loot_tables/blocks/tin_ore.json

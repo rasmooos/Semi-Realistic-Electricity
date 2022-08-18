@@ -3,10 +3,7 @@ package rasmoos.semirealisticelectricity.setup.datagen;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCookingSerializer;
@@ -29,11 +26,20 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     @Override
     protected void buildCraftingRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
-        ShapedRecipeBuilder.shaped(Registration.COBALT_INGOT.get())
-                .define('E', Registration.RAW_COBALT.get())
-                .pattern("EEE")
-                .unlockedBy("has_raw_cobalt", inventoryTrigger(ItemPredicate.Builder.item().of(Registration.RAW_COBALT.get()).build()))
-                .save(pFinishedRecipeConsumer);
+//        ShapedRecipeBuilder.shaped(Registration.COBALT_INGOT.get())
+//                .define('E', Registration.RAW_COBALT.get())
+//                .pattern("EEE")
+//                .unlockedBy("has_raw_cobalt", inventoryTrigger(ItemPredicate.Builder.item().of(Registration.RAW_COBALT.get()).build()))
+//                .save(pFinishedRecipeConsumer);
+
+//        ShapelessRecipeBuilder.shapeless(Registration.RUBBER_PLANKS.get(), 4).requires(Registration.RUBBER_LOG.get())
+//                .unlockedBy("has_rubber_log", inventoryTrigger(ItemPredicate.Builder.item().of(Registration.RUBBER_LOG.get()).build()))
+//                        .save(pFinishedRecipeConsumer);
+//        ShapelessRecipeBuilder.shapeless(Registration.RUBBER_PLANKS.get(), 4).requires(Registration.STRIPPED_RUBBER_LOG.get())
+//                .unlockedBy("has_stripped_rubber_log", inventoryTrigger(ItemPredicate.Builder.item().of(Registration.STRIPPED_RUBBER_LOG.get()).build()))
+//                .save(pFinishedRecipeConsumer);
+
+        planksFromLogs(pFinishedRecipeConsumer, Registration.RUBBER_PLANKS.get(), ModItemsTagProvider.RUBBER_LOGS);
 
         oreSmelting(pFinishedRecipeConsumer, TIN_SMELTABLES, Registration.TIN_INGOT.get(), 0.7F, 200, "tin_ingot");
         oreSmelting(pFinishedRecipeConsumer, COBALT_SMELTABLES, Registration.COBALT_INGOT.get(), 0.7F, 200, "cobalt_ingot");

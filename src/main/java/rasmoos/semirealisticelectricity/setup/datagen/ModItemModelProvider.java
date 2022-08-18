@@ -32,11 +32,32 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(Registration.TIN_INGOT.get());
 
 
-        for (RegistryObject<Item> entry : Registration.ITEMS.getEntries()) {
-            if (entry.get() instanceof BlockItem blockItem) {
-                block(blockItem);
-            }
-        }
+        block(Registration.COBALT_ORE.get());
+        block(Registration.DEEPSLATE_COBALT_ORE.get());
+        block(Registration.MAGNETITE_ORE.get());
+        block(Registration.DEEPSLATE_MAGNETITE_ORE.get());
+        block(Registration.TIN_ORE.get());
+        block(Registration.DEEPSLATE_TIN_ORE.get());
+        block(Registration.LEPIDOLITE_ORE.get());
+        block(Registration.DEEPSLATE_LEPIDOLITE_ORE.get());
+
+        block(Registration.RUBBER_PLANKS.get());
+//        block(Registration.RUBBER_WOOD.get());
+        block(Registration.RUBBER_LOG.get());
+//        block(Registration.STRIPPED_RUBBER_WOOD.get());
+        block(Registration.STRIPPED_RUBBER_LOG.get());
+
+//        for (RegistryObject<Item> entry : Registration.ITEMS.getEntries()) {
+//            if (entry.get() instanceof BlockItem blockItem) {
+//                block(blockItem);
+//            }
+//        }
+    }
+
+    private ItemModelBuilder block(Block block) {
+        ResourceLocation id_block = ForgeRegistries.BLOCKS.getKey(block);
+        ResourceLocation id_item = ForgeRegistries.ITEMS.getKey(block.asItem());
+        return withExistingParent(id_item.getPath(), modid + ":block/" + id_block.getPath());
     }
 
     protected ItemModelBuilder block(BlockItem blockItem) {
@@ -44,10 +65,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         ResourceLocation id_item = ForgeRegistries.ITEMS.getKey(blockItem);
         return withExistingParent(id_item.getPath(), modid + ":block/" + id_block.getPath());
     }
-
-
-
-
 
     private ItemModelBuilder simpleItem(Item item) {
         ResourceLocation id = ForgeRegistries.ITEMS.getKey(item);
