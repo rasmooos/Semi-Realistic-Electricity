@@ -1,6 +1,6 @@
-// 1.19.2	2022-08-18T12:27:06.8703716	Tags for minecraft:item
+// 1.19.2	2022-08-19T11:40:40.3243163	Tags for minecraft:item
 1e16c42751f66f2c265832e513b08318565cdb95 data/minecraft/tags/items/leaves.json
 9e67bd516679c8381e88ce81ad3f0e4679d451cd data/minecraft/tags/items/logs.json
 9e67bd516679c8381e88ce81ad3f0e4679d451cd data/minecraft/tags/items/logs_that_burn.json
 f8996ddc6b8f77a977f08cf050e2d27e5302797d data/minecraft/tags/items/planks.json
-b51035295a3db445d2cf6e355fed77a72398cc45 data/semirealisticelectricity/tags/items/rubber_logs.json
+e78604d3343b8f124428be8291c519ed21b5e78d data/semirealisticelectricity/tags/items/rubber_logs.json

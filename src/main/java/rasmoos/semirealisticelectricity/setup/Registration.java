@@ -8,6 +8,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -15,10 +16,12 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import rasmoos.semirealisticelectricity.SemiRealisticElectricity;
+import rasmoos.semirealisticelectricity.blockentites.RubberLogTapEntity;
 import rasmoos.semirealisticelectricity.blocks.FlammableLeaveBlock;
 import rasmoos.semirealisticelectricity.blocks.FlammableRotatedPilarBlock;
-import rasmoos.semirealisticelectricity.blocks.RubberLog;
+import rasmoos.semirealisticelectricity.blocks.RubberLogTap;
 import rasmoos.semirealisticelectricity.blocks.RubberTreeGrower;
+import rasmoos.semirealisticelectricity.items.RubberTap;
 import rasmoos.semirealisticelectricity.world.ModConfiguredFeatures;
 import rasmoos.semirealisticelectricity.world.ModPlacedFeatures;
 
@@ -28,8 +31,7 @@ public class Registration {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, SemiRealisticElectricity.MOD_ID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, SemiRealisticElectricity.MOD_ID);
-//    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, SemiRealisticElectricity.MOD_ID);
-
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, SemiRealisticElectricity.MOD_ID);
 
     //private static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(ForgeRegistries.,SemiRealisticElectricity.MOD_ID);
 
@@ -37,7 +39,7 @@ public class Registration {
     public static final void register() {
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
-//        BLOCK_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        BLOCK_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModConfiguredFeatures.CONFIGURED_FEATURES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModPlacedFeatures.PLACED_FEATURES.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
@@ -77,8 +79,8 @@ public class Registration {
     public static final RegistryObject<Block> DEEPSLATE_TIN_ORE = registerBlock("deepslate_tin_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_DIAMOND_ORE)), ModSetup.ITEM_GROUP);
 
-    public static final RegistryObject<RotatedPillarBlock> RUBBER_LOG = registerBlock("rubber_log",
-            () -> new RubberLog(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)), ModSetup.ITEM_GROUP);
+    public static final RegistryObject<FlammableRotatedPilarBlock> RUBBER_LOG = registerBlock("rubber_log",
+            () -> new FlammableRotatedPilarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)), ModSetup.ITEM_GROUP);
 
     public static final RegistryObject<RotatedPillarBlock> STRIPPED_RUBBER_LOG = registerBlock("stripped_rubber_log",
             () -> new FlammableRotatedPilarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)), ModSetup.ITEM_GROUP);
@@ -106,13 +108,6 @@ public class Registration {
     public static final RegistryObject<Block> RUBBER_SAPLING = registerBlock("rubber_sapling",
             () -> new SaplingBlock(new RubberTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING).noOcclusion()), ModSetup.ITEM_GROUP);
 
-//    public static final RegistryObject<Block> GEM_CUTTING_STATION = registerBlock("gem_cutting_station",
-//            () -> new GemCuttingStation(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_DIAMOND_ORE)), ModSetup.ITEM_GROUP);
-
-//    public static final RegistryObject<BlockEntityType<GemCuttingStationBlockEntity>> GEM_CUTTING_STATION_BLOCK_ENTITY =
-//            BLOCK_ENTITIES.register("gem_cutting_station_block_entity", () ->
-//                    BlockEntityType.Builder.of(GemCuttingStationBlockEntity::new, Registration.GEM_CUTTING_STATION.get()).build(null));
-
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> result = BLOCKS.register(name, block);
         registerBlockItem(name, result, tab);
@@ -122,6 +117,19 @@ public class Registration {
     public static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block, CreativeModeTab tab) {
         return ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(tab)));
     }
+
+    public static final RegistryObject<Block> RUBBER_LOG_TAP = registerBlock("rubber_log_tap",
+            () -> new RubberLogTap(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)), ModSetup.ITEM_GROUP);
+
+    public static final RegistryObject<Item> RUBBER_TAP = ITEMS.register("rubber_tap",
+            () -> new RubberTap(new Item.Properties().stacksTo(1).tab(ModSetup.ITEM_GROUP)));
+
+    public static final RegistryObject<Item> RUBBER_RESIN = ITEMS.register("rubber_resin",
+            () -> new Item(new Item.Properties().tab(ModSetup.ITEM_GROUP)));
+
+    public static final RegistryObject<BlockEntityType<RubberLogTapEntity>> RUBBER_LOG_ENTITY =
+            BLOCK_ENTITIES.register("rubber_log_entity", () -> BlockEntityType.Builder.of(RubberLogTapEntity::new, RUBBER_LOG_TAP.get()).build(null));
+
 }
 
 

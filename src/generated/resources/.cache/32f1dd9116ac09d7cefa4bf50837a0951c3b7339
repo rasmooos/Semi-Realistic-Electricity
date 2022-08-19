@@ -1,4 +1,4 @@
-// 1.19.2	2022-08-17T15:48:20.9389742	Item Models: semirealisticelectricity
+// 1.19.2	2022-08-19T15:14:41.5322212	Item Models: semirealisticelectricity
 2ec679dee8a571624f94a4325f915123485f6805 assets/semirealisticelectricity/models/item/cobalt_ingot.json
 bcdfaf7178301ce8bfdfa0b62f894ae37b9d8fac assets/semirealisticelectricity/models/item/cobalt_ore.json
 f7c6f1d8d51edc0fe9de659a9cbf6eb98319cc41 assets/semirealisticelectricity/models/item/deepslate_cobalt_ore.json
@@ -15,6 +15,8 @@ d73080fb81edea1d5e10737c40c9fb7d8f740585 assets/semirealisticelectricity/models/
 6eba79046eee46950f136520f9e9fca8be2b474b assets/semirealisticelectricity/models/item/raw_tin.json
 b919b53a4bded83e41a3e28873441f8ca4e7a764 assets/semirealisticelectricity/models/item/rubber_log.json
 4ad9046d3f8663ace2f1004592d28ca08b912292 assets/semirealisticelectricity/models/item/rubber_planks.json
+71310864fcd78c9c52a8476747c8a810e7412592 assets/semirealisticelectricity/models/item/rubber_resin.json
+21f7a106853089b0511a7494b95b412ccfe80e88 assets/semirealisticelectricity/models/item/rubber_tap.json
 1bd3f1b65f030226a4614f7ea2aa062943b99c02 assets/semirealisticelectricity/models/item/stripped_rubber_log.json
 56314ea3227131b25f3f1b5b6c8c89a485f860d7 assets/semirealisticelectricity/models/item/tin_ingot.json
 736e4b3916f4ebf02662d94bfbdfc3695662b4b4 assets/semirealisticelectricity/models/item/tin_ore.json

@@ -1,0 +1,48 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "semirealisticelectricity:block/rubber_log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,rubber_tap=0": {
+      "model": "semirealisticelectricity:block/rubber_log"
+    },
+    "axis=y,rubber_tap=1": {
+      "model": "semirealisticelectricity:block/rubber_log_tap_full",
+      "y": 0
+    },
+    "axis=y,rubber_tap=2": {
+      "model": "semirealisticelectricity:block/rubber_log_tap_full",
+      "y": 90
+    },
+    "axis=y,rubber_tap=3": {
+      "model": "semirealisticelectricity:block/rubber_log_tap_full",
+      "y": 180
+    },
+    "axis=y,rubber_tap=4": {
+      "model": "semirealisticelectricity:block/rubber_log_tap_full",
+      "y": 270
+    },
+    "axis=y,rubber_tap=5": {
+      "model": "semirealisticelectricity:block/rubber_log_tap_empty",
+      "y": 0
+    },
+    "axis=y,rubber_tap=6": {
+      "model": "semirealisticelectricity:block/rubber_log_tap_empty",
+      "y": 90
+    },
+    "axis=y,rubber_tap=7": {
+      "model": "semirealisticelectricity:block/rubber_log_tap_empty",
+      "y": 180
+    },
+    "axis=y,rubber_tap=8": {
+      "model": "semirealisticelectricity:block/rubber_log_tap_empty",
+      "y": 270
+    },
+    "axis=z": {
+      "model": "semirealisticelectricity:block/rubber_log_horizontal",
+      "x": 90
+    }
+  }
+}

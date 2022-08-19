@@ -30,6 +30,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(Registration.LITHIUM_DUST.get());
         simpleItem(Registration.MAGNETITE_INGOT.get());
         simpleItem(Registration.TIN_INGOT.get());
+        simpleItem(Registration.RUBBER_TAP.get());
+        simpleItem(Registration.RUBBER_RESIN.get());
 
 
         block(Registration.COBALT_ORE.get());
@@ -42,16 +44,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         block(Registration.DEEPSLATE_LEPIDOLITE_ORE.get());
 
         block(Registration.RUBBER_PLANKS.get());
-//        block(Registration.RUBBER_WOOD.get());
         block(Registration.RUBBER_LOG.get());
-//        block(Registration.STRIPPED_RUBBER_WOOD.get());
         block(Registration.STRIPPED_RUBBER_LOG.get());
-
-//        for (RegistryObject<Item> entry : Registration.ITEMS.getEntries()) {
-//            if (entry.get() instanceof BlockItem blockItem) {
-//                block(blockItem);
-//            }
-//        }
     }
 
     private ItemModelBuilder block(Block block) {

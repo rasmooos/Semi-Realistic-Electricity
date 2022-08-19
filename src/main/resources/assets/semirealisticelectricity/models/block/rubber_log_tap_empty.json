@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "semirealisticelectricity:block/rubber_log",
+    "down": "semirealisticelectricity:block/rubber_log_top",
+    "up": "semirealisticelectricity:block/rubber_log_top",
+    "north": "semirealisticelectricity:block/rubber_log_empty",
+    "south": "semirealisticelectricity:block/rubber_log",
+    "west": "semirealisticelectricity:block/rubber_log",
+    "east": "semirealisticelectricity:block/rubber_log"
+  }
+}

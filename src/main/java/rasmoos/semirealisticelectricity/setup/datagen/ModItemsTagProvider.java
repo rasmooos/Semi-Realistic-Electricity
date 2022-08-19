@@ -24,7 +24,7 @@ public class ModItemsTagProvider extends ItemTagsProvider {
     @Override
     protected void addTags() {
         this.copy(ModBlockTagProvider.RUBBER_LOGS, RUBBER_LOGS);
-        tag(RUBBER_LOGS).add(Registration.RUBBER_LOG.get().asItem()).add(Registration.STRIPPED_RUBBER_LOG.get().asItem());
+//        tag(RUBBER_LOGS).add(Registration.RUBBER_LOG.get().asItem()).add(Registration.STRIPPED_RUBBER_LOG.get().asItem());
         tag(ItemTags.PLANKS).add(Registration.RUBBER_PLANKS.get().asItem());
         tag(ItemTags.LOGS).add(Registration.RUBBER_LOG.get().asItem()).add(Registration.STRIPPED_RUBBER_LOG.get().asItem());
         tag(ItemTags.LOGS_THAT_BURN).add(Registration.RUBBER_LOG.get().asItem()).add(Registration.STRIPPED_RUBBER_LOG.get().asItem());

@@ -28,6 +28,7 @@ public class ModBlockLootTables extends BlockLoot {
         dropSelf(Registration.RUBBER_LOG.get());
         dropSelf(Registration.STRIPPED_RUBBER_LOG.get());
         dropSelf(Registration.RUBBER_PLANKS.get());
+        dropOther(Registration.RUBBER_LOG_TAP.get(), Registration.RUBBER_LOG.get().asItem());
     }
 
     @Override

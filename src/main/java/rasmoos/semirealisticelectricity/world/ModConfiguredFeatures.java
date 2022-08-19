@@ -28,8 +28,8 @@ public class ModConfiguredFeatures {
 
     public static final RegistryObject<ConfiguredFeature<?, ?>> RUBBER = CONFIGURED_FEATURES.register("rubber_tree",
             () -> new ConfiguredFeature<>(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
-                    BlockStateProvider.simple(Registration.RUBBER_LOG.get()),
-                    new StraightTrunkPlacer(5, 6, 3),
+                    BlockStateProvider.simple(Registration.RUBBER_LOG_TAP.get()),
+                    new StraightTrunkPlacer(3, 7, 5),
                     BlockStateProvider.simple(Registration.RUBBER_LEAVES.get()),
                     new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 4),
                     new TwoLayersFeatureSize(1, 0, 2)).build()));

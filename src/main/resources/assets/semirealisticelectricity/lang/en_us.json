@@ -11,6 +11,9 @@
   "item.semirealisticelectricity.magnetite_ingot": "Magnetite Ingot",
   "item.semirealisticelectricity.cobalt_ingot": "Cobalt Ingot",
   "item.semirealisticelectricity.lithium_dust": "Lithium Dust",
+  "item.semirealisticelectricity.rubber_tap": "Rubber Tap",
+  "item.semirealisticelectricity.rubber_resin": "Rubber Resin",
+
 
 
   "block.semirealisticelectricity.tin_ore": "Tin Ore",
@@ -24,6 +27,7 @@
 
   "block.semirealisticelectricity.rubber_planks": "Rubber Planks",
   "block.semirealisticelectricity.rubber_log": "Rubber Log",
+  "block.semirealisticelectricity.rubber_log_tap": "Rubber Log Tap",
   "block.semirealisticelectricity.stripped_rubber_log": "Stripped Rubber Log",
   "block.semirealisticelectricity.rubber_leaves": "Rubber Leaves",
   "block.semirealisticelectricity.rubber_sapling": "Rubber Sapling"
