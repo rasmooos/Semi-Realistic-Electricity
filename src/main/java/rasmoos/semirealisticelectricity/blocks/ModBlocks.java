@@ -76,6 +76,9 @@ public class ModBlocks {
             () -> new RubberLogTap(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)), ModSetup.ITEM_GROUP);
 
 
+    public static RegistryObject<Block> IRON_FURNACE_BLOCK = registerBlock("iron_furnace",
+            () -> new IronFurnaceBlock(BlockBehaviour.Properties.copy(Blocks.STONE)), ModSetup.ITEM_GROUP);
+
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> result = BLOCKS.register(name, block);
         registerBlockItem(name, result, tab);

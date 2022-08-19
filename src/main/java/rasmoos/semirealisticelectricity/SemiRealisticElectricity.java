@@ -3,6 +3,7 @@ package rasmoos.semirealisticelectricity;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -11,6 +12,7 @@ import org.slf4j.Logger;
 import rasmoos.semirealisticelectricity.blockentites.ModBlockEntities;
 import rasmoos.semirealisticelectricity.blocks.ModBlocks;
 import rasmoos.semirealisticelectricity.items.ModItems;
+import rasmoos.semirealisticelectricity.screen.ModMenuTypes;
 import rasmoos.semirealisticelectricity.setup.ClientSetup;
 import rasmoos.semirealisticelectricity.setup.ModSetup;
 import rasmoos.semirealisticelectricity.world.ModConfiguredFeatures;
@@ -22,25 +24,28 @@ public class SemiRealisticElectricity {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public SemiRealisticElectricity() {
-
-        register();
+        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        register(eventBus);
 
         // Register the commonSetup method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(ModSetup::init);
+        eventBus.addListener(ModSetup::init);
+
         if(FMLEnvironment.dist.isClient()) {
-            FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
+            eventBus.addListener(ClientSetup::init);
         }
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    public static final void register() {
-        ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ModBlockEntities.BLOCK_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ModConfiguredFeatures.CONFIGURED_FEATURES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ModPlacedFeatures.PLACED_FEATURES.register(FMLJavaModLoadingContext.get().getModEventBus());
+    public static final void register(IEventBus eventBus) {
+
+        ModBlocks.BLOCKS.register(eventBus);
+        ModItems.ITEMS.register(eventBus);
+        ModBlockEntities.BLOCK_ENTITIES.register(eventBus);
+        ModConfiguredFeatures.CONFIGURED_FEATURES.register(eventBus);
+        ModPlacedFeatures.PLACED_FEATURES.register(eventBus);
+        ModMenuTypes.MENUS.register(eventBus);
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call

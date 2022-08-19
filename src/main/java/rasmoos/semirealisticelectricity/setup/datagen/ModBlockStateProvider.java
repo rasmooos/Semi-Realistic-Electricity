@@ -25,6 +25,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         logBlock(ModBlocks.RUBBER_LOG.get());
         logBlock(ModBlocks.STRIPPED_RUBBER_LOG.get());
 
+
+
         simpleBlock(ModBlocks.RUBBER_PLANKS.get());
     }
 }

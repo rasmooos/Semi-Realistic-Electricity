@@ -12,6 +12,10 @@ public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, SemiRealisticElectricity.MOD_ID);
 
     public static final RegistryObject<BlockEntityType<RubberLogTapEntity>> RUBBER_LOG_ENTITY =
-            BLOCK_ENTITIES.register("rubber_log_entity", () -> BlockEntityType.Builder.of(RubberLogTapEntity::new, ModBlocks.RUBBER_LOG_TAP.get()).build(null));
+            BLOCK_ENTITIES.register("rubber_log_entity",
+                    () -> BlockEntityType.Builder.of(RubberLogTapEntity::new, ModBlocks.RUBBER_LOG_TAP.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<IronFurnaceBlockEntity>> IRON_FURNACE_ENTITY =
+            BLOCK_ENTITIES.register("iron_furnace_entity",
+                    () -> BlockEntityType.Builder.of(IronFurnaceBlockEntity::new, ModBlocks.IRON_FURNACE_BLOCK.get()).build(null));
 }

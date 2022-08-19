@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import rasmoos.semirealisticelectricity.SemiRealisticElectricity;
 import rasmoos.semirealisticelectricity.blocks.ModBlocks;
@@ -46,6 +47,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         block(ModBlocks.RUBBER_PLANKS.get());
         block(ModBlocks.RUBBER_LOG.get());
         block(ModBlocks.STRIPPED_RUBBER_LOG.get());
+
+        block(ModBlocks.IRON_FURNACE_BLOCK.get());
     }
 
     private ItemModelBuilder block(Block block) {
