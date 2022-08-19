@@ -2,11 +2,9 @@ package rasmoos.semirealisticelectricity.blockentites;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import rasmoos.semirealisticelectricity.blocks.RubberLogTap;
-import rasmoos.semirealisticelectricity.setup.Registration;
 
 import java.util.Random;
 
@@ -18,7 +16,7 @@ public class RubberLogTapEntity extends BlockEntity {
     private int value;
 
     public RubberLogTapEntity(BlockPos blockPos, BlockState blockState) {
-        super(Registration.RUBBER_LOG_ENTITY.get(), blockPos, blockState);
+        super(ModBlockEntities.RUBBER_LOG_ENTITY.get(), blockPos, blockState);
     }
 
     public void tick() {

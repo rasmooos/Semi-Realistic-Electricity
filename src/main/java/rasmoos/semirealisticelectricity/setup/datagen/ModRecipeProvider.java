@@ -3,23 +3,29 @@ package rasmoos.semirealisticelectricity.setup.datagen;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.recipes.*;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCookingSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.registries.ForgeRegistries;
-import rasmoos.semirealisticelectricity.setup.Registration;
+import rasmoos.semirealisticelectricity.blocks.ModBlocks;
+import rasmoos.semirealisticelectricity.items.ModItems;
 
 import java.util.List;
 import java.util.function.Consumer;
 
 public class ModRecipeProvider extends RecipeProvider implements IConditionBuilder {
 
-    protected static final ImmutableList<ItemLike> TIN_SMELTABLES = ImmutableList.of(Registration.TIN_ORE.get(), Registration.DEEPSLATE_TIN_ORE.get(), Registration.RAW_TIN.get());
-    protected static final ImmutableList<ItemLike> COBALT_SMELTABLES = ImmutableList.of(Registration.COBALT_ORE.get(), Registration.DEEPSLATE_COBALT_ORE.get(), Registration.RAW_COBALT.get());
-    protected static final ImmutableList<ItemLike> MAGNETITE_SMELTABLES = ImmutableList.of(Registration.MAGNETITE_ORE.get(), Registration.DEEPSLATE_MAGNETITE_ORE.get(), Registration.RAW_MAGNETITE.get());
+    protected static final ImmutableList<ItemLike> TIN_SMELTABLES = ImmutableList.of(ModBlocks.TIN_ORE.get(), ModBlocks.DEEPSLATE_TIN_ORE.get(),
+            ModItems.RAW_TIN.get());
+    protected static final ImmutableList<ItemLike> COBALT_SMELTABLES = ImmutableList.of(ModBlocks.COBALT_ORE.get(), ModBlocks.DEEPSLATE_COBALT_ORE.get(),
+            ModItems.RAW_COBALT.get());
+    protected static final ImmutableList<ItemLike> MAGNETITE_SMELTABLES = ImmutableList.of(ModBlocks.MAGNETITE_ORE.get(), ModBlocks.DEEPSLATE_MAGNETITE_ORE.get(),
+            ModItems.RAW_MAGNETITE.get());
     public ModRecipeProvider(DataGenerator pGenerator) {
         super(pGenerator);
     }
@@ -39,15 +45,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 //                .unlockedBy("has_stripped_rubber_log", inventoryTrigger(ItemPredicate.Builder.item().of(Registration.STRIPPED_RUBBER_LOG.get()).build()))
 //                .save(pFinishedRecipeConsumer);
 
-        planksFromLogs(pFinishedRecipeConsumer, Registration.RUBBER_PLANKS.get(), ModItemsTagProvider.RUBBER_LOGS);
+        planksFromLogs(pFinishedRecipeConsumer, ModBlocks.RUBBER_PLANKS.get(), ModItemsTagProvider.RUBBER_LOGS);
 
-        oreSmelting(pFinishedRecipeConsumer, TIN_SMELTABLES, Registration.TIN_INGOT.get(), 0.7F, 200, "tin_ingot");
-        oreSmelting(pFinishedRecipeConsumer, COBALT_SMELTABLES, Registration.COBALT_INGOT.get(), 0.7F, 200, "cobalt_ingot");
-        oreSmelting(pFinishedRecipeConsumer, MAGNETITE_SMELTABLES, Registration.MAGNETITE_INGOT.get(), 0.7F, 200, "magnetite_ingot");
+        oreSmelting(pFinishedRecipeConsumer, TIN_SMELTABLES, ModItems.TIN_INGOT.get(), 0.7F, 200, "tin_ingot");
+        oreSmelting(pFinishedRecipeConsumer, COBALT_SMELTABLES, ModItems.COBALT_INGOT.get(), 0.7F, 200, "cobalt_ingot");
+        oreSmelting(pFinishedRecipeConsumer, MAGNETITE_SMELTABLES, ModItems.MAGNETITE_INGOT.get(), 0.7F, 200, "magnetite_ingot");
 
-        oreBlasting(pFinishedRecipeConsumer, TIN_SMELTABLES, Registration.TIN_INGOT.get(), 0.7F, 100, "tin_ingot");
-        oreBlasting(pFinishedRecipeConsumer, COBALT_SMELTABLES, Registration.COBALT_INGOT.get(), 0.7F, 100, "cobalt_ingot");
-        oreBlasting(pFinishedRecipeConsumer, MAGNETITE_SMELTABLES, Registration.MAGNETITE_INGOT.get(), 0.7F, 100, "magnetite_ingot");
+        oreBlasting(pFinishedRecipeConsumer, TIN_SMELTABLES, ModItems.TIN_INGOT.get(), 0.7F, 100, "tin_ingot");
+        oreBlasting(pFinishedRecipeConsumer, COBALT_SMELTABLES, ModItems.COBALT_INGOT.get(), 0.7F, 100, "cobalt_ingot");
+        oreBlasting(pFinishedRecipeConsumer, MAGNETITE_SMELTABLES, ModItems.MAGNETITE_INGOT.get(), 0.7F, 100, "magnetite_ingot");
     }
 
     protected static void oreSmelting(Consumer<FinishedRecipe> p_176592_, List<ItemLike> p_176593_, ItemLike p_176594_, float p_176595_, int p_176596_, String p_176597_) {

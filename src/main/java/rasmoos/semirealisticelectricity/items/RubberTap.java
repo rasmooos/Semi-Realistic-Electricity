@@ -6,11 +6,9 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import rasmoos.semirealisticelectricity.blockentites.RubberLogTapEntity;
 import rasmoos.semirealisticelectricity.blocks.RubberLogTap;
-import rasmoos.semirealisticelectricity.setup.Registration;
 
 public class RubberTap extends Item {
     public RubberTap(Properties properties) {
@@ -29,7 +27,7 @@ public class RubberTap extends Item {
                 entity.setValue(entity.getValue() + 4);
                 BlockPos blockPos = entity.getBlockPos();
                 useOnContext.getLevel().addFreshEntity(
-                        new ItemEntity(useOnContext.getLevel(), blockPos.getX(), blockPos.getY(), blockPos.getZ(), new ItemStack(Registration.RUBBER_RESIN.get(), 1)));
+                        new ItemEntity(useOnContext.getLevel(), blockPos.getX(), blockPos.getY(), blockPos.getZ(), new ItemStack(ModItems.RUBBER_RESIN.get(), 1)));
 //                useOnContext.getLevel().setBlockAndUpdate(useOnContext.getClickedPos(), blockEntity.getBlockState().setValue(RubberLogTap.RUBBER_TAP, value + 4));
             }
         }

@@ -1,19 +1,14 @@
 package rasmoos.semirealisticelectricity.world;
 
-import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
-import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
-import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import rasmoos.semirealisticelectricity.SemiRealisticElectricity;
-import rasmoos.semirealisticelectricity.setup.Registration;
+import rasmoos.semirealisticelectricity.blocks.ModBlocks;
 
 import java.util.List;
 
@@ -25,7 +20,7 @@ public class ModPlacedFeatures {
 
     public static final RegistryObject<PlacedFeature> RUBBER_CHECKED = PLACED_FEATURES.register("rubber_checked", () ->
             new PlacedFeature(ModConfiguredFeatures.RUBBER.getHolder().get(),
-                    List.of(PlacementUtils.filteredByBlockSurvival(Registration.RUBBER_SAPLING.get()))));
+                    List.of(PlacementUtils.filteredByBlockSurvival(ModBlocks.RUBBER_SAPLING.get()))));
 
     public static final RegistryObject<PlacedFeature> RUBBER_PLACED = PLACED_FEATURES.register("rubber_placed",
             () -> new PlacedFeature(

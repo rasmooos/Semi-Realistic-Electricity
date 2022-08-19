@@ -9,7 +9,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
 import org.jetbrains.annotations.Nullable;
-import rasmoos.semirealisticelectricity.setup.Registration;
 
 public class FlammableRotatedPilarBlock extends RotatedPillarBlock {
     public FlammableRotatedPilarBlock(Properties properties) {
@@ -34,8 +33,8 @@ public class FlammableRotatedPilarBlock extends RotatedPillarBlock {
     @Override
     public @Nullable BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
         if(toolAction == ToolActions.AXE_STRIP) {
-            if(state.is(Registration.RUBBER_LOG.get())) {
-                return Registration.STRIPPED_RUBBER_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            if(state.is(ModBlocks.RUBBER_LOG.get())) {
+                return ModBlocks.STRIPPED_RUBBER_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
             }
         }
 

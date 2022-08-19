@@ -3,7 +3,8 @@ package rasmoos.semirealisticelectricity.setup.datagen.loot;
 import net.minecraft.data.loot.BlockLoot;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.RegistryObject;
-import rasmoos.semirealisticelectricity.setup.Registration;
+import rasmoos.semirealisticelectricity.blocks.ModBlocks;
+import rasmoos.semirealisticelectricity.items.ModItems;
 
 public class ModBlockLootTables extends BlockLoot {
 
@@ -12,27 +13,27 @@ public class ModBlockLootTables extends BlockLoot {
 
     @Override
     protected void addTables() {
-        add(Registration.TIN_ORE.get(), (block) -> createOreDrop(Registration.TIN_ORE.get(), Registration.RAW_TIN.get()));
-        add(Registration.DEEPSLATE_TIN_ORE.get(), (block) -> createOreDrop(Registration.DEEPSLATE_TIN_ORE.get(), Registration.RAW_TIN.get()));
-        add(Registration.MAGNETITE_ORE.get(), (block) -> createOreDrop(Registration.MAGNETITE_ORE.get(), Registration.RAW_MAGNETITE.get()));
-        add(Registration.DEEPSLATE_MAGNETITE_ORE.get(), (block) -> createOreDrop(Registration.DEEPSLATE_MAGNETITE_ORE.get(), Registration.RAW_MAGNETITE.get()));
-        add(Registration.LEPIDOLITE_ORE.get(), (block) -> createOreDrop(Registration.LEPIDOLITE_ORE.get(), Registration.RAW_LEPIDOLITE.get()));
-        add(Registration.DEEPSLATE_LEPIDOLITE_ORE.get(), (block) -> createOreDrop(Registration.DEEPSLATE_LEPIDOLITE_ORE.get(), Registration.RAW_LEPIDOLITE.get()));
-        add(Registration.COBALT_ORE.get(), (block) -> createOreDrop(Registration.COBALT_ORE.get(), Registration.RAW_COBALT.get()));
-        add(Registration.DEEPSLATE_COBALT_ORE.get(), (block) -> createOreDrop(Registration.DEEPSLATE_COBALT_ORE.get(), Registration.RAW_COBALT.get()));
+        add(ModBlocks.TIN_ORE.get(), (block) -> createOreDrop(ModBlocks.TIN_ORE.get(), ModItems.RAW_TIN.get()));
+        add(ModBlocks.DEEPSLATE_TIN_ORE.get(), (block) -> createOreDrop(ModBlocks.DEEPSLATE_TIN_ORE.get(), ModItems.RAW_TIN.get()));
+        add(ModBlocks.MAGNETITE_ORE.get(), (block) -> createOreDrop(ModBlocks.MAGNETITE_ORE.get(), ModItems.RAW_MAGNETITE.get()));
+        add(ModBlocks.DEEPSLATE_MAGNETITE_ORE.get(), (block) -> createOreDrop(ModBlocks.DEEPSLATE_MAGNETITE_ORE.get(), ModItems.RAW_MAGNETITE.get()));
+        add(ModBlocks.LEPIDOLITE_ORE.get(), (block) -> createOreDrop(ModBlocks.LEPIDOLITE_ORE.get(), ModItems.RAW_LEPIDOLITE.get()));
+        add(ModBlocks.DEEPSLATE_LEPIDOLITE_ORE.get(), (block) -> createOreDrop(ModBlocks.DEEPSLATE_LEPIDOLITE_ORE.get(), ModItems.RAW_LEPIDOLITE.get()));
+        add(ModBlocks.COBALT_ORE.get(), (block) -> createOreDrop(ModBlocks.COBALT_ORE.get(), ModItems.RAW_COBALT.get()));
+        add(ModBlocks.DEEPSLATE_COBALT_ORE.get(), (block) -> createOreDrop(ModBlocks.DEEPSLATE_COBALT_ORE.get(), ModItems.RAW_COBALT.get()));
 
-        add(Registration.RUBBER_LEAVES.get(), (block) -> createLeavesDrops(block, Registration.RUBBER_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-        dropSelf(Registration.RUBBER_SAPLING.get());
+        add(ModBlocks.RUBBER_LEAVES.get(), (block) -> createLeavesDrops(block, ModBlocks.RUBBER_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+        dropSelf(ModBlocks.RUBBER_SAPLING.get());
 
 
-        dropSelf(Registration.RUBBER_LOG.get());
-        dropSelf(Registration.STRIPPED_RUBBER_LOG.get());
-        dropSelf(Registration.RUBBER_PLANKS.get());
-        dropOther(Registration.RUBBER_LOG_TAP.get(), Registration.RUBBER_LOG.get().asItem());
+        dropSelf(ModBlocks.RUBBER_LOG.get());
+        dropSelf(ModBlocks.STRIPPED_RUBBER_LOG.get());
+        dropSelf(ModBlocks.RUBBER_PLANKS.get());
+        dropOther(ModBlocks.RUBBER_LOG_TAP.get(), ModBlocks.RUBBER_LOG.get().asItem());
     }
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
-        return Registration.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
+        return ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
     }
 }
