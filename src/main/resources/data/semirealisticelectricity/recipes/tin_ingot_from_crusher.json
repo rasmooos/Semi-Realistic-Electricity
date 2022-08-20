@@ -1,0 +1,11 @@
+{
+  "type": "semirealisticelectricity:crushing",
+  "ingredients": [
+    {
+      "item": "semirealisticelectricity:raw_tin"
+    }
+  ],
+  "output": {
+    "item": "semirealisticelectricity:tin_ingot"
+  }
+}

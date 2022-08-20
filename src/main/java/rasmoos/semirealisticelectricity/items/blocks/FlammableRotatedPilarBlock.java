@@ -1,4 +1,4 @@
-package rasmoos.semirealisticelectricity.blocks;
+package rasmoos.semirealisticelectricity.items.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

@@ -4,7 +4,7 @@ plugins {
     id 'net.minecraftforge.gradle' version '5.1.+'
 }
 
-version = '0.1.0-1.19.2'
+version = '0.1.2-1.19.2'
 group = 'rasmoos.semirealisticelectricity' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'semirealisticelectricity'
 
@@ -140,6 +140,7 @@ dependencies {
 
     implementation fg.deobf('curse.maven:jei-238222:3928388')
     implementation fg.deobf('curse.maven:theoneprobe-245211:3927520')
+    implementation fg.deobf('curse.maven:mekanism-268560:3922056')
 
     // Real mod deobf dependency examples - these get remapped to your current mappings
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency

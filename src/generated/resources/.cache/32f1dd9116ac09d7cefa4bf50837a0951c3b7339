@@ -1,6 +1,7 @@
-// 1.19.2	2022-08-19T22:40:47.6229671	Item Models: semirealisticelectricity
+// 1.19.2	2022-08-20T20:24:03.6278887	Item Models: semirealisticelectricity
 2ec679dee8a571624f94a4325f915123485f6805 assets/semirealisticelectricity/models/item/cobalt_ingot.json
 bcdfaf7178301ce8bfdfa0b62f894ae37b9d8fac assets/semirealisticelectricity/models/item/cobalt_ore.json
+015bda8f91bd908a3aa39f6e42939975aefb6c53 assets/semirealisticelectricity/models/item/crusher.json
 f7c6f1d8d51edc0fe9de659a9cbf6eb98319cc41 assets/semirealisticelectricity/models/item/deepslate_cobalt_ore.json
 9436a10dd2f42d8578713eaf25cf518b2acd896b assets/semirealisticelectricity/models/item/deepslate_lepidolite_ore.json
 431a32498ccc339dd9f4ed20596f0558b0e716df assets/semirealisticelectricity/models/item/deepslate_magnetite_ore.json

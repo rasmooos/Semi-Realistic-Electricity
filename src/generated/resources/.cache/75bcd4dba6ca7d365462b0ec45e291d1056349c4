@@ -1,6 +1,9 @@
-// 1.19.2	2022-08-18T12:27:06.8703716	Tags for minecraft:block
+// 1.19.2	2022-08-20T20:56:24.1651824	Tags for minecraft:block
 1e16c42751f66f2c265832e513b08318565cdb95 data/minecraft/tags/blocks/leaves.json
 9e67bd516679c8381e88ce81ad3f0e4679d451cd data/minecraft/tags/blocks/logs.json
 9e67bd516679c8381e88ce81ad3f0e4679d451cd data/minecraft/tags/blocks/logs_that_burn.json
+196edfcd2d06e44b5f88869ddf98a21e4b4b7a04 data/minecraft/tags/blocks/mineable/pickaxe.json
+adf051475b1120a52e366280c4b245cbec4a952a data/minecraft/tags/blocks/needs_iron_tool.json
+43a204976ff86d68d006428be04af6946a2cd53c data/minecraft/tags/blocks/needs_stone_tool.json
 f8996ddc6b8f77a977f08cf050e2d27e5302797d data/minecraft/tags/blocks/planks.json
 e78604d3343b8f124428be8291c519ed21b5e78d data/semirealisticelectricity/tags/blocks/rubber_logs.json

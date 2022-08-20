@@ -10,7 +10,7 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 import rasmoos.semirealisticelectricity.SemiRealisticElectricity;
-import rasmoos.semirealisticelectricity.blocks.ModBlocks;
+import rasmoos.semirealisticelectricity.items.blocks.ModBlocks;
 
 public class ModItemsTagProvider extends ItemTagsProvider {
 
@@ -28,5 +28,6 @@ public class ModItemsTagProvider extends ItemTagsProvider {
         tag(ItemTags.LOGS).add(ModBlocks.RUBBER_LOG.get().asItem()).add(ModBlocks.STRIPPED_RUBBER_LOG.get().asItem());
         tag(ItemTags.LOGS_THAT_BURN).add(ModBlocks.RUBBER_LOG.get().asItem()).add(ModBlocks.STRIPPED_RUBBER_LOG.get().asItem());
         tag(ItemTags.LEAVES).add(ModBlocks.RUBBER_LEAVES.get().asItem());
+
     }
 }

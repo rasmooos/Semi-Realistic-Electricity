@@ -5,7 +5,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import rasmoos.semirealisticelectricity.SemiRealisticElectricity;
-import rasmoos.semirealisticelectricity.blocks.ModBlocks;
+import rasmoos.semirealisticelectricity.items.blocks.ModBlocks;
 
 public class ModBlockEntities {
 
@@ -18,4 +18,8 @@ public class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<IronFurnaceBlockEntity>> IRON_FURNACE_ENTITY =
             BLOCK_ENTITIES.register("iron_furnace_entity",
                     () -> BlockEntityType.Builder.of(IronFurnaceBlockEntity::new, ModBlocks.IRON_FURNACE_BLOCK.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<CrusherBlockEntity>> CRUSHER_BLOCK_ENTITY =
+            BLOCK_ENTITIES.register("crusher_block_entity",
+                    () -> BlockEntityType.Builder.of(CrusherBlockEntity::new, ModBlocks.CRUSHER_BLOCK.get()).build(null));
 }

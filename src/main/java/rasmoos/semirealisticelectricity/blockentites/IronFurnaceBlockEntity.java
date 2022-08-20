@@ -7,6 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
+import rasmoos.semirealisticelectricity.items.blocks.ModBlocks;
 import rasmoos.semirealisticelectricity.screen.IronFurnaceMenu;
 
 public class IronFurnaceBlockEntity extends MachineBlockEntity {
@@ -14,7 +15,7 @@ public class IronFurnaceBlockEntity extends MachineBlockEntity {
     public static final int NUM_SLOTS = 3;
 
     public IronFurnaceBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
-        super(ModBlockEntities.IRON_FURNACE_ENTITY.get(), pWorldPosition, pBlockState);
+        super(ModBlockEntities.IRON_FURNACE_ENTITY.get(), pWorldPosition, pBlockState, ModBlocks.IRON_FURNACE_BLOCK.get());
     }
 
     @Override

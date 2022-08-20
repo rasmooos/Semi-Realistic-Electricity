@@ -1,4 +1,4 @@
-package rasmoos.semirealisticelectricity.blocks;
+package rasmoos.semirealisticelectricity.items.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -76,8 +76,11 @@ public class ModBlocks {
             () -> new RubberLogTap(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)), ModSetup.ITEM_GROUP);
 
 
-    public static RegistryObject<Block> IRON_FURNACE_BLOCK = registerBlock("iron_furnace",
+    public static RegistryObject<MachineBlock> IRON_FURNACE_BLOCK = registerBlock("iron_furnace",
             () -> new IronFurnaceBlock(BlockBehaviour.Properties.copy(Blocks.STONE)), ModSetup.ITEM_GROUP);
+
+    public static RegistryObject<MachineBlock> CRUSHER_BLOCK = registerBlock("crusher",
+            () -> new CrusherBlock(BlockBehaviour.Properties.copy(Blocks.STONE)), ModSetup.ITEM_GROUP);
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> result = BLOCKS.register(name, block);

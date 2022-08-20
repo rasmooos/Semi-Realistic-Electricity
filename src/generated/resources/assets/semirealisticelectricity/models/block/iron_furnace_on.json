@@ -2,7 +2,7 @@
   "parent": "minecraft:block/orientable",
   "textures": {
     "front": "semirealisticelectricity:block/iron_furnace_front_on",
-    "side": "semirealisticelectricity:block/iron_furnace_side",
-    "top": "semirealisticelectricity:block/iron_furnace_top"
+    "side": "semirealisticelectricity:block/machine_side",
+    "top": "semirealisticelectricity:block/machine_top"
   }
 }

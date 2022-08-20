@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import rasmoos.semirealisticelectricity.ClientBinding;
 import rasmoos.semirealisticelectricity.SemiRealisticElectricity;
+import rasmoos.semirealisticelectricity.screen.CrusherScreen;
 import rasmoos.semirealisticelectricity.screen.IronFurnaceScreen;
 import rasmoos.semirealisticelectricity.screen.ModMenuTypes;
 
@@ -16,6 +17,7 @@ public class ClientSetup {
         ClientBinding.registerKeyBindings();
 
         MenuScreens.register(ModMenuTypes.IRON_FURNACE_MENU.get(), IronFurnaceScreen::new);
+        MenuScreens.register(ModMenuTypes.CRUSHER_MENU.get(), CrusherScreen::new);
     }
 
     @SubscribeEvent

@@ -1,4 +1,4 @@
-package rasmoos.semirealisticelectricity.blocks;
+package rasmoos.semirealisticelectricity.items.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -15,11 +15,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
-import rasmoos.semirealisticelectricity.blockentites.IronFurnaceBlockEntity;
-import rasmoos.semirealisticelectricity.blockentites.MachineBlockEntity;
+import rasmoos.semirealisticelectricity.blockentites.BaseGuiBlockEntity;
 
-public abstract class MachineBlock extends BaseEntityBlock {
-    protected MachineBlock(Properties properties) {
+public abstract class BaseGuiBlock extends BaseEntityBlock {
+
+
+    protected BaseGuiBlock(Properties properties) {
         super(properties);
     }
 
@@ -28,7 +29,7 @@ public abstract class MachineBlock extends BaseEntityBlock {
     @Override
     public <V extends BlockEntity> BlockEntityTicker<V> getTicker(Level level, BlockState state, BlockEntityType<V> blockEntityType) {
         return (level1, blockPos, blockState, v) -> {
-            if (v instanceof MachineBlockEntity entity)
+            if (v instanceof BaseGuiBlockEntity entity)
                 entity.tick();
         };
     }
@@ -42,7 +43,7 @@ public abstract class MachineBlock extends BaseEntityBlock {
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
         if (pState.getBlock() != pNewState.getBlock()) {
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            if (blockEntity instanceof MachineBlockEntity entity) {
+            if (blockEntity instanceof BaseGuiBlockEntity entity) {
                 entity.drops();
             }
         }
@@ -53,7 +54,7 @@ public abstract class MachineBlock extends BaseEntityBlock {
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
-            if(entity instanceof MachineBlockEntity blockEntity) {
+            if(entity instanceof BaseGuiBlockEntity blockEntity) {
                 NetworkHooks.openScreen(((ServerPlayer)pPlayer), blockEntity, pPos);
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
@@ -62,4 +63,8 @@ public abstract class MachineBlock extends BaseEntityBlock {
 
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }
+
+    @Nullable
+    @Override
+    public abstract BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState);
 }

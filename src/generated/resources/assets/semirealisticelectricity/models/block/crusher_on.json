@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "semirealisticelectricity:block/crusher_front_on",
+    "side": "semirealisticelectricity:block/machine_side",
+    "top": "semirealisticelectricity:block/machine_top"
+  }
+}

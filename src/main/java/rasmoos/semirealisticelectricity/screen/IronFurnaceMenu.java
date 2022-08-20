@@ -2,6 +2,7 @@ package rasmoos.semirealisticelectricity.screen;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import rasmoos.semirealisticelectricity.blockentites.MachineBlockEntity;
@@ -13,7 +14,7 @@ public class IronFurnaceMenu extends MachineMenu {
     }
 
     public IronFurnaceMenu(int pContainerId, Inventory inv, MachineBlockEntity entity) {
-        super(ModMenuTypes.IRON_FURNACE_MENU.get(), pContainerId, inv, entity);
+        super(ModMenuTypes.IRON_FURNACE_MENU.get(), pContainerId, inv, entity, new SimpleContainerData(0));
     }
 
     @Override

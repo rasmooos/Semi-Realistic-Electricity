@@ -12,7 +12,7 @@ import net.minecraft.world.item.crafting.SimpleCookingSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.registries.ForgeRegistries;
-import rasmoos.semirealisticelectricity.blocks.ModBlocks;
+import rasmoos.semirealisticelectricity.items.blocks.ModBlocks;
 import rasmoos.semirealisticelectricity.items.ModItems;
 
 import java.util.List;
@@ -72,7 +72,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
             SimpleCookingRecipeBuilder.cooking(Ingredient.of(itemlike), p_176537_, p_176538_, p_176539_, p_176535_).group(p_176540_)
                     .unlockedBy(getHasName(itemlike), inventoryTrigger(ItemPredicate.Builder.item().of(itemlike).build())).
                     save(p_176534_, getItemName(p_176537_) + p_176541_ + "_" + getItemName(itemlike));
-            System.out.println(getItemName(p_176537_) + p_176541_ + "_" + getItemName(itemlike));
         }
 
     }

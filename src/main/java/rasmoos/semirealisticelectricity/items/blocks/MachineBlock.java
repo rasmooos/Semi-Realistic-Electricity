@@ -1,22 +1,20 @@
-package rasmoos.semirealisticelectricity.blocks;
+package rasmoos.semirealisticelectricity.items.blocks;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import org.jetbrains.annotations.Nullable;
-import rasmoos.semirealisticelectricity.blockentites.IronFurnaceBlockEntity;
 
-public class IronFurnaceBlock extends MachineBlock {
+public abstract class MachineBlock extends BaseGuiBlock {
+
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
-    public IronFurnaceBlock(Properties properties) {
+
+    protected MachineBlock(Properties properties) {
         super(properties);
     }
 
@@ -27,12 +25,9 @@ public class IronFurnaceBlock extends MachineBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(FACING, LIT);
+        super.createBlockStateDefinition(pBuilder);
+        pBuilder.add(FACING);
+        pBuilder.add(LIT);
     }
 
-    @Nullable
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new IronFurnaceBlockEntity(pPos, pState);
-    }
 }

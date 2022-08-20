@@ -10,8 +10,9 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.slf4j.Logger;
 import rasmoos.semirealisticelectricity.blockentites.ModBlockEntities;
-import rasmoos.semirealisticelectricity.blocks.ModBlocks;
+import rasmoos.semirealisticelectricity.items.blocks.ModBlocks;
 import rasmoos.semirealisticelectricity.items.ModItems;
+import rasmoos.semirealisticelectricity.recipe.ModRecipes;
 import rasmoos.semirealisticelectricity.screen.ModMenuTypes;
 import rasmoos.semirealisticelectricity.setup.ClientSetup;
 import rasmoos.semirealisticelectricity.setup.ModSetup;
@@ -46,6 +47,7 @@ public class SemiRealisticElectricity {
         ModConfiguredFeatures.CONFIGURED_FEATURES.register(eventBus);
         ModPlacedFeatures.PLACED_FEATURES.register(eventBus);
         ModMenuTypes.MENUS.register(eventBus);
+        ModRecipes.SERIALIZERS.register(eventBus);
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
