@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 import rasmoos.semirealisticelectricity.items.blocks.ModBlocks;
 import rasmoos.semirealisticelectricity.screen.IronFurnaceMenu;
 
-public class IronFurnaceBlockEntity extends MachineBlockEntity {
+public class IronFurnaceBlockEntity extends BaseGuiBlockEntity {
 
     public static final int NUM_SLOTS = 3;
 

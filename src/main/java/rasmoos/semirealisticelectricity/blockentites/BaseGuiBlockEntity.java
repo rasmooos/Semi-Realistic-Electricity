@@ -3,6 +3,9 @@ package rasmoos.semirealisticelectricity.blockentites;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -19,10 +22,12 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
+import rasmoos.semirealisticelectricity.network.ModNetworkHandler;
+import rasmoos.semirealisticelectricity.network.SyncItemToClient;
 
 import javax.annotation.Nonnull;
 
-public abstract class BaseGuiBlockEntity extends BlockEntity implements MenuProvider {
+public abstract class BaseGuiBlockEntity extends BlockEntity implements MenuProvider, IInventoryHandlingBlockEntity {
 
     protected final ItemStackHandler itemHandler;
     protected LazyOptional<IItemHandler> lazyItemHandler;
@@ -36,11 +41,30 @@ public abstract class BaseGuiBlockEntity extends BlockEntity implements MenuProv
             @Override
             protected void onContentsChanged(int slot) {
                 setChanged();
+                if(!level.isClientSide) {
+                    ModNetworkHandler.sendToClients(new SyncItemToClient(itemHandler, blockPos));
+                }
             }
         };
 
         lazyItemHandler = LazyOptional.empty();
 
+    }
+
+    @Override
+    public void setHandler(ItemStackHandler handler) {
+        copyHandlerContents(itemHandler);
+    }
+
+    @Override
+    public ItemStackHandler getItemStackHandler() {
+        return itemHandler;
+    }
+
+    private void copyHandlerContents(ItemStackHandler handler) {
+        for (int i = 0; i < handler.getSlots(); i++) {
+            itemHandler.setStackInSlot(i, handler.getStackInSlot(i));
+        }
     }
 
     public Block getBaseBlock() {
@@ -99,17 +123,17 @@ public abstract class BaseGuiBlockEntity extends BlockEntity implements MenuProv
     public abstract AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer);
 
 
-//    @Nullable
-//    @Override
-//    public Packet<ClientGamePacketListener> getUpdatePacket() {
-//        return ClientboundBlockEntityDataPacket.create(this);
-//    }
-//
-//    @Override
-//    public CompoundTag getUpdateTag() {
-//        CompoundTag compound = saveWithoutMetadata();
-//        load(compound);
-//
-//        return compound;
-//    }
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag() {
+        CompoundTag compound = saveWithoutMetadata();
+        load(compound);
+
+        return compound;
+    }
 }

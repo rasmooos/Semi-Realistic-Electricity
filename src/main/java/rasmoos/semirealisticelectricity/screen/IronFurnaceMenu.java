@@ -5,15 +5,16 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
+import rasmoos.semirealisticelectricity.blockentites.BaseGuiBlockEntity;
 import rasmoos.semirealisticelectricity.blockentites.MachineBlockEntity;
 import rasmoos.semirealisticelectricity.screen.slot.ModResultSlot;
 
-public class IronFurnaceMenu extends MachineMenu {
+public class IronFurnaceMenu extends BaseGuiMenu {
     public IronFurnaceMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
         this(pContainerId, inv, (MachineBlockEntity) inv.player.level.getBlockEntity(extraData.readBlockPos()));
     }
 
-    public IronFurnaceMenu(int pContainerId, Inventory inv, MachineBlockEntity entity) {
+    public IronFurnaceMenu(int pContainerId, Inventory inv, BaseGuiBlockEntity entity) {
         super(ModMenuTypes.IRON_FURNACE_MENU.get(), pContainerId, inv, entity, new SimpleContainerData(0));
     }
 

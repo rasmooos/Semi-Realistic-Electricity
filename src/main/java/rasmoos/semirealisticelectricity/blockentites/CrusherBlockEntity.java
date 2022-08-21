@@ -3,6 +3,7 @@ package rasmoos.semirealisticelectricity.blockentites;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -10,47 +11,27 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.Nullable;
+import rasmoos.semirealisticelectricity.items.blocks.CrusherBlock;
 import rasmoos.semirealisticelectricity.items.blocks.ModBlocks;
+import rasmoos.semirealisticelectricity.network.ModNetworkHandler;
+import rasmoos.semirealisticelectricity.network.SyncEnergyToClient;
+import rasmoos.semirealisticelectricity.network.SyncFluidToClient;
 import rasmoos.semirealisticelectricity.recipe.CrusherRecipe;
 import rasmoos.semirealisticelectricity.screen.CrusherMenu;
+import rasmoos.semirealisticelectricity.util.SemiRealisticEnergyStorage;
 
 import java.util.Optional;
 
-public class CrusherBlockEntity extends MachineBlockEntity {
+public class CrusherBlockEntity extends MachineBlockEntity<CrusherBlock> {
 
     public static final int NUM_SLOTS = 3;
-
-    protected final ContainerData data;
     private int progress;
     private int maxProgress;
 
     public CrusherBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.CRUSHER_BLOCK_ENTITY.get(), blockPos, blockState, ModBlocks.CRUSHER_BLOCK.get());
-
-        data = new ContainerData() {
-            @Override
-            public int get(int index) {
-                return switch(index) {
-                    case 0 -> CrusherBlockEntity.this.progress;
-                    case 1 -> CrusherBlockEntity.this.maxProgress;
-                    default -> 0;
-                };
-            }
-
-            @Override
-            public void set(int index, int value) {
-                switch(index) {
-                    case 0 -> CrusherBlockEntity.this.progress = value;
-                    case 1 -> CrusherBlockEntity.this.maxProgress = value;
-                }
-            }
-
-            @Override
-            public int getCount() {
-                return 2;
-            }
-        };
 
         progress = 0;
         maxProgress = 72;
@@ -70,12 +51,24 @@ public class CrusherBlockEntity extends MachineBlockEntity {
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
         tag.putInt("crusher.progress", progress);
+        tag.putInt("crusher.energy", energyStorage.getEnergyStored());
     }
 
     @Override
     public void load(CompoundTag nbt) {
         super.load(nbt);
         progress = nbt.getInt("crusher.progress");
+        energyStorage.setEnergy(nbt.getInt("crusher.energy"));
+    }
+
+    @Override
+    public int getFluidTankCapacity() {
+        return 16000;
+    }
+
+    @Override
+    public Tuple<Integer, Integer> getEnergyStorageCapacity() {
+        return new Tuple<>(60000, 200);
     }
 
     @Override
@@ -84,8 +77,13 @@ public class CrusherBlockEntity extends MachineBlockEntity {
     }
 
     public void tick() {
-        if(hasRecipe()) {
+        if(level.isClientSide) {
+            return;
+        }
+
+        if(hasRecipe() && hasEnoughEnergy()) {
             progress++;
+            energyStorage.extractEnergy(10, false);
             setChanged(level, getBlockPos(), getBlockState());
             if(progress > maxProgress) {
                 craftItem();
@@ -94,6 +92,22 @@ public class CrusherBlockEntity extends MachineBlockEntity {
             resetProgress();
             setChanged(level, getBlockPos(), getBlockState());
         }
+    }
+
+    public SemiRealisticEnergyStorage createEnergyStorage() {
+        Tuple<Integer, Integer> capacity = getEnergyStorageCapacity();
+        return new SemiRealisticEnergyStorage(capacity.getA(), capacity.getB()) {
+            @Override
+            public void onEnergyChanged() {
+                setChanged();
+                if(!level.isClientSide)
+                    ModNetworkHandler.sendToClients(new SyncEnergyToClient(energy, worldPosition));
+            }
+        };
+    }
+
+    private boolean hasEnoughEnergy() {
+        return energyStorage.getEnergyStored() >= 10;
     }
 
     private boolean hasRecipe() {
@@ -140,4 +154,36 @@ public class CrusherBlockEntity extends MachineBlockEntity {
         return inventory.getItem(2).getMaxStackSize() > inventory.getItem(2).getCount();
     }
 
+
+
+    @Override
+    public ContainerData getContainerData() {
+        return new ContainerData() {
+            @Override
+            public int get(int index) {
+                return switch(index) {
+                    case 0 -> CrusherBlockEntity.this.progress;
+                    case 1 -> CrusherBlockEntity.this.maxProgress;
+//                    case 2 -> CrusherBlockEntity.this.energyStorage.getEnergyStored();
+//                    case 3 -> CrusherBlockEntity.this.energyStorage.getMaxEnergyStored();
+                    default -> 0;
+                };
+            }
+
+            @Override
+            public void set(int index, int value) {
+                switch(index) {
+                    case 0 -> CrusherBlockEntity.this.progress = value;
+                    case 1 -> CrusherBlockEntity.this.maxProgress = value;
+//                    case 2 -> CrusherBlockEntity.this.energyStorage.setEnergy(value);
+//                    case 3 -> CrusherBlockEntity.this.energyStorage.setCapacity(value);
+                }
+            }
+
+            @Override
+            public int getCount() {
+                return 2;
+            }
+        };
+    }
 }

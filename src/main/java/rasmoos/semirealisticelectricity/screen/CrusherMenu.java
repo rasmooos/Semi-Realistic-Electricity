@@ -12,7 +12,7 @@ import rasmoos.semirealisticelectricity.screen.slot.ModResultSlot;
 public class CrusherMenu extends MachineMenu {
 
     public CrusherMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, (MachineBlockEntity) inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
+        this(pContainerId, inv, (MachineBlockEntity) inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(4));
     }
 
     public CrusherMenu(int pContainerId, Inventory inv, MachineBlockEntity entity, ContainerData data) {
@@ -45,4 +45,13 @@ public class CrusherMenu extends MachineMenu {
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
+
+//    public int getScaledEnergyLevel() {
+//        int energy = data.get(2);
+//        int capacity = data.get(3);
+//
+//        int pixelSize = 59;
+//
+//        return capacity == 0 ? 0 : energy * pixelSize / capacity;
+//    }
 }

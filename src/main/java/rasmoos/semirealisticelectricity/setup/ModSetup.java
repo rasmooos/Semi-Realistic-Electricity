@@ -11,6 +11,7 @@ import net.minecraftforge.registries.NewRegistryEvent;
 import net.minecraftforge.registries.RegistryObject;
 import rasmoos.semirealisticelectricity.SemiRealisticElectricity;
 import rasmoos.semirealisticelectricity.items.ModItems;
+import rasmoos.semirealisticelectricity.network.ModNetworkHandler;
 import rasmoos.semirealisticelectricity.recipe.CrusherRecipe;
 
 @Mod.EventBusSubscriber(modid = SemiRealisticElectricity.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -24,6 +25,6 @@ public class ModSetup {
     };
 
     public static void init(final FMLCommonSetupEvent event) {
-
+        ModNetworkHandler.register();
     }
 }

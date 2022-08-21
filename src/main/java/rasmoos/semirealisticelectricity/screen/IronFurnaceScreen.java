@@ -5,7 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import rasmoos.semirealisticelectricity.SemiRealisticElectricity;
 
-public class IronFurnaceScreen extends MachineScreen<IronFurnaceMenu> {
+public class IronFurnaceScreen extends BaseGuiScreen<IronFurnaceMenu> {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(SemiRealisticElectricity.MOD_ID, "textures/gui/iron_furnace.png");
 
