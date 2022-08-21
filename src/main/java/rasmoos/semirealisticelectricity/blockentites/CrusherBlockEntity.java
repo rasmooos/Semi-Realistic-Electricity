@@ -80,7 +80,7 @@ public class CrusherBlockEntity extends MachineBlockEntity {
 
     @Override
     public Component getDisplayName() {
-        return Component.literal("Crusher");
+        return Component.translatable("crusher.name");
     }
 
     public void tick() {

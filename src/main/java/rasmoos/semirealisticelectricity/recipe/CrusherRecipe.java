@@ -10,6 +10,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import org.jetbrains.annotations.Nullable;
 import rasmoos.semirealisticelectricity.SemiRealisticElectricity;
 
@@ -81,16 +82,26 @@ public class CrusherRecipe implements Recipe<SimpleContainer> {
 
         @Override
         public CrusherRecipe fromJson(ResourceLocation id, JsonObject json) {
-            ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "output"));
+            ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
 
-            JsonArray ingredients = GsonHelper.getAsJsonArray(json, "ingredients");
             NonNullList<Ingredient> inputs = NonNullList.withSize(1, Ingredient.EMPTY);
-
+            JsonArray ingredients = GsonHelper.getAsJsonArray(json, "ingredients");
             for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
 
-            return new CrusherRecipe(id, output, inputs);
+            return new CrusherRecipe(id, result, inputs);
+
+//            ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "output"));
+//
+//            JsonArray ingredients = GsonHelper.getAsJsonArray(json, "ingredients");
+//            NonNullList<Ingredient> inputs = NonNullList.withSize(1, Ingredient.EMPTY);
+//
+//            for (int i = 0; i < inputs.size(); i++) {
+//                inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
+//            }
+//
+//            return new CrusherRecipe(id, output, inputs);
         }
 
         @Override

@@ -27,11 +27,15 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.RAW_TIN.get());
 
         simpleItem(ModItems.COBALT_INGOT.get());
-        simpleItem(ModItems.LITHIUM_DUST.get());
         simpleItem(ModItems.MAGNETITE_INGOT.get());
         simpleItem(ModItems.TIN_INGOT.get());
         simpleItem(ModItems.RUBBER_TAP.get());
         simpleItem(ModItems.RUBBER_RESIN.get());
+
+        simpleItem(ModItems.TIN_DUST.get());
+        simpleItem(ModItems.COBALT_DUST.get());
+        simpleItem(ModItems.MAGNETITE_DUST.get());
+        simpleItem(ModItems.LITHIUM_DUST.get());
 
 
         block(ModBlocks.COBALT_ORE.get());

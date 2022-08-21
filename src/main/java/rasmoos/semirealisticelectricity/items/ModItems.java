@@ -1,6 +1,7 @@
 package rasmoos.semirealisticelectricity.items;
 
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -16,6 +17,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> RAW_LEPIDOLITE = ITEMS.register("raw_lepidolite", () -> new Item(new Item.Properties().tab(ModSetup.ITEM_GROUP)));
     public static final RegistryObject<Item> LITHIUM_DUST = ITEMS.register("lithium_dust", () -> new Item(new Item.Properties().tab(ModSetup.ITEM_GROUP)));
+    public static final RegistryObject<Item> TIN_DUST = ITEMS.register("tin_dust", () -> new Item(new Item.Properties().tab(ModSetup.ITEM_GROUP)));
+    public static final RegistryObject<Item> COBALT_DUST = ITEMS.register("cobalt_dust", () -> new Item(new Item.Properties().tab(ModSetup.ITEM_GROUP)));
+    public static final RegistryObject<Item> MAGNETITE_DUST = ITEMS.register("magnetite_dust", () -> new Item(new Item.Properties().tab(ModSetup.ITEM_GROUP)));
 
 
     public static final RegistryObject<Item> RAW_MAGNETITE = ITEMS.register("raw_magnetite", () -> new Item(new Item.Properties().tab(ModSetup.ITEM_GROUP)));
@@ -31,4 +35,7 @@ public class ModItems {
     public static final RegistryObject<Item> RUBBER_RESIN = ITEMS.register("rubber_resin",
             () -> new Item(new Item.Properties().tab(ModSetup.ITEM_GROUP)));
 
+    public static String getItemName(ItemLike itemLike) {
+        return ForgeRegistries.ITEMS.getKey(itemLike.asItem()).getPath();
+    }
 }

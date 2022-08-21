@@ -2,10 +2,11 @@
   "type": "semirealisticelectricity:crushing",
   "ingredients": [
     {
-      "item": "semirealisticelectricity:raw_tin"
+      "tag": "forge:raw_materials/tin"
     }
   ],
-  "output": {
+  "result": {
+    "count": 2,
     "item": "semirealisticelectricity:tin_ingot"
   }
 }

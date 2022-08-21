@@ -1,0 +1,11 @@
+{
+  "type": "semirealisticelectricity:crushing",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/tin"
+    }
+  ],
+  "result": {
+    "item": "semirealisticelectricity:tin_dust"
+  }
+}

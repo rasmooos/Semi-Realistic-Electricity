@@ -1,4 +1,23 @@
-// 1.19.2	2022-08-19T11:40:40.3243163	Tags for minecraft:item
+// 1.19.2	2022-08-21T12:55:45.0800768	Tags for minecraft:item
+26ce3323ab5d14ed201d477298ac25298ee6a929 data/forge/tags/items/dusts/cobalt.json
+b3e89b7810d7c18cc156bc93278f161aca748864 data/forge/tags/items/dusts/lithium.json
+22dba608689ff74efe52dbcf86d741b7f33b9568 data/forge/tags/items/dusts/magnetite.json
+31720bfbf028a3f04201f5d47abb6ff60c6245b5 data/forge/tags/items/dusts/tin.json
+7029a6ce9d5be2499f98a41912aefeeb639f5c57 data/forge/tags/items/ingots/cobalt.json
+28114b4281640cd46fb4dfe74bbc3f16020101ca data/forge/tags/items/ingots/magnetite.json
+5ce88b4b149a067decbed7103d7c4d6a54a2a1fa data/forge/tags/items/ingots/tin.json
+b8a068324d1ce422b2d72c7e23cacb08b600e2f3 data/forge/tags/items/ores.json
+feebfe2aba2c2efed221bbd8664e0f37ac63f65e data/forge/tags/items/ores/cobalt.json
+039f05033a1ed545712546f20e8d5f77d3e1856c data/forge/tags/items/ores/lepidolite.json
+7f75b034cbeffd3c4777fc8ab236421205b9e5c2 data/forge/tags/items/ores/magnetite.json
+4053d3b587bf0007b6b7056f05235de8d0b941c8 data/forge/tags/items/ores/tin.json
+6b12f57a5d583b597a532f0531ff423025e6a2d2 data/forge/tags/items/ores_in_ground/deepslate.json
+e21f2d0bd5e6eeffe98483b6aed3b32f93890259 data/forge/tags/items/ores_in_ground/stone.json
+68546ba36abe92d3dc39b4b5af795fbeb504f3f8 data/forge/tags/items/ore_rates/singular.json
+2853884d7b108bb6b23f221b3337a41155b2428e data/forge/tags/items/raw_materials/cobalt.json
+7de0a13be59e97ddfb9c884cbb9557d9ca6bcd1e data/forge/tags/items/raw_materials/lepidolite.json
+399e34e56537edd7c4d32eebb6d6d4716ad70520 data/forge/tags/items/raw_materials/magnetite.json
+987c37b52e7ef09275251b2451f0801f6c58bb4a data/forge/tags/items/raw_materials/tin.json
 1e16c42751f66f2c265832e513b08318565cdb95 data/minecraft/tags/items/leaves.json
 9e67bd516679c8381e88ce81ad3f0e4679d451cd data/minecraft/tags/items/logs.json
 9e67bd516679c8381e88ce81ad3f0e4679d451cd data/minecraft/tags/items/logs_that_burn.json

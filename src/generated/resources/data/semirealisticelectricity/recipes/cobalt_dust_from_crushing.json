@@ -1,0 +1,11 @@
+{
+  "type": "semirealisticelectricity:crushing",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/cobalt"
+    }
+  ],
+  "result": {
+    "item": "semirealisticelectricity:cobalt_dust"
+  }
+}

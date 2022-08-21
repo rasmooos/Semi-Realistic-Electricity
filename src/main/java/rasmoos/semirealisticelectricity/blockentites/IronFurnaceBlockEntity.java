@@ -20,7 +20,7 @@ public class IronFurnaceBlockEntity extends MachineBlockEntity {
 
     @Override
     public Component getDisplayName() {
-        return Component.literal("Iron Furnace");
+        return Component.translatable("iron_furnace.name");
     }
 
     @Nullable
