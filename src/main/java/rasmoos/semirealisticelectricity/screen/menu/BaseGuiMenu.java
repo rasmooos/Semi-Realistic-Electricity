@@ -1,4 +1,4 @@
-package rasmoos.semirealisticelectricity.screen;
+package rasmoos.semirealisticelectricity.screen.menu;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -13,7 +13,7 @@ import rasmoos.semirealisticelectricity.blockentites.IronFurnaceBlockEntity;
 
 public abstract class BaseGuiMenu extends AbstractContainerMenu {
     protected final Level level;
-    protected final BaseGuiBlockEntity entity;
+    public final BaseGuiBlockEntity entity;
     protected final ContainerData data;
 
     public BaseGuiMenu(MenuType<?> menuType, int pContainerId, Inventory inv, FriendlyByteBuf extraData, ContainerData data) {

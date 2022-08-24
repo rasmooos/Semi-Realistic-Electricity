@@ -1,26 +1,24 @@
 package rasmoos.semirealisticelectricity.setup.datagen;
 
 import com.google.common.collect.ImmutableList;
-import com.google.gson.JsonArray;
 import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.core.NonNullList;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.item.crafting.SimpleCookingSerializer;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
-import rasmoos.semirealisticelectricity.items.blocks.ModBlocks;
+import rasmoos.semirealisticelectricity.blocks.ModBlocks;
 import rasmoos.semirealisticelectricity.items.ModItems;
-import rasmoos.semirealisticelectricity.recipe.CrusherRecipe;
 import rasmoos.semirealisticelectricity.recipe.builder.CrusherRecipeBuilder;
+import rasmoos.semirealisticelectricity.recipe.builder.FluidCompactorBuilder;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -62,6 +60,9 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         oreBlasting(recipeConsumer, TIN_SMELTABLES, ModItems.TIN_INGOT.get(), 0.7F, 100, "tin_ingot");
         oreBlasting(recipeConsumer, COBALT_SMELTABLES, ModItems.COBALT_INGOT.get(), 0.7F, 100, "cobalt_ingot");
         oreBlasting(recipeConsumer, MAGNETITE_SMELTABLES, ModItems.MAGNETITE_INGOT.get(), 0.7F, 100, "magnetite_ingot");
+
+        fluidCompacting(recipeConsumer, Blocks.COBBLESTONE, new FluidStack(Fluids.WATER, 1000), 0, new FluidStack(Fluids.LAVA, 1000), 0, 60);
+        fluidCompacting(recipeConsumer, Blocks.OBSIDIAN, new FluidStack(Fluids.WATER, 1000), new FluidStack(Fluids.LAVA, 1000), 180);
     }
 
 //    private static void crushing(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike input, ItemLike output, int amount, String name) {
@@ -86,6 +87,14 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     public static void crushing(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike result, ItemLike ingredient) {
         CrusherRecipeBuilder.crush(result, 1, ingredient).unlockedBy(getHasName(ingredient), inventoryTrigger(ItemPredicate.Builder.item().of(ingredient).build()))
                 .save(pFinishedRecipeConsumer);
+    }
+
+    public static void fluidCompacting(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike result, FluidStack a, int useA, FluidStack b, int useB, int craftTime) {
+        FluidCompactorBuilder.fluidCompact(result, a, useA, b, useB, craftTime).save(pFinishedRecipeConsumer);
+    }
+
+    public static void fluidCompacting(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike result, FluidStack a, FluidStack b, int craftTime) {
+        FluidCompactorBuilder.fluidCompact(result, a, a.getAmount(), b, b.getAmount(), craftTime).save(pFinishedRecipeConsumer);
     }
 
     protected static void oreSmelting(Consumer<FinishedRecipe> p_176592_, List<ItemLike> p_176593_, ItemLike p_176594_, float p_176595_, int p_176596_, String p_176597_) {

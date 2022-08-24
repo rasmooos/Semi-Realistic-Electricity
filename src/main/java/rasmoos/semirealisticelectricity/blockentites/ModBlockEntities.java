@@ -5,7 +5,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import rasmoos.semirealisticelectricity.SemiRealisticElectricity;
-import rasmoos.semirealisticelectricity.items.blocks.ModBlocks;
+import rasmoos.semirealisticelectricity.blocks.ModBlocks;
 
 public class ModBlockEntities {
 
@@ -22,4 +22,8 @@ public class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<CrusherBlockEntity>> CRUSHER_BLOCK_ENTITY =
             BLOCK_ENTITIES.register("crusher_block_entity",
                     () -> BlockEntityType.Builder.of(CrusherBlockEntity::new, ModBlocks.CRUSHER_BLOCK.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<FluidCompactorEntity>> FLUID_COMPACTOR_ENTITY =
+            BLOCK_ENTITIES.register("fluid_compactor_entity",
+                    () -> BlockEntityType.Builder.of(FluidCompactorEntity::new, ModBlocks.FLUID_COMPACTOR.get()).build(null));
 }

@@ -15,7 +15,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import rasmoos.semirealisticelectricity.SemiRealisticElectricity;
-import rasmoos.semirealisticelectricity.items.blocks.ModBlocks;
+import rasmoos.semirealisticelectricity.blocks.ModBlocks;
 import rasmoos.semirealisticelectricity.recipe.CrusherRecipe;
 import rasmoos.semirealisticelectricity.screen.CrusherScreen;
 

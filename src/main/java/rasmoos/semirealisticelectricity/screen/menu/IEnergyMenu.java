@@ -1,4 +1,4 @@
-package rasmoos.semirealisticelectricity.screen;
+package rasmoos.semirealisticelectricity.screen.menu;
 
 import net.minecraft.world.level.block.entity.BlockEntity;
 

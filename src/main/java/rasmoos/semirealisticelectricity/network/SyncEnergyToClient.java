@@ -5,7 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
 import rasmoos.semirealisticelectricity.blockentites.IEnergyHandlingBlockEntity;
-import rasmoos.semirealisticelectricity.screen.IEnergyMenu;
+import rasmoos.semirealisticelectricity.screen.menu.IEnergyMenu;
 
 import java.util.function.Supplier;
 

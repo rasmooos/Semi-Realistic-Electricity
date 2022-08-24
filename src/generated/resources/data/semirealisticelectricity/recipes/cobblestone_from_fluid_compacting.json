@@ -1,0 +1,17 @@
+{
+  "type": "semirealisticelectricity:fluid_compacting",
+  "craftTime": 60,
+  "fluidA": {
+    "Amount": 1000,
+    "FluidName": "minecraft:water"
+  },
+  "fluidB": {
+    "Amount": 1000,
+    "FluidName": "minecraft:lava"
+  },
+  "result": {
+    "item": "minecraft:cobblestone"
+  },
+  "useA": 0,
+  "useB": 0
+}

@@ -1,4 +1,4 @@
-package rasmoos.semirealisticelectricity.screen;
+package rasmoos.semirealisticelectricity.screen.menu;
 
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -15,6 +15,7 @@ public class ModMenuTypes {
 
     public static final RegistryObject<MenuType<IronFurnaceMenu>> IRON_FURNACE_MENU = registerMenuType(IronFurnaceMenu::new, "iron_furnace_menu");
     public static final RegistryObject<MenuType<CrusherMenu>> CRUSHER_MENU = registerMenuType(CrusherMenu::new, "crusher_menu");
+    public static final RegistryObject<MenuType<FluidCompactorMenu>> FLUID_COMPACTOR_MENU = registerMenuType(FluidCompactorMenu::new, "fluid_compactor_menu");
 
     private static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory, String name) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));

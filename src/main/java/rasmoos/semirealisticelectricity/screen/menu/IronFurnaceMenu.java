@@ -1,4 +1,4 @@
-package rasmoos.semirealisticelectricity.screen;
+package rasmoos.semirealisticelectricity.screen.menu;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;

@@ -5,10 +5,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.TooltipFlag;
-import rasmoos.semirealisticelectricity.blockentites.CrusherBlockEntity;
+import rasmoos.semirealisticelectricity.blockentites.MachineBlockEntity;
+import rasmoos.semirealisticelectricity.screen.menu.MachineMenu;
 import rasmoos.semirealisticelectricity.screen.renderer.EnergyInfoArea;
 import rasmoos.semirealisticelectricity.screen.renderer.FluidStackRenderer;
-import rasmoos.semirealisticelectricity.screen.renderer.ProgressBarRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class MachineScreen<T extends MachineMenu> extends BaseGuiScreen<T> {
     protected void init() {
         super.init();
         fluidStackRenderers.clear();
-        energyInfoArea = new EnergyInfoArea(x + 163, y + 10, ((CrusherBlockEntity) menu.entity).getEnergyStorage(), 5, 64);
+        energyInfoArea = new EnergyInfoArea(x + 163, y + 10, ((MachineBlockEntity) menu.entity).getEnergyStorage(), 5, 64);
     }
 
     @Override

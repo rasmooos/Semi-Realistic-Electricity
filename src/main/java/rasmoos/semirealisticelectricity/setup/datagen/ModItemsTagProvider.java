@@ -9,11 +9,10 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.common.data.ForgeItemTagsProvider;
 import org.jetbrains.annotations.Nullable;
 import rasmoos.semirealisticelectricity.SemiRealisticElectricity;
 import rasmoos.semirealisticelectricity.items.ModItems;
-import rasmoos.semirealisticelectricity.items.blocks.ModBlocks;
+import rasmoos.semirealisticelectricity.blocks.ModBlocks;
 
 public class ModItemsTagProvider extends ItemTagsProvider {
 

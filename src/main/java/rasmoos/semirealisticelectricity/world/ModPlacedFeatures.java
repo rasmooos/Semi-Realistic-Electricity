@@ -8,7 +8,7 @@ import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import rasmoos.semirealisticelectricity.SemiRealisticElectricity;
-import rasmoos.semirealisticelectricity.items.blocks.ModBlocks;
+import rasmoos.semirealisticelectricity.blocks.ModBlocks;
 
 import java.util.List;
 

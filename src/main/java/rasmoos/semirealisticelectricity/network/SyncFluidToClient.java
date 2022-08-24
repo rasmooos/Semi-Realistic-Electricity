@@ -6,7 +6,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.network.NetworkEvent;
 import rasmoos.semirealisticelectricity.blockentites.IFluidHandlingBlockEntity;
-import rasmoos.semirealisticelectricity.screen.IFluidMenu;
+import rasmoos.semirealisticelectricity.screen.menu.IFluidMenu;
 
 import java.util.function.Supplier;
 

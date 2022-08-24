@@ -4,6 +4,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import rasmoos.semirealisticelectricity.SemiRealisticElectricity;
+import rasmoos.semirealisticelectricity.screen.menu.IronFurnaceMenu;
 
 public class IronFurnaceScreen extends BaseGuiScreen<IronFurnaceMenu> {
 

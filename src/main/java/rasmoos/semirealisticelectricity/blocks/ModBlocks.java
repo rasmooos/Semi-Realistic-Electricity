@@ -1,4 +1,4 @@
-package rasmoos.semirealisticelectricity.items.blocks;
+package rasmoos.semirealisticelectricity.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -81,6 +81,9 @@ public class ModBlocks {
 
     public static RegistryObject<MachineBlock> CRUSHER_BLOCK = registerBlock("crusher",
             () -> new CrusherBlock(BlockBehaviour.Properties.copy(Blocks.STONE)), ModSetup.ITEM_GROUP);
+
+    public static RegistryObject<MachineBlock> FLUID_COMPACTOR = registerBlock("fluid_compactor",
+            () -> new FluidCompactor(BlockBehaviour.Properties.copy(Blocks.STONE)), ModSetup.ITEM_GROUP);
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> result = BLOCKS.register(name, block);

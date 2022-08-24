@@ -7,8 +7,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
-import rasmoos.semirealisticelectricity.items.blocks.ModBlocks;
-import rasmoos.semirealisticelectricity.screen.IronFurnaceMenu;
+import rasmoos.semirealisticelectricity.blocks.ModBlocks;
+import rasmoos.semirealisticelectricity.screen.menu.IronFurnaceMenu;
 
 public class IronFurnaceBlockEntity extends BaseGuiBlockEntity {
 

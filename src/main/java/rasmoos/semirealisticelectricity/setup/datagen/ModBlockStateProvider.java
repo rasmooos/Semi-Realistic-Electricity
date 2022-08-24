@@ -11,8 +11,8 @@ import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import rasmoos.semirealisticelectricity.SemiRealisticElectricity;
-import rasmoos.semirealisticelectricity.items.blocks.MachineBlock;
-import rasmoos.semirealisticelectricity.items.blocks.ModBlocks;
+import rasmoos.semirealisticelectricity.blocks.MachineBlock;
+import rasmoos.semirealisticelectricity.blocks.ModBlocks;
 
 public class ModBlockStateProvider extends BlockStateProvider {
     public ModBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
@@ -36,6 +36,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         machineBlock(ModBlocks.IRON_FURNACE_BLOCK.get());
         machineBlock(ModBlocks.CRUSHER_BLOCK.get());
+        machineBlock(ModBlocks.FLUID_COMPACTOR.get());
     }
 
     public void logBlock(RotatedPillarBlock block) {

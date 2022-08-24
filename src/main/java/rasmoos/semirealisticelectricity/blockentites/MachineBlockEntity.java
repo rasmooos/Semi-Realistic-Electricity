@@ -3,7 +3,6 @@ package rasmoos.semirealisticelectricity.blockentites;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -26,13 +25,15 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import rasmoos.semirealisticelectricity.items.blocks.MachineBlock;
+import rasmoos.semirealisticelectricity.blocks.MachineBlock;
 import rasmoos.semirealisticelectricity.network.ModNetworkHandler;
 import rasmoos.semirealisticelectricity.network.SyncEnergyToClient;
 import rasmoos.semirealisticelectricity.network.SyncFluidToClient;
 import rasmoos.semirealisticelectricity.util.SemiRealisticEnergyStorage;
 
-public abstract class MachineBlockEntity<BLOCK extends MachineBlock> extends BaseGuiBlockEntity implements IFluidHandlingBlockEntity, IEnergyHandlingBlockEntity {
+public abstract class MachineBlockEntity extends BaseGuiBlockEntity implements IFluidHandlingBlockEntity, IEnergyHandlingBlockEntity {
+
+    private static final int BASE_ENERGY_PER_TICK = 5;
 
     protected final FluidTank[] fluidTanks;
     protected final SemiRealisticEnergyStorage energyStorage;
@@ -41,8 +42,9 @@ public abstract class MachineBlockEntity<BLOCK extends MachineBlock> extends Bas
     private LazyOptional<IEnergyStorage> lazyEnergyHandler;
 
     protected final ContainerData data;
+    private MachineBlock baseBlock;
 
-    public MachineBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState, Block baseBlock) {
+    public MachineBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState, MachineBlock baseBlock) {
         super(blockEntityType, blockPos, blockState, baseBlock);
 
         fluidTanks = createFluidTanks();
@@ -56,8 +58,18 @@ public abstract class MachineBlockEntity<BLOCK extends MachineBlock> extends Bas
         for(int i = 0; i < fluidTanks.length; i++) {
             lazyFluidHandlers[i] = LazyOptional.empty();
         }
+
+        this.baseBlock = baseBlock;
     }
 
+    @Override
+    public void tick() {
+        if(level.isClientSide) {
+            return;
+        }
+
+        energyStorage.extractEnergy(BASE_ENERGY_PER_TICK, false);
+    }
 
     @NotNull
     @Override
@@ -71,7 +83,8 @@ public abstract class MachineBlockEntity<BLOCK extends MachineBlock> extends Bas
         }
 
         if(cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-            if(this.getBlockState().getValue(BLOCK.FACING).getClockWise() == side) {
+            if(this.getBlockState().getValue(baseBlock.FACING).getClockWise() == side) {
+                if(lazyFluidHandlers.length == 0) return super.getCapability(cap, side);
                 return lazyFluidHandlers[0].cast();
             }
         }
@@ -181,7 +194,6 @@ public abstract class MachineBlockEntity<BLOCK extends MachineBlock> extends Bas
                 @Override
                 protected void onContentsChanged() {
                     setChanged();
-                    // TODO PACKETS
                     if(!level.isClientSide)
                         ModNetworkHandler.sendToClients(new SyncFluidToClient(finalI, fluid, worldPosition));
                 }

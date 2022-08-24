@@ -1,4 +1,4 @@
-package rasmoos.semirealisticelectricity.items.blocks;
+package rasmoos.semirealisticelectricity.blocks;
 
 import net.minecraft.core.Holder;
 import net.minecraft.util.RandomSource;

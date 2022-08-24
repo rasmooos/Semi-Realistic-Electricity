@@ -4,15 +4,13 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 import rasmoos.semirealisticelectricity.SemiRealisticElectricity;
-import rasmoos.semirealisticelectricity.items.blocks.ModBlocks;
+import rasmoos.semirealisticelectricity.blocks.ModBlocks;
 
 public class ModBlockTagProvider extends BlockTagsProvider {
 
@@ -61,6 +59,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
 
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.IRON_FURNACE_BLOCK.get());
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.CRUSHER_BLOCK.get());
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.FLUID_COMPACTOR.get());
 
         tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.TIN_ORE.get());
         tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.DEEPSLATE_TIN_ORE.get());
@@ -74,6 +73,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
 
         tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.IRON_FURNACE_BLOCK.get());
         tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.CRUSHER_BLOCK.get());
+        tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.FLUID_COMPACTOR.get());
 
     }
 }

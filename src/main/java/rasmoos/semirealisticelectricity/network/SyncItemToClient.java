@@ -7,7 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.network.NetworkEvent;
 import rasmoos.semirealisticelectricity.blockentites.IInventoryHandlingBlockEntity;
-import rasmoos.semirealisticelectricity.screen.IEnergyMenu;
+import rasmoos.semirealisticelectricity.screen.menu.IEnergyMenu;
 
 import java.util.ArrayList;
 import java.util.Collection;

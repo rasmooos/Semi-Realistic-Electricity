@@ -11,18 +11,14 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.Nullable;
-import rasmoos.semirealisticelectricity.items.blocks.CrusherBlock;
-import rasmoos.semirealisticelectricity.items.blocks.ModBlocks;
+import rasmoos.semirealisticelectricity.blocks.ModBlocks;
 import rasmoos.semirealisticelectricity.recipe.CrusherRecipe;
-import rasmoos.semirealisticelectricity.screen.CrusherMenu;
+import rasmoos.semirealisticelectricity.screen.menu.CrusherMenu;
 
 import java.util.Optional;
 
-public class CrusherBlockEntity extends MachineBlockEntity<CrusherBlock> {
+public class CrusherBlockEntity extends MachineBlockEntity {
 
     public static final int NUM_SLOTS = 3;
     private int progress;
@@ -61,7 +57,7 @@ public class CrusherBlockEntity extends MachineBlockEntity<CrusherBlock> {
 
     @Override
     public int[] getFluidTankCapacity() {
-        return new int[]{16000, 8000};
+        return new int[]{};
     }
 
     @Override
@@ -75,14 +71,7 @@ public class CrusherBlockEntity extends MachineBlockEntity<CrusherBlock> {
     }
 
     public void tick() {
-        if(level.isClientSide) {
-            return;
-        }
-
-        System.out.println(progress);
-
-        fluidTanks[0].fill(new FluidStack(Fluids.WATER, 50), IFluidHandler.FluidAction.EXECUTE);
-        fluidTanks[1].fill(new FluidStack(Fluids.LAVA, 100), IFluidHandler.FluidAction.EXECUTE);
+        super.tick();
 
         if(hasRecipe() && hasEnoughEnergy()) {
             progress++;
@@ -154,8 +143,6 @@ public class CrusherBlockEntity extends MachineBlockEntity<CrusherBlock> {
                 return switch(index) {
                     case 0 -> CrusherBlockEntity.this.progress;
                     case 1 -> CrusherBlockEntity.this.maxProgress;
-//                    case 2 -> CrusherBlockEntity.this.energyStorage.getEnergyStored();
-//                    case 3 -> CrusherBlockEntity.this.energyStorage.getMaxEnergyStored();
                     default -> 0;
                 };
             }
@@ -165,8 +152,6 @@ public class CrusherBlockEntity extends MachineBlockEntity<CrusherBlock> {
                 switch(index) {
                     case 0 -> CrusherBlockEntity.this.progress = value;
                     case 1 -> CrusherBlockEntity.this.maxProgress = value;
-//                    case 2 -> CrusherBlockEntity.this.energyStorage.setEnergy(value);
-//                    case 3 -> CrusherBlockEntity.this.energyStorage.setCapacity(value);
                 }
             }
 

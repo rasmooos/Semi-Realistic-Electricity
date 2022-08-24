@@ -96,18 +96,6 @@ public class FluidStackRenderer extends InfoArea implements IIngredientRenderer<
         RenderSystem.disableBlend();
         poseStack.popPose();
     }
-
-    public void render(PoseStack stack, int xPosition, int yPosition, @Nullable FluidStack ingredient) {
-        if (ingredient != null) {
-            stack.pushPose();
-            {
-                stack.translate(xPosition, yPosition, 0);
-                render(stack, ingredient);
-            }
-            stack.popPose();
-        }
-    }
-
     private void drawFluid(PoseStack poseStack, final int width, final int height, FluidStack fluidStack) {
         Fluid fluid = fluidStack.getFluid();
         if (fluid == null) {

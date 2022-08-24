@@ -4,7 +4,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.LanguageProvider;
 import rasmoos.semirealisticelectricity.SemiRealisticElectricity;
 import rasmoos.semirealisticelectricity.items.ModItems;
-import rasmoos.semirealisticelectricity.items.blocks.ModBlocks;
+import rasmoos.semirealisticelectricity.blocks.ModBlocks;
 
 public class ModLangProvider extends LanguageProvider {
     
@@ -59,11 +59,13 @@ public class ModLangProvider extends LanguageProvider {
 
         add(ModBlocks.IRON_FURNACE_BLOCK.get(), "Iron Furnace");
         add(ModBlocks.CRUSHER_BLOCK.get(), "Crusher");
+        add(ModBlocks.FLUID_COMPACTOR.get(), "Fluid Compactor");
     }
 
     private void addGui() {
         add("crusher.name", "Crusher");
         add("iron_furnace.name", "Iron Furnace");
+        add("fluid_compactor.name", "Fluid Compactor");
     }
 
     private void addMisc() {

@@ -1,4 +1,4 @@
-package rasmoos.semirealisticelectricity.items.blocks;
+package rasmoos.semirealisticelectricity.blocks;
 
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;

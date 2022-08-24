@@ -1,19 +1,12 @@
 package rasmoos.semirealisticelectricity.screen;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.item.TooltipFlag;
 import rasmoos.semirealisticelectricity.SemiRealisticElectricity;
-import rasmoos.semirealisticelectricity.blockentites.CrusherBlockEntity;
-import rasmoos.semirealisticelectricity.screen.renderer.EnergyInfoArea;
-import rasmoos.semirealisticelectricity.screen.renderer.FluidStackRenderer;
+import rasmoos.semirealisticelectricity.screen.menu.CrusherMenu;
 import rasmoos.semirealisticelectricity.screen.renderer.ProgressBarRenderer;
-
-import java.util.Optional;
 
 public class CrusherScreen extends MachineScreen<CrusherMenu> {
 
@@ -28,8 +21,8 @@ public class CrusherScreen extends MachineScreen<CrusherMenu> {
     @Override
     protected void init() {
         super.init();
-        addFluidRenderer(new FluidStackRenderer(x + 8, y + 17, menu.getFluidTankCapacity(0), true, 19, 48));
-        addFluidRenderer(new FluidStackRenderer(x + 29, y + 17, menu.getFluidTankCapacity(1), true, 19, 48));
+//        addFluidRenderer(new FluidStackRenderer(x + 8, y + 17, menu.getFluidTankCapacity(0), true, 19, 48));
+//        addFluidRenderer(new FluidStackRenderer(x + 29, y + 17, menu.getFluidTankCapacity(1), true, 19, 48));
 
 
 
@@ -44,7 +37,6 @@ public class CrusherScreen extends MachineScreen<CrusherMenu> {
 
             progressBarRenderer.setTextureWidth(menu.getScaledProgress());
             progressBarRenderer.render(pPoseStack);
-            System.out.println("HEJ");
         }
     }
 }

@@ -1,4 +1,4 @@
-package rasmoos.semirealisticelectricity.screen;
+package rasmoos.semirealisticelectricity.screen.menu;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -12,7 +12,7 @@ import rasmoos.semirealisticelectricity.screen.slot.ModResultSlot;
 public class CrusherMenu extends MachineMenu {
 
     public CrusherMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, (MachineBlockEntity) inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(4));
+        this(pContainerId, inv, (MachineBlockEntity) inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
     }
 
     public CrusherMenu(int pContainerId, Inventory inv, MachineBlockEntity entity, ContainerData data) {

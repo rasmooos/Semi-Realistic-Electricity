@@ -5,6 +5,7 @@
     "semirealisticelectricity:magnetite_ore",
     "semirealisticelectricity:deepslate_magnetite_ore",
     "semirealisticelectricity:iron_furnace",
-    "semirealisticelectricity:crusher"
+    "semirealisticelectricity:crusher",
+    "semirealisticelectricity:fluid_compactor"
   ]
 }

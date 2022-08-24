@@ -1,4 +1,4 @@
-package rasmoos.semirealisticelectricity.screen;
+package rasmoos.semirealisticelectricity.screen.menu;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -24,16 +24,16 @@ public abstract class MachineMenu extends BaseGuiMenu implements IEnergyMenu, IF
 
     @Override
     public FluidStack getFluid(int tank) {
-        return ((MachineBlockEntity<?>) entity).getFluid(tank);
+        return ((MachineBlockEntity) entity).getFluid(tank);
     }
 
     @Override
     public void setFluid(int tank, FluidStack fluidStack) {
-        ((MachineBlockEntity<?>) entity).setFluid(tank, fluidStack);
+        ((MachineBlockEntity) entity).setFluid(tank, fluidStack);
     }
 
     @Override
     public int getFluidTankCapacity(int tank) {
-        return ((MachineBlockEntity<?>) entity).getFluidTankCapacity()[tank];
+        return ((MachineBlockEntity) entity).getFluidTankCapacity()[tank];
     }
 }

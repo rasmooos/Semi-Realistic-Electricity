@@ -1,9 +1,9 @@
-package rasmoos.semirealisticelectricity.setup.datagen.loot;
+package rasmoos.semirealisticelectricity.setup.datagen;
 
 import net.minecraft.data.loot.BlockLoot;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.RegistryObject;
-import rasmoos.semirealisticelectricity.items.blocks.ModBlocks;
+import rasmoos.semirealisticelectricity.blocks.ModBlocks;
 import rasmoos.semirealisticelectricity.items.ModItems;
 
 public class ModBlockLootTables extends BlockLoot {
@@ -33,6 +33,7 @@ public class ModBlockLootTables extends BlockLoot {
 
         dropSelf(ModBlocks.IRON_FURNACE_BLOCK.get());
         dropSelf(ModBlocks.CRUSHER_BLOCK.get());
+        dropSelf(ModBlocks.FLUID_COMPACTOR.get());
     }
 
     @Override

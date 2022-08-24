@@ -13,4 +13,7 @@ public class ModRecipes {
     public static final RegistryObject<RecipeSerializer<CrusherRecipe>> CRUSHER_SERIALIZER = SERIALIZERS.register("crushing",
             () -> CrusherRecipe.Serializer.INSTANCE);
 
+    public static final RegistryObject<RecipeSerializer<FluidCompactorRecipe>> FLUID_COMPACTING_SERIALIZER = SERIALIZERS.register("fluid_compacting",
+            () -> FluidCompactorRecipe.Serializer.INSTANCE);
+
 }

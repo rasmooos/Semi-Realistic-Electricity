@@ -8,7 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import rasmoos.semirealisticelectricity.blockentites.RubberLogTapEntity;
-import rasmoos.semirealisticelectricity.items.blocks.RubberLogTap;
+import rasmoos.semirealisticelectricity.blocks.RubberLogTap;
 
 public class RubberTap extends Item {
     public RubberTap(Properties properties) {

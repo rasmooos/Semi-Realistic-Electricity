@@ -10,7 +10,7 @@ import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import rasmoos.semirealisticelectricity.SemiRealisticElectricity;
-import rasmoos.semirealisticelectricity.items.blocks.ModBlocks;
+import rasmoos.semirealisticelectricity.blocks.ModBlocks;
 import rasmoos.semirealisticelectricity.items.ModItems;
 
 public class ModItemModelProvider extends ItemModelProvider {
@@ -53,6 +53,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         block(ModBlocks.IRON_FURNACE_BLOCK.get());
         block(ModBlocks.CRUSHER_BLOCK.get());
+        block(ModBlocks.FLUID_COMPACTOR.get());
     }
 
     private ItemModelBuilder block(Block block) {
