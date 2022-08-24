@@ -4,7 +4,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 public interface IFluidHandlingBlockEntity {
 
-    void setFluid(FluidStack fluid);
-    FluidStack getFluid();
+    void setFluid(int tank, FluidStack fluid);
+    FluidStack getFluid(int tank);
 
 }

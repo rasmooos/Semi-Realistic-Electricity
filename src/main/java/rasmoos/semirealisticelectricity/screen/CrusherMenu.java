@@ -41,17 +41,8 @@ public class CrusherMenu extends MachineMenu {
         int progress = data.get(0);
         int maxProgress = data.get(1);
 
-        int progressArrowSize = 21;
+        int progressArrowSize = 22;
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
-
-//    public int getScaledEnergyLevel() {
-//        int energy = data.get(2);
-//        int capacity = data.get(3);
-//
-//        int pixelSize = 59;
-//
-//        return capacity == 0 ? 0 : energy * pixelSize / capacity;
-//    }
 }

@@ -14,20 +14,28 @@ public class SyncFluidToClient implements IModPacket {
 
     private final FluidStack fluidStack;
     private final BlockPos pos;
+    private final int tank;
 
     public SyncFluidToClient(FluidStack stack, BlockPos pos) {
+        this(0, stack, pos);
+    }
+
+    public SyncFluidToClient(int tank, FluidStack stack, BlockPos pos) {
         this.fluidStack = stack;
         this.pos = pos;
+        this.tank = tank;
     }
 
     public SyncFluidToClient(FriendlyByteBuf buf) {
-        this.fluidStack = buf.readFluidStack();
-        this.pos = buf.readBlockPos();
+        fluidStack = buf.readFluidStack();
+        pos = buf.readBlockPos();
+        tank = buf.readInt();
     }
 
     public void toBytes(FriendlyByteBuf buf) {
         buf.writeFluidStack(fluidStack);
         buf.writeBlockPos(pos);
+        buf.writeInt(tank);
     }
 
     public boolean handle(Supplier<NetworkEvent.Context> contextSupplier) {
@@ -35,10 +43,10 @@ public class SyncFluidToClient implements IModPacket {
         context.enqueueWork(() -> {
             // HERE WE ARE ON THE CLIENT YES
             if(Minecraft.getInstance().level.getBlockEntity(pos) instanceof IFluidHandlingBlockEntity blockEntity) {
-                blockEntity.setFluid(fluidStack);
+                blockEntity.setFluid(tank, fluidStack);
 
                 if(Minecraft.getInstance().player.containerMenu instanceof IFluidMenu menu && menu.getBlockEntity().getBlockPos().equals(pos)) {
-                    menu.setFluid(fluidStack);
+                    menu.setFluid(tank, fluidStack);
                 }
             }
         });

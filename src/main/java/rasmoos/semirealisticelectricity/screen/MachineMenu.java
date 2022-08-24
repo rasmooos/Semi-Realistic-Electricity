@@ -23,12 +23,17 @@ public abstract class MachineMenu extends BaseGuiMenu implements IEnergyMenu, IF
     }
 
     @Override
-    public FluidStack getFluid() {
-        return ((MachineBlockEntity<?>) entity).getFluid();
+    public FluidStack getFluid(int tank) {
+        return ((MachineBlockEntity<?>) entity).getFluid(tank);
     }
 
     @Override
-    public void setFluid(FluidStack fluidStack) {
-        ((MachineBlockEntity<?>) entity).setFluid(fluidStack);
+    public void setFluid(int tank, FluidStack fluidStack) {
+        ((MachineBlockEntity<?>) entity).setFluid(tank, fluidStack);
+    }
+
+    @Override
+    public int getFluidTankCapacity(int tank) {
+        return ((MachineBlockEntity<?>) entity).getFluidTankCapacity()[tank];
     }
 }

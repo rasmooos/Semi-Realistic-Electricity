@@ -68,5 +68,8 @@ public class ModLangProvider extends LanguageProvider {
 
     private void addMisc() {
         add("itemGroup.semirealisticelectricity", "Semi Realistic Electricity");
+        add("jei.integration.semirealisticelectricity.tooltip.liquid.amount.with.capacity", "%s / %s mB");
+        add("jei.integration.semirealisticelectricity.tooltip.liquid.amount", "%s mB");
+        add("jei.integration.semirealisticelectricity.tooltip.liquid.empty", "Empty");
     }
 }

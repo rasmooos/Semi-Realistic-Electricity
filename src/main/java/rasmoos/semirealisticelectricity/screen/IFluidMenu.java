@@ -5,8 +5,11 @@ import net.minecraftforge.fluids.FluidStack;
 
 public interface IFluidMenu {
 
-    void setFluid(FluidStack fluidStack);
-    FluidStack getFluid();
+    void setFluid(int tank, FluidStack fluidStack);
+    FluidStack getFluid(int tank);
+
+    int getFluidTankCapacity(int tank);
+
     BlockEntity getBlockEntity();
 
 }

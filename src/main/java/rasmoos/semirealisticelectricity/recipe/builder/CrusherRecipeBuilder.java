@@ -77,7 +77,7 @@ public class CrusherRecipeBuilder implements RecipeBuilder {
     @Override
     public void save(Consumer<FinishedRecipe> finishedRecipeConsumer) {
         save(finishedRecipeConsumer, new ResourceLocation(SemiRealisticElectricity.MOD_ID,
-                ModItems.getItemName(result) + "_from_crushing"));
+                ModItems.getItemName(result) + "_from_crushing_" + ModItems.getItemName(ingredient.getItems()[0].getItem())));
     }
 
     public void save(Consumer<FinishedRecipe> recipeConsumer, ResourceLocation location) {
@@ -147,7 +147,7 @@ public class CrusherRecipeBuilder implements RecipeBuilder {
         public ResourceLocation getAdvancementId() {
             return this.advancementId;
         }
-        
+
     }
-    
+
 }

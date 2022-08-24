@@ -19,4 +19,24 @@ public abstract class InfoArea extends GuiComponent {
     }
 
     public abstract void draw(PoseStack transform);
+
+    public Rect2i getArea() {
+        return area;
+    }
+
+    public int getX() {
+        return getArea().getX();
+    }
+
+    public int getY() {
+        return getArea().getY();
+    }
+
+    public int getWidth() {
+        return getArea().getWidth();
+    }
+
+    public int getHeight() {
+        return getArea().getHeight();
+    }
 }

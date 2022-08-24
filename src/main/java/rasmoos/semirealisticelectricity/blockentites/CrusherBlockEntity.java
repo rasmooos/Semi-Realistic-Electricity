@@ -11,16 +11,14 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.Nullable;
 import rasmoos.semirealisticelectricity.items.blocks.CrusherBlock;
 import rasmoos.semirealisticelectricity.items.blocks.ModBlocks;
-import rasmoos.semirealisticelectricity.network.ModNetworkHandler;
-import rasmoos.semirealisticelectricity.network.SyncEnergyToClient;
-import rasmoos.semirealisticelectricity.network.SyncFluidToClient;
 import rasmoos.semirealisticelectricity.recipe.CrusherRecipe;
 import rasmoos.semirealisticelectricity.screen.CrusherMenu;
-import rasmoos.semirealisticelectricity.util.SemiRealisticEnergyStorage;
 
 import java.util.Optional;
 
@@ -62,8 +60,8 @@ public class CrusherBlockEntity extends MachineBlockEntity<CrusherBlock> {
     }
 
     @Override
-    public int getFluidTankCapacity() {
-        return 16000;
+    public int[] getFluidTankCapacity() {
+        return new int[]{16000, 8000};
     }
 
     @Override
@@ -81,6 +79,11 @@ public class CrusherBlockEntity extends MachineBlockEntity<CrusherBlock> {
             return;
         }
 
+        System.out.println(progress);
+
+        fluidTanks[0].fill(new FluidStack(Fluids.WATER, 50), IFluidHandler.FluidAction.EXECUTE);
+        fluidTanks[1].fill(new FluidStack(Fluids.LAVA, 100), IFluidHandler.FluidAction.EXECUTE);
+
         if(hasRecipe() && hasEnoughEnergy()) {
             progress++;
             energyStorage.extractEnergy(10, false);
@@ -93,19 +96,6 @@ public class CrusherBlockEntity extends MachineBlockEntity<CrusherBlock> {
             setChanged(level, getBlockPos(), getBlockState());
         }
     }
-
-    public SemiRealisticEnergyStorage createEnergyStorage() {
-        Tuple<Integer, Integer> capacity = getEnergyStorageCapacity();
-        return new SemiRealisticEnergyStorage(capacity.getA(), capacity.getB()) {
-            @Override
-            public void onEnergyChanged() {
-                setChanged();
-                if(!level.isClientSide)
-                    ModNetworkHandler.sendToClients(new SyncEnergyToClient(energy, worldPosition));
-            }
-        };
-    }
-
     private boolean hasEnoughEnergy() {
         return energyStorage.getEnergyStored() >= 10;
     }

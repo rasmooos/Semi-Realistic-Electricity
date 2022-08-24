@@ -3,14 +3,17 @@ package rasmoos.semirealisticelectricity.blockentites;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -20,6 +23,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import rasmoos.semirealisticelectricity.items.blocks.MachineBlock;
@@ -30,21 +34,28 @@ import rasmoos.semirealisticelectricity.util.SemiRealisticEnergyStorage;
 
 public abstract class MachineBlockEntity<BLOCK extends MachineBlock> extends BaseGuiBlockEntity implements IFluidHandlingBlockEntity, IEnergyHandlingBlockEntity {
 
-    protected final FluidTank fluidTank;
+    protected final FluidTank[] fluidTanks;
     protected final SemiRealisticEnergyStorage energyStorage;
 
-    private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();
-    private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.empty();
+    private LazyOptional<IFluidHandler>[] lazyFluidHandlers;
+    private LazyOptional<IEnergyStorage> lazyEnergyHandler;
 
     protected final ContainerData data;
 
     public MachineBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState, Block baseBlock) {
         super(blockEntityType, blockPos, blockState, baseBlock);
 
-        fluidTank = createFluidTank();
+        fluidTanks = createFluidTanks();
         energyStorage = createEnergyStorage();
 
         data = getContainerData();
+
+        lazyEnergyHandler = LazyOptional.empty();
+        lazyFluidHandlers = new LazyOptional[fluidTanks.length];
+
+        for(int i = 0; i < fluidTanks.length; i++) {
+            lazyFluidHandlers[i] = LazyOptional.empty();
+        }
     }
 
 
@@ -61,7 +72,7 @@ public abstract class MachineBlockEntity<BLOCK extends MachineBlock> extends Bas
 
         if(cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
             if(this.getBlockState().getValue(BLOCK.FACING).getClockWise() == side) {
-                return lazyFluidHandler.cast();
+                return lazyFluidHandlers[0].cast();
             }
         }
 
@@ -71,28 +82,63 @@ public abstract class MachineBlockEntity<BLOCK extends MachineBlock> extends Bas
     @Override
     public void onLoad() {
         super.onLoad();
-        lazyFluidHandler = LazyOptional.of(() -> fluidTank);
+
+        for(int i = 0; i < fluidTanks.length; i++) {
+            int finalI = i;
+            lazyFluidHandlers[i] = LazyOptional.of(() -> fluidTanks[finalI]);
+        }
+
         lazyEnergyHandler = LazyOptional.of(() -> energyStorage);
     }
 
     @Override
     public void invalidateCaps() {
         super.invalidateCaps();
-        lazyFluidHandler.invalidate();
+
+        for(LazyOptional lazyFluidHandler : lazyFluidHandlers) {
+            lazyFluidHandler.invalidate();
+        }
+
         lazyEnergyHandler.invalidate();
     }
 
     @Override
     protected void saveAdditional(CompoundTag tag) {
         tag.putInt("energy", energyStorage.getEnergyStored());
-        tag = fluidTank.writeToNBT(tag);
+
+        for(int i = 0; i < fluidTanks.length; i++) {
+            FluidStack fluid = fluidTanks[i].getFluid();
+
+            tag.putString(i + ".FluidName", ForgeRegistries.FLUIDS.getKey(fluid.getFluid()).toString());
+            tag.putInt(i + ".Amount", fluid.getAmount());
+        }
+
         super.saveAdditional(tag);
     }
 
     @Override
     public void load(CompoundTag nbt) {
         energyStorage.setEnergy(nbt.getInt("energy"));
-        fluidTank.readFromNBT(nbt);
+
+        for(int i = 0; i < fluidTanks.length; i++) {
+
+            FluidStack stack;
+
+
+
+            ResourceLocation fluidName = new ResourceLocation(nbt.getString(i + ".FluidName"));
+            Fluid fluid = ForgeRegistries.FLUIDS.getValue(fluidName);
+            if (fluid == null)
+            {
+                stack =  FluidStack.EMPTY;
+            } else {
+                stack = new FluidStack(fluid, nbt.getInt(i + ".Amount"));
+            }
+
+
+            fluidTanks[i].setFluid(stack);
+        }
+
         super.load(nbt);
     }
 
@@ -115,24 +161,34 @@ public abstract class MachineBlockEntity<BLOCK extends MachineBlock> extends Bas
     }
 
     @Override
-    public void setFluid(FluidStack fluid) {
-        fluidTank.setFluid(fluid);
+    public void setFluid(int tank, FluidStack fluid) {
+        fluidTanks[tank].setFluid(fluid);
     }
 
     @Override
-    public FluidStack getFluid() {
-        return fluidTank.getFluid();
+    public FluidStack getFluid(int tank) {
+        return fluidTanks[tank].getFluid();
     }
 
-    public FluidTank createFluidTank() {
-        return new FluidTank(getFluidTankCapacity()) {
-            @Override
-            protected void onContentsChanged() {
-                setChanged();
-                if(!level.isClientSide)
-                    ModNetworkHandler.sendToClients(new SyncFluidToClient(fluid, worldPosition));
-            }
-        };
+    public FluidTank[] createFluidTanks() {
+        int[] size = getFluidTankCapacity();
+
+        FluidTank[] result = new FluidTank[size.length];
+
+        for(int i = 0; i < size.length; i++) {
+            int finalI = i;
+            result[i] = new FluidTank(size[finalI]) {
+                @Override
+                protected void onContentsChanged() {
+                    setChanged();
+                    // TODO PACKETS
+                    if(!level.isClientSide)
+                        ModNetworkHandler.sendToClients(new SyncFluidToClient(finalI, fluid, worldPosition));
+                }
+            };
+        }
+
+        return result;
     }
 
     public SemiRealisticEnergyStorage createEnergyStorage() {
@@ -147,7 +203,7 @@ public abstract class MachineBlockEntity<BLOCK extends MachineBlock> extends Bas
         };
     }
 
-    public abstract int getFluidTankCapacity();
+    public abstract int[] getFluidTankCapacity();
 
     /**
      * capacity, maxtransfer

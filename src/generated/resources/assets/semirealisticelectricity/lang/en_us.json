@@ -30,5 +30,8 @@
   "item.semirealisticelectricity.rubber_tap": "Rubber Tap",
   "item.semirealisticelectricity.tin_dust": "Tin dust",
   "item.semirealisticelectricity.tin_ingot": "Tin Ingot",
-  "itemGroup.semirealisticelectricity": "Semi Realistic Electricity"
+  "itemGroup.semirealisticelectricity": "Semi Realistic Electricity",
+  "jei.integration.semirealisticelectricity.tooltip.liquid.amount": "%s mB",
+  "jei.integration.semirealisticelectricity.tooltip.liquid.amount.with.capacity": "%s / %s mB",
+  "jei.integration.semirealisticelectricity.tooltip.liquid.empty": "Empty"
 }

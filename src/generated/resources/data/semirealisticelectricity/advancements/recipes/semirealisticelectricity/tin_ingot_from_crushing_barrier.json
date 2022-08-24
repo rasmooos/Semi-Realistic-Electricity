@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:ingots/tin"
+            "tag": "forge:raw_materials/tin"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "semirealisticelectricity:tin_dust_from_crushing"
+        "recipe": "semirealisticelectricity:tin_ingot_from_crushing_barrier"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "semirealisticelectricity:tin_dust_from_crushing"
+      "semirealisticelectricity:tin_ingot_from_crushing_barrier"
     ]
   }
 }
