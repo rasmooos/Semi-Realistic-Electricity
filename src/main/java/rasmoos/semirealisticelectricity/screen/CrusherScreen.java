@@ -44,6 +44,7 @@ public class CrusherScreen extends MachineScreen<CrusherMenu> {
 
             progressBarRenderer.setTextureWidth(menu.getScaledProgress());
             progressBarRenderer.render(pPoseStack);
+            System.out.println("HEJ");
         }
     }
 }
