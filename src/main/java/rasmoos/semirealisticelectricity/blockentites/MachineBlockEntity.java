@@ -2,6 +2,7 @@ package rasmoos.semirealisticelectricity.blockentites;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -25,22 +26,22 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import rasmoos.semirealisticelectricity.blocks.FluidCompactor;
 import rasmoos.semirealisticelectricity.blocks.MachineBlock;
 import rasmoos.semirealisticelectricity.network.ModNetworkHandler;
 import rasmoos.semirealisticelectricity.network.SyncEnergyToClient;
 import rasmoos.semirealisticelectricity.network.SyncFluidToClient;
 import rasmoos.semirealisticelectricity.util.SemiRealisticEnergyStorage;
 
+import java.util.Map;
+
 public abstract class MachineBlockEntity extends BaseGuiBlockEntity implements IFluidHandlingBlockEntity, IEnergyHandlingBlockEntity {
 
     private static final int BASE_ENERGY_PER_TICK = 5;
 
-    protected final FluidTank[] fluidTanks;
+    protected final NonNullList<FluidTank> fluidTanks;
     protected final SemiRealisticEnergyStorage energyStorage;
-
-    private LazyOptional<IFluidHandler>[] lazyFluidHandlers;
-    private LazyOptional<IEnergyStorage> lazyEnergyHandler;
-
+    protected LazyOptional<IEnergyStorage> lazyEnergyHandler;
     protected final ContainerData data;
     private MachineBlock baseBlock;
 
@@ -53,11 +54,6 @@ public abstract class MachineBlockEntity extends BaseGuiBlockEntity implements I
         data = getContainerData();
 
         lazyEnergyHandler = LazyOptional.empty();
-        lazyFluidHandlers = new LazyOptional[fluidTanks.length];
-
-        for(int i = 0; i < fluidTanks.length; i++) {
-            lazyFluidHandlers[i] = LazyOptional.empty();
-        }
 
         this.baseBlock = baseBlock;
     }
@@ -78,14 +74,47 @@ public abstract class MachineBlockEntity extends BaseGuiBlockEntity implements I
             return lazyEnergyHandler.cast();
         }
 
-        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return lazyItemHandler.cast();
+        if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            if(side == null) {
+                return super.getCapability(cap, side);
+            }
+            var directionWrappedItemHandlerMap = getDirectionWrappedItemHandlerMap();
+
+            if(directionWrappedItemHandlerMap.containsKey(side)) {
+                Direction localDir = this.getBlockState().getValue(FluidCompactor.FACING);
+
+                if(side == Direction.UP || side == Direction.DOWN) {
+                    return directionWrappedItemHandlerMap.get(side).cast();
+                }
+
+                return switch(localDir) {
+                    default -> directionWrappedItemHandlerMap.get(side.getOpposite()).cast();
+                    case EAST -> directionWrappedItemHandlerMap.get(side.getClockWise()).cast();
+                    case SOUTH -> directionWrappedItemHandlerMap.get(side).cast();
+                    case WEST -> directionWrappedItemHandlerMap.get(side.getCounterClockWise()).cast();
+                };
+            }
         }
 
         if(cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-            if(this.getBlockState().getValue(baseBlock.FACING).getClockWise() == side) {
-                if(lazyFluidHandlers.length == 0) return super.getCapability(cap, side);
-                return lazyFluidHandlers[0].cast();
+            if(side == null) {
+                return super.getCapability(cap, side);
+            }
+            var directionWrappedFluidHandlerMap = getDirectionWrappedFluidHandlerMap();
+
+            if(directionWrappedFluidHandlerMap.containsKey(side)) {
+                Direction localDir = this.getBlockState().getValue(FluidCompactor.FACING);
+
+                if(side == Direction.UP || side == Direction.DOWN) {
+                    return directionWrappedFluidHandlerMap.get(side).cast();
+                }
+
+                return switch(localDir) {
+                    default -> directionWrappedFluidHandlerMap.get(side.getOpposite()).cast();
+                    case EAST -> directionWrappedFluidHandlerMap.get(side.getClockWise()).cast();
+                    case SOUTH -> directionWrappedFluidHandlerMap.get(side).cast();
+                    case WEST -> directionWrappedFluidHandlerMap.get(side.getCounterClockWise()).cast();
+                };
             }
         }
 
@@ -96,31 +125,20 @@ public abstract class MachineBlockEntity extends BaseGuiBlockEntity implements I
     public void onLoad() {
         super.onLoad();
 
-        for(int i = 0; i < fluidTanks.length; i++) {
-            int finalI = i;
-            lazyFluidHandlers[i] = LazyOptional.of(() -> fluidTanks[finalI]);
-        }
-
         lazyEnergyHandler = LazyOptional.of(() -> energyStorage);
     }
 
     @Override
     public void invalidateCaps() {
         super.invalidateCaps();
-
-        for(LazyOptional lazyFluidHandler : lazyFluidHandlers) {
-            lazyFluidHandler.invalidate();
-        }
-
-        lazyEnergyHandler.invalidate();
     }
 
     @Override
     protected void saveAdditional(CompoundTag tag) {
         tag.putInt("energy", energyStorage.getEnergyStored());
 
-        for(int i = 0; i < fluidTanks.length; i++) {
-            FluidStack fluid = fluidTanks[i].getFluid();
+        for(int i = 0; i < fluidTanks.size(); i++) {
+            FluidStack fluid = fluidTanks.get(i).getFluid();
 
             tag.putString(i + ".FluidName", ForgeRegistries.FLUIDS.getKey(fluid.getFluid()).toString());
             tag.putInt(i + ".Amount", fluid.getAmount());
@@ -133,7 +151,7 @@ public abstract class MachineBlockEntity extends BaseGuiBlockEntity implements I
     public void load(CompoundTag nbt) {
         energyStorage.setEnergy(nbt.getInt("energy"));
 
-        for(int i = 0; i < fluidTanks.length; i++) {
+        for(int i = 0; i < fluidTanks.size(); i++) {
 
             FluidStack stack;
 
@@ -149,7 +167,7 @@ public abstract class MachineBlockEntity extends BaseGuiBlockEntity implements I
             }
 
 
-            fluidTanks[i].setFluid(stack);
+            fluidTanks.get(i).setFluid(stack);
         }
 
         super.load(nbt);
@@ -175,29 +193,29 @@ public abstract class MachineBlockEntity extends BaseGuiBlockEntity implements I
 
     @Override
     public void setFluid(int tank, FluidStack fluid) {
-        fluidTanks[tank].setFluid(fluid);
+        fluidTanks.get(tank).setFluid(fluid);
     }
 
     @Override
     public FluidStack getFluid(int tank) {
-        return fluidTanks[tank].getFluid();
+        return fluidTanks.get(tank).getFluid();
     }
 
-    public FluidTank[] createFluidTanks() {
+    public NonNullList<FluidTank> createFluidTanks() {
         int[] size = getFluidTankCapacity();
 
-        FluidTank[] result = new FluidTank[size.length];
+        NonNullList<FluidTank> result = NonNullList.create();
 
         for(int i = 0; i < size.length; i++) {
             int finalI = i;
-            result[i] = new FluidTank(size[finalI]) {
+            result.add(new FluidTank(size[finalI]) {
                 @Override
                 protected void onContentsChanged() {
                     setChanged();
                     if(!level.isClientSide)
                         ModNetworkHandler.sendToClients(new SyncFluidToClient(finalI, fluid, worldPosition));
                 }
-            };
+            });
         }
 
         return result;
@@ -216,6 +234,8 @@ public abstract class MachineBlockEntity extends BaseGuiBlockEntity implements I
     }
 
     public abstract int[] getFluidTankCapacity();
+    public abstract Map<Direction, LazyOptional<WrappedItemHandler>> getDirectionWrappedItemHandlerMap();
+    public abstract Map<Direction, LazyOptional<WrappedFluidHandler>> getDirectionWrappedFluidHandlerMap();
 
     /**
      * capacity, maxtransfer

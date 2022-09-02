@@ -1,6 +1,7 @@
 package rasmoos.semirealisticelectricity.blockentites;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Tuple;
@@ -12,13 +13,19 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import rasmoos.semirealisticelectricity.blocks.ModBlocks;
+import rasmoos.semirealisticelectricity.network.ModNetworkHandler;
+import rasmoos.semirealisticelectricity.network.SyncItemToClient;
 import rasmoos.semirealisticelectricity.recipe.FluidCompactorRecipe;
 import rasmoos.semirealisticelectricity.screen.menu.FluidCompactorMenu;
 
+import java.util.Map;
 import java.util.Optional;
 
 public class FluidCompactorEntity extends MachineBlockEntity {
@@ -46,6 +53,24 @@ public class FluidCompactorEntity extends MachineBlockEntity {
     @Override
     public int getNumberOfSlots() {
         return 2;
+    }
+
+    @Override
+    public ItemStackHandler getItemHandler() {
+        return new ItemStackHandler(getNumberOfSlots()) {
+            @Override
+            protected void onContentsChanged(int slot) {
+                setChanged();
+                if(!level.isClientSide) {
+                    ModNetworkHandler.sendToClients(new SyncItemToClient(itemHandler, getBlockPos()));
+                }
+            }
+
+            @Override
+            public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+                return false;
+            }
+        };
     }
 
     @Override
@@ -79,13 +104,13 @@ public class FluidCompactorEntity extends MachineBlockEntity {
         if(match.isPresent()) {
             FluidStack[] fluids = match.get().getFluids();
 
-            if(fluidTanks[0].getFluid().isFluidEqual(fluids[0]) && fluidTanks[1].getFluid().isFluidEqual(fluids[1])) {
+            if(fluidTanks.get(0).getFluid().isFluidEqual(fluids[0]) && fluidTanks.get(1).getFluid().isFluidEqual(fluids[1])) {
 
-                fluidTanks[0].drain(match.get().getUseAmount()[0], IFluidHandler.FluidAction.EXECUTE);
-                fluidTanks[1].drain(match.get().getUseAmount()[1], IFluidHandler.FluidAction.EXECUTE);
+                fluidTanks.get(0).drain(match.get().getUseAmount()[0], IFluidHandler.FluidAction.EXECUTE);
+                fluidTanks.get(1).drain(match.get().getUseAmount()[1], IFluidHandler.FluidAction.EXECUTE);
             } else {
-                fluidTanks[1].drain(match.get().getUseAmount()[0], IFluidHandler.FluidAction.EXECUTE);
-                fluidTanks[0].drain(match.get().getUseAmount()[1], IFluidHandler.FluidAction.EXECUTE);
+                fluidTanks.get(1).drain(match.get().getUseAmount()[0], IFluidHandler.FluidAction.EXECUTE);
+                fluidTanks.get(0).drain(match.get().getUseAmount()[1], IFluidHandler.FluidAction.EXECUTE);
             }
 
             itemHandler.setStackInSlot(0, new ItemStack(match.get().getResultItem().getItem(), itemHandler.getStackInSlot(0).getCount() + 1));
@@ -108,11 +133,11 @@ public class FluidCompactorEntity extends MachineBlockEntity {
 
             boolean fluidChecked = false;
 
-            if(fluidTanks[0].getFluid().isFluidEqual(fluids[0]) && fluidTanks[1].getFluid().isFluidEqual(fluids[1]) &&
-                fluidTanks[0].getFluidAmount() >= fluids[0].getAmount() && fluidTanks[1].getFluidAmount() >= fluids[1].getAmount()) {
+            if(fluidTanks.get(0).getFluid().isFluidEqual(fluids[0]) && fluidTanks.get(1).getFluid().isFluidEqual(fluids[1]) &&
+                fluidTanks.get(0).getFluidAmount() >= fluids[0].getAmount() && fluidTanks.get(1).getFluidAmount() >= fluids[1].getAmount()) {
                 fluidChecked = true;
-            } else if(fluidTanks[1].getFluid().isFluidEqual(fluids[0]) && fluidTanks[0].getFluid().isFluidEqual(fluids[1]) &&
-                        fluidTanks[1].getFluidAmount() >= fluids[0].getAmount() && fluidTanks[0].getFluidAmount() >= fluids[1].getAmount()) {
+            } else if(fluidTanks.get(1).getFluid().isFluidEqual(fluids[0]) && fluidTanks.get(0).getFluid().isFluidEqual(fluids[1]) &&
+                        fluidTanks.get(1).getFluidAmount() >= fluids[0].getAmount() && fluidTanks.get(0).getFluidAmount() >= fluids[1].getAmount()) {
                 fluidChecked = true;
             }
 
@@ -147,6 +172,31 @@ public class FluidCompactorEntity extends MachineBlockEntity {
     @Override
     public int[] getFluidTankCapacity() {
         return new int[]{32000, 32000};
+    }
+
+    private final Map<Direction, LazyOptional<WrappedItemHandler>> directionWrappedItemHandlerMap =
+            Map.of(Direction.DOWN, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (i) -> i == 0, (i, s) -> false)),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (index) -> index == 0, (index, stack) -> false)),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (i) -> i == 0, (i, s) -> false)),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (i) -> i == 0, (index, stack) -> false)),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (index) -> index == 0, (index, stack) -> false)));
+
+    private final Map<Direction, LazyOptional<WrappedFluidHandler>> directionWrappedFluidHandlerMap =
+            Map.of(Direction.DOWN, LazyOptional.of(() -> new WrappedFluidHandler(fluidTanks, (i) -> true, (i, s) -> false)),
+                    Direction.UP, LazyOptional.of(() -> new WrappedFluidHandler(fluidTanks, (i) -> true, (i, s) -> false)),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedFluidHandler(fluidTanks, (i) -> true, (i, s) -> true)),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedFluidHandler(fluidTanks, (i) -> true, (i, s) -> true)),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedFluidHandler(fluidTanks, (i) -> true, (i, s) -> true)),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedFluidHandler(fluidTanks, (i) -> true, (i, s) -> true)));
+
+    @Override
+    public Map<Direction, LazyOptional<WrappedItemHandler>> getDirectionWrappedItemHandlerMap() {
+        return directionWrappedItemHandlerMap;
+    }
+
+    @Override
+    public Map<Direction, LazyOptional<WrappedFluidHandler>> getDirectionWrappedFluidHandlerMap() {
+        return directionWrappedFluidHandlerMap;
     }
 
     @Override

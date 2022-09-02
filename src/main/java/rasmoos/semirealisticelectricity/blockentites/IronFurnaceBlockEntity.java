@@ -5,9 +5,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import rasmoos.semirealisticelectricity.blocks.ModBlocks;
+import rasmoos.semirealisticelectricity.network.ModNetworkHandler;
+import rasmoos.semirealisticelectricity.network.SyncItemToClient;
 import rasmoos.semirealisticelectricity.screen.menu.IronFurnaceMenu;
 
 public class IronFurnaceBlockEntity extends BaseGuiBlockEntity {
@@ -54,5 +59,23 @@ public class IronFurnaceBlockEntity extends BaseGuiBlockEntity {
     @Override
     public int getNumberOfSlots() {
         return NUM_SLOTS;
+    }
+
+    @Override
+    public ItemStackHandler getItemHandler() {
+        return new ItemStackHandler(getNumberOfSlots()) {
+            @Override
+            protected void onContentsChanged(int slot) {
+                setChanged();
+                if(!level.isClientSide) {
+                    ModNetworkHandler.sendToClients(new SyncItemToClient(itemHandler, getBlockPos()));
+                }
+            }
+
+            @Override
+            public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+                return true;
+            }
+        };
     }
 }

@@ -1,6 +1,7 @@
 package rasmoos.semirealisticelectricity.blockentites;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Tuple;
@@ -11,11 +12,17 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import rasmoos.semirealisticelectricity.blocks.ModBlocks;
+import rasmoos.semirealisticelectricity.network.ModNetworkHandler;
+import rasmoos.semirealisticelectricity.network.SyncItemToClient;
 import rasmoos.semirealisticelectricity.recipe.CrusherRecipe;
 import rasmoos.semirealisticelectricity.screen.menu.CrusherMenu;
 
+import java.util.Map;
 import java.util.Optional;
 
 public class CrusherBlockEntity extends MachineBlockEntity {
@@ -34,6 +41,24 @@ public class CrusherBlockEntity extends MachineBlockEntity {
     @Override
     public int getNumberOfSlots() {
         return NUM_SLOTS;
+    }
+
+    @Override
+    public ItemStackHandler getItemHandler() {
+        return new ItemStackHandler(getNumberOfSlots()) {
+            @Override
+            protected void onContentsChanged(int slot) {
+                setChanged();
+                if(!level.isClientSide) {
+                    ModNetworkHandler.sendToClients(new SyncItemToClient(itemHandler, getBlockPos()));
+                }
+            }
+
+            @Override
+            public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+                return true;
+            }
+        };
     }
 
     @Override
@@ -58,6 +83,22 @@ public class CrusherBlockEntity extends MachineBlockEntity {
     @Override
     public int[] getFluidTankCapacity() {
         return new int[]{};
+    }
+
+    private final Map<Direction, LazyOptional<WrappedItemHandler>> directionWrappedItemHandlerMap =
+            Map.of(Direction.DOWN, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (i) -> i == 0, (i, s) -> false)),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (index) -> index == 0, (index, stack) -> false)),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (i) -> i == 0, (i, s) -> false)),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (i) -> i == 0, (index, stack) -> false)),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (index) -> index == 0, (index, stack) -> false)));
+    @Override
+    public Map<Direction, LazyOptional<WrappedItemHandler>> getDirectionWrappedItemHandlerMap() {
+        return directionWrappedItemHandlerMap;
+    }
+
+    @Override
+    public Map<Direction, LazyOptional<WrappedFluidHandler>> getDirectionWrappedFluidHandlerMap() {
+        return Map.of();
     }
 
     @Override

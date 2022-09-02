@@ -12,6 +12,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -21,6 +22,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import rasmoos.semirealisticelectricity.network.ModNetworkHandler;
 import rasmoos.semirealisticelectricity.network.SyncItemToClient;
@@ -29,7 +31,7 @@ import javax.annotation.Nonnull;
 
 public abstract class BaseGuiBlockEntity extends BlockEntity implements MenuProvider, IInventoryHandlingBlockEntity {
 
-    protected final ItemStackHandler itemHandler;
+    protected ItemStackHandler itemHandler;
     protected LazyOptional<IItemHandler> lazyItemHandler;
     protected final Block baseBlock;
 
@@ -37,15 +39,7 @@ public abstract class BaseGuiBlockEntity extends BlockEntity implements MenuProv
         super(blockEntityType, blockPos, blockState);
         this.baseBlock = baseBlock;
 
-        itemHandler = new ItemStackHandler(getNumberOfSlots()) {
-            @Override
-            protected void onContentsChanged(int slot) {
-                setChanged();
-                if(!level.isClientSide) {
-                    ModNetworkHandler.sendToClients(new SyncItemToClient(itemHandler, blockPos));
-                }
-            }
-        };
+        itemHandler = getItemHandler();
 
         lazyItemHandler = LazyOptional.empty();
 
@@ -72,6 +66,7 @@ public abstract class BaseGuiBlockEntity extends BlockEntity implements MenuProv
     }
 
     public abstract int getNumberOfSlots();
+    public abstract ItemStackHandler getItemHandler();
 
     @Nonnull
     @Override
