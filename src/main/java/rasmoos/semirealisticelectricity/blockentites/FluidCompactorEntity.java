@@ -57,6 +57,7 @@ public class FluidCompactorEntity extends MachineBlockEntity {
 
     @Override
     public ItemStackHandler getItemHandler() {
+        System.out.println("HEJ");
         return new ItemStackHandler(getNumberOfSlots()) {
             @Override
             protected void onContentsChanged(int slot) {
