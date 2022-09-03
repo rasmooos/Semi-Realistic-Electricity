@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/orientable",
-  "textures": {
-    "front": "semirealisticelectricity:block/fluid_compactor_front",
-    "side": "semirealisticelectricity:block/machine_side",
-    "top": "semirealisticelectricity:block/machine_top"
-  }
-}

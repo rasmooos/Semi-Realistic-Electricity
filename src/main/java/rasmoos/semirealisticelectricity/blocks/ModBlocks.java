@@ -83,7 +83,7 @@ public class ModBlocks {
             () -> new CrusherBlock(BlockBehaviour.Properties.copy(Blocks.STONE)), ModSetup.ITEM_GROUP);
 
     public static RegistryObject<MachineBlock> FLUID_COMPACTOR = registerBlock("fluid_compactor",
-            () -> new FluidCompactor(BlockBehaviour.Properties.copy(Blocks.STONE)), ModSetup.ITEM_GROUP);
+            () -> new FluidCompactor(BlockBehaviour.Properties.copy(Blocks.STONE).noOcclusion()), ModSetup.ITEM_GROUP);
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> result = BLOCKS.register(name, block);

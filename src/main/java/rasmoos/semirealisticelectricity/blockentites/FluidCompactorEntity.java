@@ -19,7 +19,9 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import rasmoos.semirealisticelectricity.blocks.FluidCompactor;
 import rasmoos.semirealisticelectricity.blocks.ModBlocks;
+import rasmoos.semirealisticelectricity.blocks.RubberLogTap;
 import rasmoos.semirealisticelectricity.network.ModNetworkHandler;
 import rasmoos.semirealisticelectricity.network.SyncItemToClient;
 import rasmoos.semirealisticelectricity.recipe.FluidCompactorRecipe;
@@ -83,6 +85,10 @@ public class FluidCompactorEntity extends MachineBlockEntity {
         itemHandler.setStackInSlot(1, getCraftItem());
 
         if(hasRecipe() && hasEnoughEnergy()) {
+            if(!getBlockState().getValue(FluidCompactor.LIT)) {
+                level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(FluidCompactor.LIT, true));
+            }
+
             progress++;
             energyStorage.extractEnergy(10, false);
             setChanged(level, getBlockPos(), getBlockState());
@@ -92,6 +98,10 @@ public class FluidCompactorEntity extends MachineBlockEntity {
         } else {
             resetProgress();
             setChanged(level, getBlockPos(), getBlockState());
+
+            if(getBlockState().getValue(FluidCompactor.LIT)) {
+                level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(FluidCompactor.LIT, false));
+            }
         }
     }
 

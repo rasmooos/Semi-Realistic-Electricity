@@ -5,7 +5,9 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -36,12 +38,44 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         machineBlock(ModBlocks.IRON_FURNACE_BLOCK.get());
         machineBlock(ModBlocks.CRUSHER_BLOCK.get());
-        machineBlock(ModBlocks.FLUID_COMPACTOR.get());
+//        machineBlock(ModBlocks.FLUID_COMPACTOR.get());
+
+        machineCustomModel(ModBlocks.FLUID_COMPACTOR.get(),
+                new ModelFile.UncheckedModelFile(modLoc("block/fluid_compactor")),
+                new ModelFile.UncheckedModelFile(modLoc("block/fluid_compactor_on")));
     }
 
     public void logBlock(RotatedPillarBlock block) {
         axisBlock(block, blockTexture(block), extend(blockTexture(block), "_top"));
     }
+
+    public void machineCustomModel(MachineBlock block, ModelFile off, ModelFile on) {
+        getVariantBuilder(block)
+                .partialState().with(MachineBlock.FACING, Direction.NORTH).with(MachineBlock.LIT, false)
+                .setModels(new ConfiguredModel(off))
+
+                .partialState().with(MachineBlock.FACING, Direction.SOUTH).with(MachineBlock.LIT, false)
+                .setModels(new ConfiguredModel(off, 0, 180, false))
+
+                .partialState().with(MachineBlock.FACING, Direction.WEST).with(MachineBlock.LIT, false)
+                .setModels(new ConfiguredModel(off, 0, 270, false))
+
+                .partialState().with(MachineBlock.FACING, Direction.EAST).with(MachineBlock.LIT, false)
+                .setModels(new ConfiguredModel(off, 0, 90, false))
+                ///////////////
+                .partialState().with(MachineBlock.FACING, Direction.NORTH).with(MachineBlock.LIT, true)
+                .setModels(new ConfiguredModel(on))
+
+                .partialState().with(MachineBlock.FACING, Direction.SOUTH).with(MachineBlock.LIT, true)
+                .setModels(new ConfiguredModel(on, 0, 180, false))
+
+                .partialState().with(MachineBlock.FACING, Direction.WEST).with(MachineBlock.LIT, true)
+                .setModels(new ConfiguredModel(on, 0, 270, false))
+
+                .partialState().with(MachineBlock.FACING, Direction.EAST).with(MachineBlock.LIT, true)
+                .setModels(new ConfiguredModel(on, 0, 90, false));
+    }
+
     public void machineBlock(MachineBlock block, ModelFile off, ModelFile on) {
         getVariantBuilder(block)
                 .partialState().with(MachineBlock.FACING, Direction.NORTH).with(MachineBlock.LIT, false)
