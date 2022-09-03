@@ -7,6 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.network.NetworkEvent;
 import rasmoos.semirealisticelectricity.blockentites.IInventoryHandlingBlockEntity;
+import rasmoos.semirealisticelectricity.screen.menu.BaseGuiMenu;
 import rasmoos.semirealisticelectricity.screen.menu.IEnergyMenu;
 
 import java.util.ArrayList;
@@ -52,7 +53,7 @@ public class SyncItemToClient implements IModPacket {
             if(Minecraft.getInstance().level.getBlockEntity(pos) instanceof IInventoryHandlingBlockEntity blockEntity) {
                 blockEntity.setHandler(handler);
 
-                if(Minecraft.getInstance().player.containerMenu instanceof IEnergyMenu menu && menu.getBlockEntity().getBlockPos().equals(pos)) {
+                if(Minecraft.getInstance().player.containerMenu instanceof BaseGuiMenu menu && menu.getEntity().getBlockPos().equals(pos)) {
                     blockEntity.setHandler(handler);
                 }
             }

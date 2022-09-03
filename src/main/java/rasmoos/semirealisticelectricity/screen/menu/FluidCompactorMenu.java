@@ -1,14 +1,18 @@
 package rasmoos.semirealisticelectricity.screen.menu;
 
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.network.NetworkDirection;
+import net.minecraftforge.network.PacketDistributor;
 import rasmoos.semirealisticelectricity.blockentites.FluidCompactorEntity;
 import rasmoos.semirealisticelectricity.blockentites.MachineBlockEntity;
+import rasmoos.semirealisticelectricity.network.ModNetworkHandler;
+import rasmoos.semirealisticelectricity.network.SyncItemToServer;
 import rasmoos.semirealisticelectricity.screen.slot.ModRenderSlot;
 import rasmoos.semirealisticelectricity.screen.slot.ModResultSlot;
 
@@ -53,5 +57,25 @@ public class FluidCompactorMenu extends MachineMenu {
 
     public void setCraftType(FluidCompactorEntity.CraftType craftType) {
         data.set(2, craftType.ordinal());
+    }
+
+    public void cycleCraftType() {
+        int craftType = data.get(2);
+        int index = (craftType + 1) % (FluidCompactorEntity.CraftType.values().length - 1);
+
+        FluidCompactorEntity blockEntity = (FluidCompactorEntity) level.getBlockEntity(entity.getBlockPos());
+        blockEntity.setCraftType(index);
+        ModNetworkHandler.sendToServer(new SyncItemToServer(entity.getBlockPos(), blockEntity.getCraftType()));
+    }
+
+    public void cycleCraftTypeBack() {
+        int craftType = data.get(2);
+        int index = (craftType - 1) % (FluidCompactorEntity.CraftType.values().length - 1);
+
+        index += index < 0 ? FluidCompactorEntity.CraftType.values().length - 1 : 0;
+
+        FluidCompactorEntity blockEntity = (FluidCompactorEntity) level.getBlockEntity(entity.getBlockPos());
+        blockEntity.setCraftType(index);
+        ModNetworkHandler.sendToServer(new SyncItemToServer(entity.getBlockPos(), blockEntity.getCraftType()));
     }
 }

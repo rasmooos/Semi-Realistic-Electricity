@@ -1,7 +1,7 @@
 package rasmoos.semirealisticelectricity.screen;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import mekanism.client.gui.element.button.BasicColorButton;
+import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -15,6 +15,7 @@ import rasmoos.semirealisticelectricity.screen.renderer.ProgressBarRenderer;
 public class FluidCompactorScreen extends MachineScreen<FluidCompactorMenu> {
 
     public static final ResourceLocation TEXTURE = new ResourceLocation(SemiRealisticElectricity.MOD_ID, "textures/gui/fluid_compactor.png");
+    public static final ResourceLocation BUTTON = new ResourceLocation(SemiRealisticElectricity.MOD_ID, "textures/gui/button.png");
 
     private ProgressBarRenderer progressBarRendererL;
     private ProgressBarRenderer progressBarRendererR;
@@ -28,15 +29,23 @@ public class FluidCompactorScreen extends MachineScreen<FluidCompactorMenu> {
     protected void init() {
         super.init();
 
-        addFluidRenderer(new FluidStackRenderer(x + 13, y + 17, ((MachineBlockEntity) menu.entity).getFluidTankCapacity()[0], true, 19, 48));
-        addFluidRenderer(new FluidStackRenderer(x + 132, y + 17, ((MachineBlockEntity) menu.entity).getFluidTankCapacity()[1], true, 19, 48));
+        addFluidRenderer(new FluidStackRenderer(x + 13, y + 18, ((MachineBlockEntity) menu.entity).getFluidTankCapacity()[0], true, 19, 48));
+        addFluidRenderer(new FluidStackRenderer(x + 132, y + 18, ((MachineBlockEntity) menu.entity).getFluidTankCapacity()[1], true, 19, 48));
 
         progressBarRendererL = new ProgressBarRenderer(x + 42, y + 36, 176, 0, 22, 9, TEXTURE);
         progressBarRendererR = new ProgressBarRenderer(x + 121, y + 36, 0, 0, 22, 9, TEXTURE);
 
         itemStackRenderer = new ItemStackRenderer(x + 74, y + 59);
 
-//        addRenderableWidget(new BasicColorButton())
+        ImageButton buttonRight = new ImageButton(x + 88, y + 60, 16, 16, 16, 16, 0, BUTTON, 32, 16, (b) -> {
+            menu.cycleCraftType();
+        });
+        addRenderableWidget(buttonRight);
+
+        ImageButton buttonLeft = new ImageButton(x + 60, y + 60, 16, 16, 0, 0, 0, BUTTON, 32, 16, (b) -> {
+            menu.cycleCraftTypeBack();
+        });
+        addRenderableWidget(buttonLeft);
     }
 
     @Override

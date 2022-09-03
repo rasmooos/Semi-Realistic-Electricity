@@ -63,6 +63,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
         fluidCompacting(recipeConsumer, Blocks.COBBLESTONE, new FluidStack(Fluids.WATER, 1000), 0, new FluidStack(Fluids.LAVA, 1000), 0, 60);
         fluidCompacting(recipeConsumer, Blocks.OBSIDIAN, new FluidStack(Fluids.WATER, 1000), new FluidStack(Fluids.LAVA, 1000), 180);
+        fluidCompacting(recipeConsumer, Blocks.STONE, new FluidStack(Fluids.WATER, 1000), 1000, new FluidStack(Fluids.LAVA, 1000), 0, 60);
     }
 
 //    private static void crushing(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike input, ItemLike output, int amount, String name) {

@@ -47,7 +47,7 @@ public class FluidCompactorEntity extends MachineBlockEntity {
 
         progress = 0;
         maxProgress = 72;
-        craftType = CraftType.OBSIDIAN;
+        craftType = CraftType.COBBLESTONE;
     }
 
     @Override
@@ -57,7 +57,6 @@ public class FluidCompactorEntity extends MachineBlockEntity {
 
     @Override
     public ItemStackHandler getItemHandler() {
-        System.out.println("HEJ");
         return new ItemStackHandler(getNumberOfSlots()) {
             @Override
             protected void onContentsChanged(int slot) {
@@ -77,6 +76,9 @@ public class FluidCompactorEntity extends MachineBlockEntity {
     @Override
     public void tick() {
         super.tick();
+        if(level.isClientSide) {
+            return;
+        }
 
         itemHandler.setStackInSlot(1, getCraftItem());
 
@@ -248,16 +250,26 @@ public class FluidCompactorEntity extends MachineBlockEntity {
     @Override
     public void load(CompoundTag nbt) {
         super.load(nbt);
-        craftType = CraftType.values()[nbt.getInt("craftType")];
+        setCraftType(nbt.getInt("craftType"));
     }
 
     public void onRemove() {
         setCraftType(CraftType.NONE);
+        itemHandler.setStackInSlot(1, getCraftItem());
     }
 
     public void setCraftType(CraftType craftType) {
         this.craftType = craftType;
-        itemHandler.setStackInSlot(1, getCraftItem());
+        progress = 0;
+        data.set(2, craftType.ordinal());
+    }
+
+    public void setCraftType(int craftType) {
+        setCraftType(CraftType.values()[craftType]);
+    }
+
+    public CraftType getCraftType() {
+        return craftType;
     }
 
     public ItemStack getCraftItem() {

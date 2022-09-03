@@ -40,6 +40,10 @@ public abstract class BaseGuiMenu extends AbstractContainerMenu {
         addSlots(inv);
     }
 
+    public BaseGuiBlockEntity getEntity() {
+        return entity;
+    }
+
     public abstract void addSlots(Inventory inventory);
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons

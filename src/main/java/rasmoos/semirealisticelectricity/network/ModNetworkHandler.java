@@ -45,6 +45,12 @@ public class ModNetworkHandler {
                 .encoder(SyncItemToClient::toBytes)
                 .consumerMainThread(SyncItemToClient::handle)
                 .add();
+
+        net.messageBuilder(SyncItemToServer.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(SyncItemToServer::new)
+                .encoder(SyncItemToServer::toBytes)
+                .consumerMainThread(SyncItemToServer::handle)
+                .add();
     }
 
     public static <MSG> void sendTo(MSG msg, Connection connection, NetworkDirection direction) {
@@ -52,5 +58,9 @@ public class ModNetworkHandler {
     }
     public static <MSG> void sendToClients(MSG message) {
         INSTANCE.send(PacketDistributor.ALL.noArg(), message);
+    }
+
+    public static <MSG> void sendToServer(MSG message) {
+        INSTANCE.sendToServer(message);
     }
 }
