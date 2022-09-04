@@ -53,11 +53,6 @@ public class CrusherBlockEntity extends MachineBlockEntity {
                     ModNetworkHandler.sendToClients(new SyncItemToClient(itemHandler, getBlockPos()));
                 }
             }
-
-            @Override
-            public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-                return true;
-            }
         };
     }
 
@@ -70,35 +65,17 @@ public class CrusherBlockEntity extends MachineBlockEntity {
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
         tag.putInt("crusher.progress", progress);
-        tag.putInt("crusher.energy", energyStorage.getEnergyStored());
     }
 
     @Override
     public void load(CompoundTag nbt) {
         super.load(nbt);
         progress = nbt.getInt("crusher.progress");
-        energyStorage.setEnergy(nbt.getInt("crusher.energy"));
     }
 
     @Override
     public int[] getFluidTankCapacity() {
         return new int[]{};
-    }
-
-    private final Map<Direction, LazyOptional<WrappedItemHandler>> directionWrappedItemHandlerMap =
-            Map.of(Direction.DOWN, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (i) -> i == 0, (i, s) -> false)),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (index) -> index == 0, (index, stack) -> false)),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (i) -> i == 0, (i, s) -> false)),
-                    Direction.EAST, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (i) -> i == 0, (index, stack) -> false)),
-                    Direction.WEST, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (index) -> index == 0, (index, stack) -> false)));
-    @Override
-    public Map<Direction, LazyOptional<WrappedItemHandler>> getDirectionWrappedItemHandlerMap() {
-        return directionWrappedItemHandlerMap;
-    }
-
-    @Override
-    public Map<Direction, LazyOptional<WrappedFluidHandler>> getDirectionWrappedFluidHandlerMap() {
-        return Map.of();
     }
 
     @Override
@@ -113,6 +90,9 @@ public class CrusherBlockEntity extends MachineBlockEntity {
 
     public void tick() {
         super.tick();
+
+        if(level.isClientSide)
+            return;
 
         if(hasRecipe() && hasEnoughEnergy()) {
             progress++;
@@ -175,6 +155,22 @@ public class CrusherBlockEntity extends MachineBlockEntity {
     }
 
 
+    private final Map<Direction, LazyOptional<WrappedItemHandler>> directionWrappedItemHandlerMap =
+            Map.of(Direction.DOWN, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (i) -> i == 0, (i, s) -> false)),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (index) -> index == 0, (index, stack) -> false)),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (i) -> i == 0, (i, s) -> false)),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (i) -> i == 0, (index, stack) -> false)),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (index) -> index == 0, (index, stack) -> false)));
+
+    @Override
+    public Map<Direction, LazyOptional<WrappedItemHandler>> getDirectionWrappedItemHandlerMap() {
+        return directionWrappedItemHandlerMap;
+    }
+
+    @Override
+    public Map<Direction, LazyOptional<WrappedFluidHandler>> getDirectionWrappedFluidHandlerMap() {
+        return Map.of();
+    }
 
     @Override
     public ContainerData getContainerData() {

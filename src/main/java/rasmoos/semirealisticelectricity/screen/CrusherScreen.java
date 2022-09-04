@@ -21,11 +21,6 @@ public class CrusherScreen extends MachineScreen<CrusherMenu> {
     @Override
     protected void init() {
         super.init();
-//        addFluidRenderer(new FluidStackRenderer(x + 8, y + 17, menu.getFluidTankCapacity(0), true, 19, 48));
-//        addFluidRenderer(new FluidStackRenderer(x + 29, y + 17, menu.getFluidTankCapacity(1), true, 19, 48));
-
-
-
         progressBarRenderer = new ProgressBarRenderer(x + 79, y + 38, 176, 11, 22, 9, texture);
     }
 

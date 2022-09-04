@@ -29,11 +29,24 @@ public class ModLangProvider extends LanguageProvider {
         add(ModItems.TIN_INGOT.get(), "Tin Ingot");
         add(ModItems.COBALT_INGOT.get(), "Cobalt Ingot");
         add(ModItems.MAGNETITE_INGOT.get(), "Magnetite Ingot");
+        add(ModItems.BRONZE_INGOT.get(), "Bronze Ingot");
+        add(ModItems.ALUMINIUM_INGOT.get(), "Aluminium Ingot");
 
         add(ModItems.TIN_DUST.get(), "Tin dust");
         add(ModItems.COBALT_DUST.get(), "Cobalt dust");
         add(ModItems.MAGNETITE_DUST.get(), "Magnetite dust");
         add(ModItems.LITHIUM_DUST.get(), "Lithium dust");
+        add(ModItems.COPPER_DUST.get(), "Copper dust");
+        add(ModItems.BRONZE_DUST.get(), "Bronze dust");
+        add(ModItems.LEPIDOLITE_DUST.get(), "Lepidolite dust");
+        add(ModItems.ALUMINIUM_DUST.get(), "Aluminium dust");
+
+        add(ModItems.TIN_NUGGET.get(), "Tin nugget");
+        add(ModItems.MAGNETITE_NUGGET.get(), "Magnetite nugget");
+        add(ModItems.COBALT_NUGGET.get(), "Cobalt nugget");
+        add(ModItems.BRONZE_NUGGET.get(), "Bronze nugget");
+        add(ModItems.ALUMINIUM_NUGGET.get(), "Aluminium nugget");
+
 
         add(ModItems.RUBBER_TAP.get(), "Rubber Tap");
         add(ModItems.RUBBER_RESIN.get(), "Rubber Resin");
@@ -73,5 +86,8 @@ public class ModLangProvider extends LanguageProvider {
         add("jei.integration.semirealisticelectricity.tooltip.liquid.amount.with.capacity", "%s / %s mB");
         add("jei.integration.semirealisticelectricity.tooltip.liquid.amount", "%s mB");
         add("jei.integration.semirealisticelectricity.tooltip.liquid.empty", "Empty");
+        add("jei.integration.semirealisticelectricity.category.iron_smelting", "Smelting");
+        add("jei.integration.semirealisticelectricity.category.crushing", "Crushing");
+        add("jei.integration.semirealisticelectricity.category.fluid_compacting", "Fluid Compacting");
     }
 }

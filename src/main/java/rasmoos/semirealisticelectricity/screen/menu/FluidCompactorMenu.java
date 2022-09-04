@@ -1,14 +1,11 @@
 package rasmoos.semirealisticelectricity.screen.menu;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.PacketDistributor;
 import rasmoos.semirealisticelectricity.blockentites.FluidCompactorEntity;
 import rasmoos.semirealisticelectricity.blockentites.MachineBlockEntity;
 import rasmoos.semirealisticelectricity.network.ModNetworkHandler;
@@ -36,19 +33,6 @@ public class FluidCompactorMenu extends MachineMenu {
         });
 
         addDataSlots(data);
-    }
-
-    public boolean isCrafting() {
-        return data.get(0) > 0;
-    }
-
-    public int getScaledProgress() {
-        int progress = data.get(0);
-        int maxProgress = data.get(1);
-
-        int progressArrowSize = 22;
-
-        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
 
     public ItemStack getCraftItem() {

@@ -1,11 +1,22 @@
-// 1.19.2	2022-08-21T12:55:45.0800768	Tags for minecraft:item
+// 1.19.2	2022-09-04T13:29:44.8310386	Tags for minecraft:item
+2084041d6786ce31e5c59fcb96b8f21f28b1c537 data/forge/tags/items/dusts/aluminium.json
+aa06ee99432464870a4600e45e4dcde799b91ca0 data/forge/tags/items/dusts/bronze.json
 26ce3323ab5d14ed201d477298ac25298ee6a929 data/forge/tags/items/dusts/cobalt.json
+fe124719dc0f28c70b7572da47f5068db5bae214 data/forge/tags/items/dusts/copper.json
+41163803bc597d0e8fb512edc4233c8703b7088c data/forge/tags/items/dusts/lepidolite.json
 b3e89b7810d7c18cc156bc93278f161aca748864 data/forge/tags/items/dusts/lithium.json
 22dba608689ff74efe52dbcf86d741b7f33b9568 data/forge/tags/items/dusts/magnetite.json
 31720bfbf028a3f04201f5d47abb6ff60c6245b5 data/forge/tags/items/dusts/tin.json
+34dd715b234070a4e69972051420ecbbfae34a81 data/forge/tags/items/ingots/aluminium.json
+c9bdb68e8dbeb59ef4fbd140e85e0552470245ac data/forge/tags/items/ingots/bronze.json
 7029a6ce9d5be2499f98a41912aefeeb639f5c57 data/forge/tags/items/ingots/cobalt.json
 28114b4281640cd46fb4dfe74bbc3f16020101ca data/forge/tags/items/ingots/magnetite.json
 5ce88b4b149a067decbed7103d7c4d6a54a2a1fa data/forge/tags/items/ingots/tin.json
+dc78cfc526fd094f1e6bc52f8dec7c557f930a22 data/forge/tags/items/nuggets/aluminium.json
+1772c45528523a469dca6dc5165f7ddcde4715ed data/forge/tags/items/nuggets/bronze.json
+140712bcc06487ced65462a941c13a5097c339e2 data/forge/tags/items/nuggets/cobalt.json
+8f5fa1e3eca55aa53e6a6ae60cbe4d7129f4d8a4 data/forge/tags/items/nuggets/magnetite.json
+6c456a3924336e84e3c99ea6ed29d08a76201d72 data/forge/tags/items/nuggets/tin.json
 b8a068324d1ce422b2d72c7e23cacb08b600e2f3 data/forge/tags/items/ores.json
 feebfe2aba2c2efed221bbd8664e0f37ac63f65e data/forge/tags/items/ores/cobalt.json
 039f05033a1ed545712546f20e8d5f77d3e1856c data/forge/tags/items/ores/lepidolite.json

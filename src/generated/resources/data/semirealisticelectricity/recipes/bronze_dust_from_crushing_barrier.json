@@ -1,0 +1,11 @@
+{
+  "type": "semirealisticelectricity:crushing",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/bronze"
+    }
+  ],
+  "result": {
+    "item": "semirealisticelectricity:bronze_dust"
+  }
+}

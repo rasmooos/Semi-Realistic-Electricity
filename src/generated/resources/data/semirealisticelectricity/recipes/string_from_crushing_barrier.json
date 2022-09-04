@@ -1,0 +1,11 @@
+{
+  "type": "semirealisticelectricity:crushing",
+  "ingredients": [
+    {
+      "tag": "minecraft:wool"
+    }
+  ],
+  "result": {
+    "item": "minecraft:string"
+  }
+}

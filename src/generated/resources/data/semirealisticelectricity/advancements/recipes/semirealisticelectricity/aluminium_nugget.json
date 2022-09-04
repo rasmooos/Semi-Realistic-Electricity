@@ -1,11 +1,13 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_ResourceKey[minecraft:root / minecraft:item]": {
+    "has_aluminium_ingot": {
       "conditions": {
         "items": [
           {
-            "tag": "forge:raw_materials/tin"
+            "items": [
+              "semirealisticelectricity:aluminium_ingot"
+            ]
           }
         ]
       },
@@ -13,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "semirealisticelectricity:tin_ingot_from_crushing_barrier"
+        "recipe": "semirealisticelectricity:aluminium_nugget"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_ResourceKey[minecraft:root / minecraft:item]",
+      "has_aluminium_ingot",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "semirealisticelectricity:tin_ingot_from_crushing_barrier"
+      "semirealisticelectricity:aluminium_nugget"
     ]
   }
 }

@@ -85,10 +85,6 @@ public class FluidCompactorEntity extends MachineBlockEntity {
         itemHandler.setStackInSlot(1, getCraftItem());
 
         if(hasRecipe() && hasEnoughEnergy()) {
-            if(!getBlockState().getValue(FluidCompactor.LIT)) {
-                level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(FluidCompactor.LIT, true));
-            }
-
             progress++;
             energyStorage.extractEnergy(10, false);
             setChanged(level, getBlockPos(), getBlockState());
@@ -98,10 +94,12 @@ public class FluidCompactorEntity extends MachineBlockEntity {
         } else {
             resetProgress();
             setChanged(level, getBlockPos(), getBlockState());
+        }
 
-            if(getBlockState().getValue(FluidCompactor.LIT)) {
-                level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(FluidCompactor.LIT, false));
-            }
+        if(!getBlockState().getValue(FluidCompactor.LIT) && progress > 0) {
+            level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(FluidCompactor.LIT, true));
+        } else if(getBlockState().getValue(FluidCompactor.LIT) && progress == 0) {
+            level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(FluidCompactor.LIT, false));
         }
     }
 
@@ -147,10 +145,10 @@ public class FluidCompactorEntity extends MachineBlockEntity {
             boolean fluidChecked = false;
 
             if(fluidTanks.get(0).getFluid().isFluidEqual(fluids[0]) && fluidTanks.get(1).getFluid().isFluidEqual(fluids[1]) &&
-                fluidTanks.get(0).getFluidAmount() >= fluids[0].getAmount() && fluidTanks.get(1).getFluidAmount() >= fluids[1].getAmount()) {
+                    fluidTanks.get(0).getFluidAmount() >= fluids[0].getAmount() && fluidTanks.get(1).getFluidAmount() >= fluids[1].getAmount()) {
                 fluidChecked = true;
             } else if(fluidTanks.get(1).getFluid().isFluidEqual(fluids[0]) && fluidTanks.get(0).getFluid().isFluidEqual(fluids[1]) &&
-                        fluidTanks.get(1).getFluidAmount() >= fluids[0].getAmount() && fluidTanks.get(0).getFluidAmount() >= fluids[1].getAmount()) {
+                    fluidTanks.get(1).getFluidAmount() >= fluids[0].getAmount() && fluidTanks.get(0).getFluidAmount() >= fluids[1].getAmount()) {
                 fluidChecked = true;
             }
 

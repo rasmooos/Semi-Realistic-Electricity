@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "semirealisticelectricity:copper_dust"
+    },
+    "$": {
+      "item": "semirealisticelectricity:tin_dust"
+    }
+  },
+  "pattern": [
+    "##",
+    "#$"
+  ],
+  "result": {
+    "item": "semirealisticelectricity:bronze_dust"
+  }
+}

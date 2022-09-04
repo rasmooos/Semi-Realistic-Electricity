@@ -42,6 +42,8 @@ public abstract class MachineBlockEntity extends BaseGuiBlockEntity implements I
     protected final NonNullList<FluidTank> fluidTanks;
     protected final SemiRealisticEnergyStorage energyStorage;
     protected LazyOptional<IEnergyStorage> lazyEnergyHandler;
+    private LazyOptional<IFluidHandler>[] lazyFluidHandlers;
+
     protected final ContainerData data;
     private MachineBlock baseBlock;
 
@@ -54,6 +56,11 @@ public abstract class MachineBlockEntity extends BaseGuiBlockEntity implements I
         data = getContainerData();
 
         lazyEnergyHandler = LazyOptional.empty();
+        lazyFluidHandlers = new LazyOptional[fluidTanks.size()];
+
+        for(int i = 0; i < fluidTanks.size(); i++) {
+            lazyFluidHandlers[i] = LazyOptional.empty();
+        }
 
         this.baseBlock = baseBlock;
     }
@@ -126,11 +133,17 @@ public abstract class MachineBlockEntity extends BaseGuiBlockEntity implements I
         super.onLoad();
 
         lazyEnergyHandler = LazyOptional.of(() -> energyStorage);
+        for(int i = 0; i < fluidTanks.size(); i++) {
+            int finalI = i;
+            lazyFluidHandlers[i] = LazyOptional.of(() -> fluidTanks.get(finalI));
+        }
     }
 
     @Override
     public void invalidateCaps() {
         super.invalidateCaps();
+
+        lazyEnergyHandler.invalidate();
     }
 
     @Override

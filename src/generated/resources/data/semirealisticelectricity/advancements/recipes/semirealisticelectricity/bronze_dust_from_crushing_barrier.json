@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ResourceKey[minecraft:root / minecraft:item]": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/bronze"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "semirealisticelectricity:bronze_dust_from_crushing_barrier"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_ResourceKey[minecraft:root / minecraft:item]",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "semirealisticelectricity:bronze_dust_from_crushing_barrier"
+    ]
+  }
+}

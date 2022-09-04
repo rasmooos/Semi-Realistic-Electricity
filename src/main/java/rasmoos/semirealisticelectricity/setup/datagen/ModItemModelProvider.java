@@ -29,14 +29,28 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.COBALT_INGOT.get());
         simpleItem(ModItems.MAGNETITE_INGOT.get());
         simpleItem(ModItems.TIN_INGOT.get());
-        simpleItem(ModItems.RUBBER_TAP.get());
-        simpleItem(ModItems.RUBBER_RESIN.get());
+        simpleItem(ModItems.BRONZE_INGOT.get());
+        simpleItem(ModItems.ALUMINIUM_INGOT.get());
 
         simpleItem(ModItems.TIN_DUST.get());
         simpleItem(ModItems.COBALT_DUST.get());
         simpleItem(ModItems.MAGNETITE_DUST.get());
         simpleItem(ModItems.LITHIUM_DUST.get());
+        simpleItem(ModItems.COPPER_DUST.get());
+        simpleItem(ModItems.BRONZE_DUST.get());
+        simpleItem(ModItems.LEPIDOLITE_DUST.get());
+        simpleItem(ModItems.ALUMINIUM_DUST.get());
 
+
+        simpleItem(ModItems.TIN_NUGGET.get());
+        simpleItem(ModItems.MAGNETITE_NUGGET.get());
+        simpleItem(ModItems.COBALT_NUGGET.get());
+        simpleItem(ModItems.BRONZE_NUGGET.get());
+        simpleItem(ModItems.ALUMINIUM_NUGGET.get());
+
+
+        simpleItem(ModItems.RUBBER_TAP.get());
+        simpleItem(ModItems.RUBBER_RESIN.get());
 
         block(ModBlocks.COBALT_ORE.get());
         block(ModBlocks.DEEPSLATE_COBALT_ORE.get());

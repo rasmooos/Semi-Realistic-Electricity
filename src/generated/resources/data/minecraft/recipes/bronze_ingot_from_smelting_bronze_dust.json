@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "group": "bronze_ingot",
+  "ingredient": {
+    "item": "semirealisticelectricity:bronze_dust"
+  },
+  "result": "semirealisticelectricity:bronze_ingot"
+}

@@ -32,17 +32,4 @@ public class CrusherMenu extends MachineMenu {
 
         addDataSlots(data);
     }
-
-    public boolean isCrafting() {
-        return data.get(0) > 0;
-    }
-
-    public int getScaledProgress() {
-        int progress = data.get(0);
-        int maxProgress = data.get(1);
-
-        int progressArrowSize = 22;
-
-        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
-    }
 }

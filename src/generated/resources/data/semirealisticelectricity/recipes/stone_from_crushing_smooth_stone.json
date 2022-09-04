@@ -1,0 +1,11 @@
+{
+  "type": "semirealisticelectricity:crushing",
+  "ingredients": [
+    {
+      "item": "minecraft:smooth_stone"
+    }
+  ],
+  "result": {
+    "item": "minecraft:stone"
+  }
+}

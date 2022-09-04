@@ -31,9 +31,13 @@ public class FluidCompactorRecipe implements Recipe<SimpleContainer> {
         this.craftTime = craftTime;
     }
 
+    public Ingredient getRecipeItem() {
+        return recipeItem;
+    }
+
     @Override
     public NonNullList<Ingredient> getIngredients() {
-        return Recipe.super.getIngredients();
+        return NonNullList.of(recipeItem);
     }
 
     @Override

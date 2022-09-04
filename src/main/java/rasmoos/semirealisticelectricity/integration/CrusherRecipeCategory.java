@@ -18,57 +18,35 @@ import rasmoos.semirealisticelectricity.SemiRealisticElectricity;
 import rasmoos.semirealisticelectricity.blocks.ModBlocks;
 import rasmoos.semirealisticelectricity.recipe.CrusherRecipe;
 import rasmoos.semirealisticelectricity.screen.CrusherScreen;
+import rasmoos.semirealisticelectricity.screen.FluidCompactorScreen;
 
-public class CrusherRecipeCategory implements IRecipeCategory<CrusherRecipe> {
+public class CrusherRecipeCategory extends MachineRecipeCategory<CrusherRecipe> {
 
-    public static final ResourceLocation UID = new ResourceLocation(SemiRealisticElectricity.MOD_ID, "crushing");
-
-    private final IDrawable background;
-    private final IDrawable icon;
-
-    private final IDrawable progressBar;
 
     public CrusherRecipeCategory(IGuiHelper helper) {
-        background = helper.createDrawable(CrusherScreen.TEXTURE, 0, 0, 175, 80);
-        icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.CRUSHER_BLOCK.get()));
-        progressBar = helper.createAnimatedDrawable(helper.createDrawable(CrusherScreen.TEXTURE, 176, 11, 22, 9), 200, IDrawableAnimated.StartDirection.LEFT, false);
+        super(helper, CrusherScreen.TEXTURE, 41, 12, 105, 63,
+                ModBlocks.CRUSHER_BLOCK.get(),
+                ModRecipeTypes.CRUSHING);
+
+        addProgressBar(CrusherScreen.TEXTURE, 176, 11, 22, 9, 72,
+                IDrawableAnimated.StartDirection.LEFT, false, 79 - 41, 38 - 12);
     }
 
     @Override
     public RecipeType<CrusherRecipe> getRecipeType() {
-        return new RecipeType<>(UID, CrusherRecipe.class);
-    }
-
-    public Class<? extends CrusherRecipe> getRecipeClass() {
-        return CrusherRecipe.class;
-    }
-
-    @Override
-    public void draw(CrusherRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
-        progressBar.draw(stack, 79, 38);
+        return ModRecipeTypes.CRUSHING;
     }
 
     @Override
     public Component getTitle() {
-        return Component.literal("Crusher");
+        return Component.translatable("jei.integration.semirealisticelectricity.category.crushing");
     }
-
-    @Override
-    public IDrawable getBackground() {
-        return background;
-    }
-
-    @Override
-    public IDrawable getIcon() {
-        return icon;
-    }
-
 
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, CrusherRecipe crusherRecipe, IFocusGroup iFocusGroup) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 56, 17).addIngredients(crusherRecipe.getIngredients().get(0));
+        builder.addSlot(RecipeIngredientRole.INPUT, 56 - 41, 17 - 12).addIngredients(crusherRecipe.getIngredients().get(0));
 
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 116, 35).addItemStack(crusherRecipe.getResultItem());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 116 - 41, 35 - 12).addItemStack(crusherRecipe.getResultItem());
     }
 }
