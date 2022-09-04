@@ -39,6 +39,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         machineBlock(ModBlocks.IRON_FURNACE_BLOCK.get());
         machineBlock(ModBlocks.CRUSHER_BLOCK.get());
         machineBlock(ModBlocks.ELECTROSTATIC_SEPARATOR.get());
+        machineBlock(ModBlocks.ELECTRIC_FURNACE.get());
 //        machineBlock(ModBlocks.FLUID_COMPACTOR.get());
 
         machineCustomModel(ModBlocks.FLUID_COMPACTOR.get(),

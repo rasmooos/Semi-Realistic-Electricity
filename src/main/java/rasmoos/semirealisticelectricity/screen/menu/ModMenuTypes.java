@@ -18,6 +18,8 @@ public class ModMenuTypes {
     public static final RegistryObject<MenuType<FluidCompactorMenu>> FLUID_COMPACTOR_MENU = registerMenuType(FluidCompactorMenu::new, "fluid_compactor_menu");
     public static final RegistryObject<MenuType<ElectrostaticSeparatorMenu>> ELECTROSTATIC_SEPARATOR_MENU
             = registerMenuType(ElectrostaticSeparatorMenu::new, "electrostatic_separator_menu");
+    public static final RegistryObject<MenuType<ElectricFurnaceMenu>> ELECTRIC_FURNACE_MENU
+            = registerMenuType(ElectricFurnaceMenu::new, "electric_furnace_menu");
 
     private static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory, String name) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));

@@ -29,4 +29,8 @@ public class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<ElectrostaticSeparatorEntity>> ELECTROSTATIC_SEPARATOR_ENTITY =
             BLOCK_ENTITIES.register("electrostatic_separator_entity",
                     () -> BlockEntityType.Builder.of(ElectrostaticSeparatorEntity::new, ModBlocks.ELECTROSTATIC_SEPARATOR.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<ElectricFurnaceEntity>> ELECTRIC_FURNACE_ENTITY =
+            BLOCK_ENTITIES.register("electric_furnace_entity",
+                    () -> BlockEntityType.Builder.of(ElectricFurnaceEntity::new, ModBlocks.ELECTRIC_FURNACE.get()).build(null));
 }

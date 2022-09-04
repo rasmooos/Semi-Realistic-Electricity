@@ -39,7 +39,7 @@ import java.util.Map;
 
 public abstract class MachineBlockEntity extends BaseGuiBlockEntity implements IFluidHandlingBlockEntity, IEnergyHandlingBlockEntity {
 
-    private static final int BASE_ENERGY_PER_TICK = 5;
+    protected static final int BASE_ENERGY_PER_TICK = 5;
 
     protected final NonNullList<FluidTank> fluidTanks;
     protected final SemiRealisticEnergyStorage energyStorage;
@@ -50,6 +50,7 @@ public abstract class MachineBlockEntity extends BaseGuiBlockEntity implements I
     private MachineBlock baseBlock;
     protected int progress;
     protected int maxProgress;
+    protected int energyPerOperation;
 
 
     public MachineBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState, MachineBlock baseBlock) {
@@ -70,6 +71,7 @@ public abstract class MachineBlockEntity extends BaseGuiBlockEntity implements I
         this.baseBlock = baseBlock;
         progress = 0;
         maxProgress = 100;
+        energyPerOperation = 10;
     }
 
     @Override
@@ -79,7 +81,32 @@ public abstract class MachineBlockEntity extends BaseGuiBlockEntity implements I
         }
 
         energyStorage.extractEnergy(BASE_ENERGY_PER_TICK, false);
+
+        if(hasRecipe() && hasEnoughEnergy()) {
+            progress++;
+            energyStorage.extractEnergy(energyPerOperation, false);
+            setChanged(level, getBlockPos(), getBlockState());
+            if(progress > maxProgress) {
+                craftItem();
+            }
+        } else {
+            resetProgress();
+            setChanged(level, getBlockPos(), getBlockState());
+        }
+
+        if(!getBlockState().getValue(FluidCompactor.LIT) && progress > 0) {
+            level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(MachineBlock.LIT, true));
+        } else if(getBlockState().getValue(FluidCompactor.LIT) && progress == 0) {
+            level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(MachineBlock.LIT, false));
+        }
     }
+
+    protected boolean hasEnoughEnergy() {
+        return energyStorage.getEnergyStored() >= energyPerOperation;
+    }
+
+    public abstract boolean hasRecipe();
+    public abstract void craftItem();
 
     @NotNull
     @Override
@@ -269,7 +296,7 @@ public abstract class MachineBlockEntity extends BaseGuiBlockEntity implements I
     }
 
     protected void resetProgress() {
-        this.progress = 0;
+        progress = 0;
     }
 
     public abstract int[] getFluidTankCapacity();

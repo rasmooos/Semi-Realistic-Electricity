@@ -86,7 +86,10 @@ public class ModBlocks {
             () -> new FluidCompactor(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()), ModSetup.ITEM_GROUP);
 
     public static RegistryObject<MachineBlock> ELECTROSTATIC_SEPARATOR = registerBlock("electrostatic_separator",
-            () -> new ElectrostaticSeparator(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()), ModSetup.ITEM_GROUP);
+            () -> new ElectrostaticSeparator(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), ModSetup.ITEM_GROUP);
+
+    public static RegistryObject<MachineBlock> ELECTRIC_FURNACE = registerBlock("electric_furnace",
+            () -> new ElectricFurnace(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), ModSetup.ITEM_GROUP);
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> result = BLOCKS.register(name, block);

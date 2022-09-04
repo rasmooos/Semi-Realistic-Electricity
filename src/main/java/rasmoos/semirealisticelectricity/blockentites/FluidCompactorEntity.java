@@ -77,10 +77,10 @@ public class FluidCompactorEntity extends MachineBlockEntity {
 
     @Override
     public void tick() {
-        super.tick();
         if(level.isClientSide) {
             return;
         }
+        energyStorage.extractEnergy(BASE_ENERGY_PER_TICK, false);
 
         itemHandler.setStackInSlot(1, getCraftItem());
 
@@ -103,7 +103,7 @@ public class FluidCompactorEntity extends MachineBlockEntity {
         }
     }
 
-    private void craftItem() {
+    public void craftItem() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
             inventory.setItem(i, itemHandler.getStackInSlot(i));
@@ -126,11 +126,11 @@ public class FluidCompactorEntity extends MachineBlockEntity {
 
             itemHandler.setStackInSlot(0, new ItemStack(match.get().getResultItem().getItem(), itemHandler.getStackInSlot(0).getCount() + 1));
 
-            resetProgress();
+            progress = 0;
         }
     }
 
-    private boolean hasRecipe() {
+    public boolean hasRecipe() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
             inventory.setItem(i, itemHandler.getStackInSlot(i));
@@ -165,10 +165,6 @@ public class FluidCompactorEntity extends MachineBlockEntity {
 
     private boolean canInsertAmountIntoOutputSlot(SimpleContainer inventory) {
         return inventory.getItem(0).getMaxStackSize() > inventory.getItem(0).getCount();
-    }
-
-    private boolean hasEnoughEnergy() {
-        return energyStorage.getEnergyStored() >= 10;
     }
 
     @Override

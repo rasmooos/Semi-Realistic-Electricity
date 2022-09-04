@@ -74,6 +74,7 @@ public class ModLangProvider extends LanguageProvider {
         add(ModBlocks.CRUSHER_BLOCK.get(), "Crusher");
         add(ModBlocks.FLUID_COMPACTOR.get(), "Fluid Compactor");
         add(ModBlocks.ELECTROSTATIC_SEPARATOR.get(), "Electrostatic Separator");
+        add(ModBlocks.ELECTRIC_FURNACE.get(), "Electric Furnace");
     }
 
     private void addGui() {
@@ -81,6 +82,7 @@ public class ModLangProvider extends LanguageProvider {
         add("iron_furnace.name", "Iron Furnace");
         add("fluid_compactor.name", "Fluid Compactor");
         add("electrostatic_separator.name", "Electrostatic Separator");
+        add("electric_furnace.name", "Electric Furnace");
     }
 
     private void addMisc() {
@@ -88,9 +90,10 @@ public class ModLangProvider extends LanguageProvider {
         add("jei.integration.semirealisticelectricity.tooltip.liquid.amount.with.capacity", "%s / %s mB");
         add("jei.integration.semirealisticelectricity.tooltip.liquid.amount", "%s mB");
         add("jei.integration.semirealisticelectricity.tooltip.liquid.empty", "Empty");
-        add("jei.integration.semirealisticelectricity.category.iron_smelting", "Smelting");
-        add("jei.integration.semirealisticelectricity.category.crushing", "Crushing");
-        add("jei.integration.semirealisticelectricity.category.fluid_compacting", "Fluid Compacting");
-        add("jei.integration.semirealisticelectricity.category.separating", "Electrostatic Separation");
+        add("jei.integration.semirealisticelectricity.category.iron_smelting", "Iron Furnace");
+        add("jei.integration.semirealisticelectricity.category.crushing", "Crusher");
+        add("jei.integration.semirealisticelectricity.category.fluid_compacting", "Fluid Compactor");
+        add("jei.integration.semirealisticelectricity.category.separating", "Electrostatic Separator");
+        add("jei.integration.semirealisticelectricity.category.electric_smelting", "Electric Furnace");
     }
 }

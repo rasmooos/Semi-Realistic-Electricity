@@ -25,29 +25,7 @@ public class ElectrostaticSeparatorEntity extends MachineBlockEntity {
         super(ModBlockEntities.ELECTROSTATIC_SEPARATOR_ENTITY.get(), blockPos, blockState, ModBlocks.ELECTROSTATIC_SEPARATOR.get());
     }
 
-    public void tick() {
-        super.tick();
-
-        if(level.isClientSide)
-            return;
-
-        if(hasRecipe() && hasEnoughEnergy()) {
-            progress++;
-            energyStorage.extractEnergy(10, false);
-            setChanged(level, getBlockPos(), getBlockState());
-            if(progress > maxProgress) {
-                craftItem();
-            }
-        } else {
-            resetProgress();
-            setChanged(level, getBlockPos(), getBlockState());
-        }
-    }
-    private boolean hasEnoughEnergy() {
-        return energyStorage.getEnergyStored() >= 10;
-    }
-
-    private boolean hasRecipe() {
+    public boolean hasRecipe() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
             inventory.setItem(i, itemHandler.getStackInSlot(i));
@@ -62,7 +40,7 @@ public class ElectrostaticSeparatorEntity extends MachineBlockEntity {
                 && canInsertItemIntoOutputSlot(3, inventory, match.get().getSecondaryOutput());
     }
 
-    private void craftItem() {
+    public void craftItem() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
             inventory.setItem(i, itemHandler.getStackInSlot(i));

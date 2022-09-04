@@ -71,7 +71,6 @@ public class IronFurnaceBlockEntity extends MachineBlockEntity {
     }
 
     public void tick() {
-        super.tick();
         if(level.isClientSide()) {
             return;
         }
@@ -111,7 +110,7 @@ public class IronFurnaceBlockEntity extends MachineBlockEntity {
         }
     }
 
-    private void craftItem() {
+    public void craftItem() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
         for(int i = 0; i < itemHandler.getSlots(); i++) {
             inventory.setItem(i, itemHandler.getStackInSlot(i));
@@ -130,7 +129,7 @@ public class IronFurnaceBlockEntity extends MachineBlockEntity {
         }
     }
 
-    private boolean hasRecipe() {
+    public boolean hasRecipe() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
             inventory.setItem(i, itemHandler.getStackInSlot(i));
