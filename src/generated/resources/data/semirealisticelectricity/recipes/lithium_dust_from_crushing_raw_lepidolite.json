@@ -1,0 +1,12 @@
+{
+  "type": "semirealisticelectricity:electrostatic_separating",
+  "ingredient": {
+    "item": "semirealisticelectricity:raw_lepidolite"
+  },
+  "mainResult": {
+    "item": "semirealisticelectricity:lithium_dust"
+  },
+  "secondaryResult": {
+    "item": "semirealisticelectricity:aluminium_dust"
+  }
+}

@@ -1,4 +1,4 @@
-// 1.19.2	2022-09-04T13:29:44.8290447	Item Models: semirealisticelectricity
+// 1.19.2	2022-09-04T13:51:53.4302519	Item Models: semirealisticelectricity
 e71e9b7c8520ffc633380562b3d5b8a427183f12 assets/semirealisticelectricity/models/item/aluminium_dust.json
 b9387b0065de81f2089d3ca6e6e5144c8737dd07 assets/semirealisticelectricity/models/item/aluminium_ingot.json
 611ca4ef307d1a4777e1be91c51375a4028e5716 assets/semirealisticelectricity/models/item/aluminium_nugget.json
@@ -15,6 +15,7 @@ f7c6f1d8d51edc0fe9de659a9cbf6eb98319cc41 assets/semirealisticelectricity/models/
 9436a10dd2f42d8578713eaf25cf518b2acd896b assets/semirealisticelectricity/models/item/deepslate_lepidolite_ore.json
 431a32498ccc339dd9f4ed20596f0558b0e716df assets/semirealisticelectricity/models/item/deepslate_magnetite_ore.json
 00b1f3ae8520aeac0e881251815df12240afa744 assets/semirealisticelectricity/models/item/deepslate_tin_ore.json
+2ed1e98fc6f3d90ccbc7226d068fea11cf3251bd assets/semirealisticelectricity/models/item/electrostatic_separator.json
 234d0df44bbc618f1f4ca86db2f6762015a77072 assets/semirealisticelectricity/models/item/fluid_compactor.json
 687d3ecfa70693f6ae93b705fbedd00c1fc40430 assets/semirealisticelectricity/models/item/iron_furnace.json
 1e4d72e940c001058a99dddd484512c2445f39f1 assets/semirealisticelectricity/models/item/lepidolite_dust.json

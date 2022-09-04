@@ -21,6 +21,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import rasmoos.semirealisticelectricity.blocks.ModBlocks;
 import rasmoos.semirealisticelectricity.items.ModItems;
 import rasmoos.semirealisticelectricity.recipe.builder.CrusherRecipeBuilder;
+import rasmoos.semirealisticelectricity.recipe.builder.ElectrostaticSeparatorRecipeBuilder;
 import rasmoos.semirealisticelectricity.recipe.builder.FluidCompactorBuilder;
 
 import java.util.List;
@@ -49,6 +50,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         crushing(recipeConsumer, Items.STRING, ItemTags.WOOL);
         crushing(recipeConsumer, Blocks.COBBLESTONE, Blocks.STONE);
         crushing(recipeConsumer, Blocks.STONE, Blocks.SMOOTH_STONE);
+
+        separating(recipeConsumer, ModItems.LITHIUM_DUST.get(), 1, ModItems.ALUMINIUM_DUST.get(), 1, ModItems.RAW_LEPIDOLITE.get());
 
         nugget(recipeConsumer, ModItems.TIN_NUGGET.get(), ModItems.TIN_INGOT.get());
         nugget(recipeConsumer, ModItems.MAGNETITE_NUGGET.get(), ModItems.MAGNETITE_INGOT.get());
@@ -119,6 +122,13 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     public static void crushing(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike result, ItemLike ingredient) {
         CrusherRecipeBuilder.crush(result, 1, ingredient).unlockedBy(getHasName(ingredient), inventoryTrigger(ItemPredicate.Builder.item().of(ingredient).build()))
+                .save(pFinishedRecipeConsumer);
+    }
+
+    public static void separating(Consumer<FinishedRecipe> pFinishedRecipeConsumer,
+                                  ItemLike mainResult, int mainCount, ItemLike secondaryResult, int secondaryCount, ItemLike ingredient) {
+        ElectrostaticSeparatorRecipeBuilder.separate(mainResult, mainCount, secondaryResult, secondaryCount, ingredient)
+                .unlockedBy(getHasName(ingredient), getTrigger(ingredient))
                 .save(pFinishedRecipeConsumer);
     }
 

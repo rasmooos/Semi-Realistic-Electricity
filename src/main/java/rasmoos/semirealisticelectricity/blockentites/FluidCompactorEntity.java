@@ -167,10 +167,6 @@ public class FluidCompactorEntity extends MachineBlockEntity {
         return inventory.getItem(0).getMaxStackSize() > inventory.getItem(0).getCount();
     }
 
-    private void resetProgress() {
-        this.progress = 0;
-    }
-
     private boolean hasEnoughEnergy() {
         return energyStorage.getEnergyStored() >= 10;
     }
@@ -208,11 +204,6 @@ public class FluidCompactorEntity extends MachineBlockEntity {
     @Override
     public Map<Direction, LazyOptional<WrappedFluidHandler>> getDirectionWrappedFluidHandlerMap() {
         return directionWrappedFluidHandlerMap;
-    }
-
-    @Override
-    public Tuple<Integer, Integer> getEnergyStorageCapacity() {
-        return new Tuple<>(60000, 200);
     }
 
     @Override

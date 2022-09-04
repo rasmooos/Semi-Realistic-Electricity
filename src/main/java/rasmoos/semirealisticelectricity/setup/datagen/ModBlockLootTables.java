@@ -34,6 +34,7 @@ public class ModBlockLootTables extends BlockLoot {
         dropSelf(ModBlocks.IRON_FURNACE_BLOCK.get());
         dropSelf(ModBlocks.CRUSHER_BLOCK.get());
         dropSelf(ModBlocks.FLUID_COMPACTOR.get());
+        dropSelf(ModBlocks.ELECTROSTATIC_SEPARATOR.get());
     }
 
     @Override

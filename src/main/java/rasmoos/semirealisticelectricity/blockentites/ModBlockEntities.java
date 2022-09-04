@@ -26,4 +26,7 @@ public class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<FluidCompactorEntity>> FLUID_COMPACTOR_ENTITY =
             BLOCK_ENTITIES.register("fluid_compactor_entity",
                     () -> BlockEntityType.Builder.of(FluidCompactorEntity::new, ModBlocks.FLUID_COMPACTOR.get()).build(null));
+    public static final RegistryObject<BlockEntityType<ElectrostaticSeparatorEntity>> ELECTROSTATIC_SEPARATOR_ENTITY =
+            BLOCK_ENTITIES.register("electrostatic_separator_entity",
+                    () -> BlockEntityType.Builder.of(ElectrostaticSeparatorEntity::new, ModBlocks.ELECTROSTATIC_SEPARATOR.get()).build(null));
 }

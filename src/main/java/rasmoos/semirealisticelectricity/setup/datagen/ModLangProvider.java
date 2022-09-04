@@ -73,12 +73,14 @@ public class ModLangProvider extends LanguageProvider {
         add(ModBlocks.IRON_FURNACE_BLOCK.get(), "Iron Furnace");
         add(ModBlocks.CRUSHER_BLOCK.get(), "Crusher");
         add(ModBlocks.FLUID_COMPACTOR.get(), "Fluid Compactor");
+        add(ModBlocks.ELECTROSTATIC_SEPARATOR.get(), "Electrostatic Separator");
     }
 
     private void addGui() {
         add("crusher.name", "Crusher");
         add("iron_furnace.name", "Iron Furnace");
         add("fluid_compactor.name", "Fluid Compactor");
+        add("electrostatic_separator.name", "Electrostatic Separator");
     }
 
     private void addMisc() {
@@ -89,5 +91,6 @@ public class ModLangProvider extends LanguageProvider {
         add("jei.integration.semirealisticelectricity.category.iron_smelting", "Smelting");
         add("jei.integration.semirealisticelectricity.category.crushing", "Crushing");
         add("jei.integration.semirealisticelectricity.category.fluid_compacting", "Fluid Compacting");
+        add("jei.integration.semirealisticelectricity.category.separating", "Electrostatic Separation");
     }
 }

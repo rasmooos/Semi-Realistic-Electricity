@@ -5,6 +5,7 @@
   "block.semirealisticelectricity.deepslate_lepidolite_ore": "Deepslate Lepidolite Ore",
   "block.semirealisticelectricity.deepslate_magnetite_ore": "Deepslate Magnetite Ore",
   "block.semirealisticelectricity.deepslate_tin_ore": "Deepslate Tin Ore",
+  "block.semirealisticelectricity.electrostatic_separator": "Electrostatic Separator",
   "block.semirealisticelectricity.fluid_compactor": "Fluid Compactor",
   "block.semirealisticelectricity.iron_furnace": "Iron Furnace",
   "block.semirealisticelectricity.lepidolite_ore": "Lepidolite Ore",
@@ -17,6 +18,7 @@
   "block.semirealisticelectricity.stripped_rubber_log": "Stripped Rubber Log",
   "block.semirealisticelectricity.tin_ore": "Tin Ore",
   "crusher.name": "Crusher",
+  "electrostatic_separator.name": "Electrostatic Separator",
   "fluid_compactor.name": "Fluid Compactor",
   "iron_furnace.name": "Iron Furnace",
   "item.semirealisticelectricity.aluminium_dust": "Aluminium dust",
@@ -47,6 +49,7 @@
   "jei.integration.semirealisticelectricity.category.crushing": "Crushing",
   "jei.integration.semirealisticelectricity.category.fluid_compacting": "Fluid Compacting",
   "jei.integration.semirealisticelectricity.category.iron_smelting": "Smelting",
+  "jei.integration.semirealisticelectricity.category.separating": "Electrostatic Separation",
   "jei.integration.semirealisticelectricity.tooltip.liquid.amount": "%s mB",
   "jei.integration.semirealisticelectricity.tooltip.liquid.amount.with.capacity": "%s / %s mB",
   "jei.integration.semirealisticelectricity.tooltip.liquid.empty": "Empty"

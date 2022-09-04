@@ -23,6 +23,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -31,6 +32,7 @@ import rasmoos.semirealisticelectricity.blocks.MachineBlock;
 import rasmoos.semirealisticelectricity.network.ModNetworkHandler;
 import rasmoos.semirealisticelectricity.network.SyncEnergyToClient;
 import rasmoos.semirealisticelectricity.network.SyncFluidToClient;
+import rasmoos.semirealisticelectricity.network.SyncItemToClient;
 import rasmoos.semirealisticelectricity.util.SemiRealisticEnergyStorage;
 
 import java.util.Map;
@@ -46,6 +48,9 @@ public abstract class MachineBlockEntity extends BaseGuiBlockEntity implements I
 
     protected final ContainerData data;
     private MachineBlock baseBlock;
+    protected int progress;
+    protected int maxProgress;
+
 
     public MachineBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState, MachineBlock baseBlock) {
         super(blockEntityType, blockPos, blockState, baseBlock);
@@ -63,6 +68,8 @@ public abstract class MachineBlockEntity extends BaseGuiBlockEntity implements I
         }
 
         this.baseBlock = baseBlock;
+        progress = 0;
+        maxProgress = 100;
     }
 
     @Override
@@ -149,6 +156,7 @@ public abstract class MachineBlockEntity extends BaseGuiBlockEntity implements I
     @Override
     protected void saveAdditional(CompoundTag tag) {
         tag.putInt("energy", energyStorage.getEnergyStored());
+        tag.putInt("progress", progress);
 
         for(int i = 0; i < fluidTanks.size(); i++) {
             FluidStack fluid = fluidTanks.get(i).getFluid();
@@ -161,8 +169,22 @@ public abstract class MachineBlockEntity extends BaseGuiBlockEntity implements I
     }
 
     @Override
+    public ItemStackHandler getItemHandler() {
+        return new ItemStackHandler(getNumberOfSlots()) {
+            @Override
+            protected void onContentsChanged(int slot) {
+                setChanged();
+                if(!level.isClientSide) {
+                    ModNetworkHandler.sendToClients(new SyncItemToClient(itemHandler, getBlockPos()));
+                }
+            }
+        };
+    }
+
+    @Override
     public void load(CompoundTag nbt) {
         energyStorage.setEnergy(nbt.getInt("energy"));
+        progress = nbt.getInt("progress");
 
         for(int i = 0; i < fluidTanks.size(); i++) {
 
@@ -246,6 +268,10 @@ public abstract class MachineBlockEntity extends BaseGuiBlockEntity implements I
         };
     }
 
+    protected void resetProgress() {
+        this.progress = 0;
+    }
+
     public abstract int[] getFluidTankCapacity();
     public abstract Map<Direction, LazyOptional<WrappedItemHandler>> getDirectionWrappedItemHandlerMap();
     public abstract Map<Direction, LazyOptional<WrappedFluidHandler>> getDirectionWrappedFluidHandlerMap();
@@ -254,9 +280,35 @@ public abstract class MachineBlockEntity extends BaseGuiBlockEntity implements I
      * capacity, maxtransfer
      * @return
      */
-    public abstract Tuple<Integer, Integer> getEnergyStorageCapacity();
+    public Tuple<Integer, Integer> getEnergyStorageCapacity() {
+        return new Tuple<>(60000, 200);
+    }
 
-    public abstract ContainerData getContainerData();
+    public ContainerData getContainerData() {
+        return new ContainerData() {
+            @Override
+            public int get(int index) {
+                return switch(index) {
+                    case 0 -> MachineBlockEntity.this.progress;
+                    case 1 -> MachineBlockEntity.this.maxProgress;
+                    default -> 0;
+                };
+            }
+
+            @Override
+            public void set(int index, int value) {
+                switch(index) {
+                    case 0 -> MachineBlockEntity.this.progress = value;
+                    case 1 -> MachineBlockEntity.this.maxProgress = value;
+                }
+            }
+
+            @Override
+            public int getCount() {
+                return 2;
+            }
+        };
+    }
 
     @Nullable
     @Override

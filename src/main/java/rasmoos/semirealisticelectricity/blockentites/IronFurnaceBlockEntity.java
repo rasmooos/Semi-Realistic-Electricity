@@ -34,14 +34,11 @@ public class IronFurnaceBlockEntity extends MachineBlockEntity {
 
     public static final int NUM_SLOTS = 3;
 
-    private int progress;
-    private int maxProgress;
     private float fuelTime;
     private int maxFuelTime;
 
     public IronFurnaceBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
         super(ModBlockEntities.IRON_FURNACE_ENTITY.get(), pWorldPosition, pBlockState, ModBlocks.IRON_FURNACE_BLOCK.get());
-        progress = 0;
         maxProgress = 120;
         fuelTime = 0;
     }
@@ -133,10 +130,6 @@ public class IronFurnaceBlockEntity extends MachineBlockEntity {
         }
     }
 
-    private void resetProgress() {
-        progress = 0;
-    }
-
     private boolean hasRecipe() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
@@ -218,23 +211,5 @@ public class IronFurnaceBlockEntity extends MachineBlockEntity {
     @Override
     public int getNumberOfSlots() {
         return NUM_SLOTS;
-    }
-
-    @Override
-    public ItemStackHandler getItemHandler() {
-        return new ItemStackHandler(getNumberOfSlots()) {
-            @Override
-            protected void onContentsChanged(int slot) {
-                setChanged();
-                if(!level.isClientSide) {
-                    ModNetworkHandler.sendToClients(new SyncItemToClient(itemHandler, getBlockPos()));
-                }
-            }
-
-            @Override
-            public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-                return true;
-            }
-        };
     }
 }

@@ -16,4 +16,6 @@ public class ModRecipes {
     public static final RegistryObject<RecipeSerializer<FluidCompactorRecipe>> FLUID_COMPACTING_SERIALIZER = SERIALIZERS.register("fluid_compacting",
             () -> FluidCompactorRecipe.Serializer.INSTANCE);
 
+    public static final RegistryObject<RecipeSerializer<ElectrostaticSeparatorRecipe>> ELECTROSTATIC_SEPARATOR_SERIALIZER = SERIALIZERS.register("electrostatic_separating",
+            () -> ElectrostaticSeparatorRecipe.Serializer.INSTANCE);
 }

@@ -77,13 +77,16 @@ public class ModBlocks {
 
 
     public static RegistryObject<MachineBlock> IRON_FURNACE_BLOCK = registerBlock("iron_furnace",
-            () -> new IronFurnaceBlock(BlockBehaviour.Properties.copy(Blocks.STONE)), ModSetup.ITEM_GROUP);
+            () -> new IronFurnaceBlock(BlockBehaviour.Properties.copy(Blocks.FURNACE)), ModSetup.ITEM_GROUP);
 
     public static RegistryObject<MachineBlock> CRUSHER_BLOCK = registerBlock("crusher",
-            () -> new CrusherBlock(BlockBehaviour.Properties.copy(Blocks.STONE)), ModSetup.ITEM_GROUP);
+            () -> new CrusherBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), ModSetup.ITEM_GROUP);
 
     public static RegistryObject<MachineBlock> FLUID_COMPACTOR = registerBlock("fluid_compactor",
-            () -> new FluidCompactor(BlockBehaviour.Properties.copy(Blocks.STONE).noOcclusion()), ModSetup.ITEM_GROUP);
+            () -> new FluidCompactor(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()), ModSetup.ITEM_GROUP);
+
+    public static RegistryObject<MachineBlock> ELECTROSTATIC_SEPARATOR = registerBlock("electrostatic_separator",
+            () -> new ElectrostaticSeparator(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()), ModSetup.ITEM_GROUP);
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> result = BLOCKS.register(name, block);

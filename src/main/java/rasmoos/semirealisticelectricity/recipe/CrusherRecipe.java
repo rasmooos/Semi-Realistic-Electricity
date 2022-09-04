@@ -20,7 +20,6 @@ public class CrusherRecipe implements Recipe<SimpleContainer> {
     private final ItemStack output;
     private final NonNullList<Ingredient> recipeItems;
 
-
     public CrusherRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> recipeItems) {
         this.id = id;
         this.output = output;

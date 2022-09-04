@@ -68,6 +68,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         block(ModBlocks.IRON_FURNACE_BLOCK.get());
         block(ModBlocks.CRUSHER_BLOCK.get());
         block(ModBlocks.FLUID_COMPACTOR.get());
+        block(ModBlocks.ELECTROSTATIC_SEPARATOR.get());
     }
 
     private ItemModelBuilder block(Block block) {
